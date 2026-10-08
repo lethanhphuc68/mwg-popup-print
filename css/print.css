@@ -48,6 +48,73 @@
         overflow: hidden !important;
     }
 
+    /* TỜ IN KHỔ A5 NGANG: IN A6 ĐÔI TRÊN GIẤY A5 - CHUẨN XÁC 100% KHÔNG LỆCH */
+    .print-sheet.size-a5-landscape {
+        width: 210mm !important;
+        height: 148mm !important;
+        max-height: 148mm !important;
+        padding: 4mm 5mm !important;
+        margin: 0 auto !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        background: #ffffff !important;
+    }
+
+    .print-sheet.size-a5-landscape .label-box.format-gd-a6,
+    .print-sheet.size-a5-landscape .label-box.format-a5 {
+        width: 98mm !important;
+        height: 140mm !important;
+        max-height: 140mm !important;
+        border: 3.5px solid #000000 !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* TỜ IN KHỔ A5 ĐỨNG: 1 TEM / TỜ A5 */
+    .print-sheet.size-a5 {
+        width: 148mm !important;
+        height: 210mm !important;
+        max-height: 210mm !important;
+        padding: 5mm !important;
+        margin: 0 auto !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        background: #ffffff !important;
+    }
+
+    .print-sheet.size-a5 .label-box.format-a5 {
+        width: 138mm !important;
+        height: 198mm !important;
+        max-height: 198mm !important;
+        border: 4px solid #000000 !important;
+    }
+
+    .print-sheet.size-a5 .label-box.format-gd-a6 {
+        width: 135mm !important;
+        height: 195mm !important;
+        max-height: 195mm !important;
+        border: 4px solid #000000 !important;
+    }
+
     .print-sheet:last-child {
         page-break-after: avoid !important;
         break-after: avoid !important;
@@ -78,10 +145,22 @@
         margin: 0 auto !important;
     }
 
+    /* BỐ CỤC GHÉP A4 4 TEM A6 (LƯỚI 2x2) */
+    .print-sheet.layout-a4-4,
+    .print-sheet.template-giadung:not(.layout-single):not(.size-a5-landscape):not(.size-a5):not(.layout-a4-2) {
+        display: grid !important;
+        grid-template-columns: 96mm 96mm !important;
+        grid-template-rows: 141mm 141mm !important;
+        gap: 4mm !important;
+        justify-content: center !important;
+        align-content: center !important;
+    }
+
     /* ==============================================================
        1. MẪU TV & TỦ LẠNH (A5 - GHÉP 2 TEM KHÁC NHAU / TỜ A4)
        ============================================================== */
-    .print-sheet.template-tvtl:not(.layout-single) {
+    .print-sheet.layout-a4-2,
+    .print-sheet.template-tvtl:not(.layout-single):not(.size-a5-landscape):not(.size-a5):not(.layout-a4-4) {
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
@@ -210,7 +289,7 @@
        2. MẪU GIA DỤNG GẠCH GIÁ (A6 - 4 TEM / TỜ A4)
        Nguồn: https://mientay2.pro/in-online/popup/gd/gach/
        ============================================================== */
-    .print-sheet.template-giadung {
+    .print-sheet.template-giadung:not(.layout-single):not(.size-a5-landscape):not(.size-a5):not(.layout-a4-2) {
         display: grid !important;
         grid-template-columns: 96mm 96mm !important;
         grid-template-rows: 141mm 141mm !important;

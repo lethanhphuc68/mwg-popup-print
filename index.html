@@ -158,15 +158,18 @@
                     </div>
                 </div>
 
-                <!-- Bố cục in số lượng tem trên 1 trang -->
+                <!-- Bố cục in số lượng tem trên 1 trang & Khổ giấy -->
                 <div class="form-group">
-                    <label class="form-label" for="layoutModeSelect">Bố cục hiển thị & in:</label>
+                    <label class="form-label" for="layoutModeSelect">Bố cục in ấn & Khổ giấy:</label>
                     <select class="form-select" id="layoutModeSelect">
-                        <option value="single" selected>⭐ 1 Tem / Trang (Chuẩn Miền Tây 2 - Không trùng lặp)</option>
-                        <option value="multi">Ghép nhiều tem khác nhau / Tờ A4</option>
+                        <option value="a6_doi_a5">📑 In A6 Đôi - Bằng giấy A5 (2 tem A6 / tờ A5 ngang - Chuẩn không lệch)</option>
+                        <option value="a4_4_a6">📑 In tiết kiệm A4: 4 tem A6 / tờ A4 (Lưới 2x2)</option>
+                        <option value="a4_2_a5">📑 In ghép A4: 2 tem A5 / tờ A4 (Trên & Dưới)</option>
+                        <option value="single_a5">📄 In 1 tem / tờ A5 (Chuẩn giấy A5 đứng)</option>
+                        <option value="single_a4" selected>📄 In 1 tem / tờ A4 (Chuẩn TV & Tủ Lạnh A5)</option>
                     </select>
-                    <div style="font-size: 11px; color: #64748b; margin-top: 4px;">
-                        • Mặc định: Mỗi sản phẩm in 1 tem riêng biệt, không bị trùng lặp.
+                    <div style="font-size: 11px; color: #64748b; margin-top: 4px;" id="layoutHintText">
+                        • Tuỳ chọn in tự do: Gia dụng có thể in A5 hoặc A6, in 1 tem hoặc in ghép tiết kiệm.
                     </div>
                 </div>
 
@@ -199,7 +202,7 @@
                     IN TẤT CẢ ĐÃ CHỌN
                 </button>
                 <button type="button" class="btn-print-single" id="btnPrintSingle">
-                    🖨️ In riêng sản phẩm này (1 tem)
+                    🖨️ In trang này (Tờ đang xem)
                 </button>
             </div>
 
@@ -236,14 +239,25 @@
             <!-- Bảng danh sách sản phẩm trích xuất từ Excel -->
             <div class="table-card">
                 <div class="table-header-bar">
-                    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                         <div style="font-size: 14px; font-weight: 700; color: #0f172a;">
-                            DANH SÁCH SẢN PHẨM (<span id="totalCountLabel">0 sản phẩm</span>)
+                            DANH SÁCH SẢN PHẨM (<span id="totalCountLabel">27 sản phẩm</span>)
                         </div>
-                        <input type="text" class="form-input" id="searchInput" style="width: 220px; padding: 4px 10px; font-size: 12px;" placeholder="🔍 Tìm kiếm Model / Mã..." />
+                        <!-- Bộ lọc ưu tiên danh mục -->
+                        <div class="cat-filter-group" style="display: flex; gap: 4px;">
+                            <button type="button" class="btn-cat-filter active" data-cat="all">⭐ Tất cả (27)</button>
+                            <button type="button" class="btn-cat-filter" data-cat="tvtl">📺 TV & Điện Máy (19)</button>
+                            <button type="button" class="btn-cat-filter" data-cat="giadung">🍳 Gia Dụng (8)</button>
+                        </div>
+                        <input type="text" class="form-input" id="searchInput" style="width: 170px; padding: 4px 10px; font-size: 12px;" placeholder="🔍 Tìm Model / Mã..." />
                     </div>
-                    <div style="font-size: 12px; font-weight: 600; color: #0284c7;" id="selectedCountLabel">
-                        Đang chọn: 0 sản phẩm
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <div style="font-size: 12px; font-weight: 600; color: #0284c7;" id="selectedCountLabel">
+                            Đang chọn: 27 sản phẩm
+                        </div>
+                        <!-- Nút ưu tiên chọn nhanh -->
+                        <button type="button" class="btn-quick-sel" id="btnSelectGiaDung" title="Ưu tiên chọn các món Gia Dụng">🍳 Chọn Gia Dụng</button>
+                        <button type="button" class="btn-quick-sel" id="btnSelectTvTl" title="Ưu tiên chọn TV & Tủ Lạnh">📺 Chọn TV/TL</button>
                     </div>
                 </div>
 

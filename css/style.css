@@ -673,7 +673,7 @@ body {
    2. LAYOUT MẪU GIA DỤNG (A6 - 4 TEM TRÊN TỜ A4)
    Chuẩn: https://mientay2.pro/in-online/popup/gd/gach/
    ============================================================== */
-.paper-sheet.template-giadung {
+.paper-sheet.template-giadung:not(.layout-single) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -928,6 +928,106 @@ body {
     font-weight: 700;
     color: #0f172a;
     margin-bottom: 12px;
+}
+
+/* PREVIEW KHỔ GIẤY A5 NGANG (IN A6 ĐÔI TRÊN GIẤY A5) */
+.paper-sheet.size-a5-landscape {
+    width: 760px;
+    height: 535px;
+    min-height: 535px;
+    padding: 14px 16px;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 14px;
+}
+
+.paper-sheet.size-a5-landscape .label-box.format-gd-a6,
+.paper-sheet.size-a5-landscape .label-box.format-a5 {
+    width: 355px !important;
+    height: 505px !important;
+    flex-shrink: 0 !important;
+}
+
+/* PREVIEW KHỔ GIẤY A5 ĐỨNG (1 TEM / TỜ A5) */
+.paper-sheet.size-a5 {
+    width: 535px;
+    height: 760px;
+    min-height: 760px;
+    padding: 16px;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.paper-sheet.size-a5 .label-box.format-a5,
+.paper-sheet.size-a5 .label-box.format-gd-a6 {
+    width: 490px !important;
+    height: 710px !important;
+}
+
+/* LƯỚI A4 4 TEM A6 */
+.paper-sheet.layout-a4-4 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+    gap: 14px !important;
+    padding: 16px !important;
+}
+
+/* GHÉP A4 2 TEM A5 */
+.paper-sheet.layout-a4-2 {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding: 16px !important;
+}
+
+/* Nút lọc ưu tiên danh mục */
+.btn-cat-filter {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 3px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-cat-filter:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.btn-cat-filter.active {
+    background: #0284c7;
+    border-color: #0284c7;
+    color: #ffffff;
+}
+
+/* Nút ưu tiên chọn nhanh */
+.btn-quick-sel {
+    background: #f8fafc;
+    border: 1px dashed #94a3b8;
+    color: #334155;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-quick-sel:hover {
+    background: #e0f2fe;
+    border-color: #0284c7;
+    color: #0284c7;
 }
 
 @media (max-width: 1200px) {
