@@ -1,0 +1,295 @@
+/* CSS Chuyên Dụng Khi In Ấn (window.print) - TỐI ƯU CẢ MẪU TV/TL (A5) VÀ GIA DỤNG (A6) */
+@page {
+    size: A4 portrait;
+    margin: 0mm;
+}
+
+@media print {
+    .app-header,
+    .control-panel,
+    .preview-toolbar,
+    .paper-viewport,
+    .table-card,
+    .modal-overlay,
+    .no-print {
+        display: none !important;
+    }
+
+    html, body {
+        background: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    #printContainer {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* TỜ IN A4 CHUẨN */
+    .print-sheet.size-a4 {
+        width: 210mm !important;
+        height: 296mm !important;
+        max-height: 296mm !important;
+        padding: 5mm 8mm !important;
+        margin: 0 auto !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    .print-sheet:last-child {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+    }
+
+    /* ==============================================================
+       1. MẪU TV & TỦ LẠNH (A5 - 2 TEM / TỜ A4 TIẾT KIỆM)
+       ============================================================== */
+    .print-sheet.template-tvtl {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+    }
+
+    .print-sheet .label-box.format-a5 {
+        width: 190mm !important;
+        height: 139mm !important;
+        max-height: 139mm !important;
+        border: 4.5px solid #000000 !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding-bottom: 2mm !important;
+        background: #ffffff !important;
+    }
+
+    .print-sheet .label-box.format-a5 .label-banner {
+        width: 100% !important;
+        height: 40mm !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+        border-bottom: 3.5px solid #000000 !important;
+    }
+
+    .print-sheet .label-box.format-a5 .label-banner svg {
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+    }
+
+    .print-sheet .label-box.format-a5 .txt-price-strike {
+        width: 100% !important;
+        height: 31mm !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+    }
+
+    .print-sheet .label-box.format-a5 .strike-number {
+        font-size: 27mm !important;
+        line-height: 31mm !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #000000 !important;
+        z-index: 1 !important;
+    }
+
+    .print-sheet .label-box.format-a5 .strike-bar {
+        position: absolute !important;
+        top: 54% !important;
+        left: 8% !important;
+        right: 8% !important;
+        height: 4px !important;
+        background-color: #000000 !important;
+        border-top: 4px solid #000000 !important;
+        z-index: 2 !important;
+    }
+
+    .print-sheet .label-box.format-a5 .txt-price-promo {
+        width: 100% !important;
+        height: 41mm !important;
+        line-height: 41mm !important;
+        margin: 0 !important;
+        font-size: 40mm !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #000000 !important;
+    }
+
+    .print-sheet .label-box.format-a5 .txt-subline {
+        width: 100% !important;
+        height: 8mm !important;
+        line-height: 8mm !important;
+        font-size: 7mm !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #000000 !important;
+        margin: 0 !important;
+    }
+
+    .print-sheet .label-box.format-a5 .label-footer {
+        height: 11mm !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 3mm !important;
+        padding: 0 3mm !important;
+        margin: 0 !important;
+    }
+
+    .print-sheet .label-box.format-a5 .input-product-name {
+        width: 115mm !important;
+        height: 9.5mm !important;
+        font-size: 5mm !important;
+        font-weight: bold !important;
+        padding: 1mm 2mm !important;
+        border: 2.5px solid #000000 !important;
+        text-align: center !important;
+        background: transparent !important;
+        color: #000000 !important;
+    }
+
+    .print-sheet .label-box.format-a5 .input-print-date {
+        width: 68mm !important;
+        height: 9.5mm !important;
+        font-size: 4.8mm !important;
+        padding: 1mm 2mm !important;
+        border: 2.5px solid #000000 !important;
+        text-align: center !important;
+        background: transparent !important;
+        color: #000000 !important;
+    }
+
+    /* ==============================================================
+       2. MẪU GIA DỤNG GẠCH GIÁ (A6 - 4 TEM / TỜ A4)
+       Nguồn: https://mientay2.pro/in-online/popup/gd/gach/
+       ============================================================== */
+    .print-sheet.template-giadung {
+        display: grid !important;
+        grid-template-columns: 96mm 96mm !important;
+        grid-template-rows: 141mm 141mm !important;
+        gap: 4mm !important;
+        justify-content: center !important;
+        align-content: center !important;
+    }
+
+    .print-sheet .label-box.format-gd-a6 {
+        width: 95mm !important;
+        height: 140mm !important;
+        max-height: 140mm !important;
+        border: 3.5px solid #000000 !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        background: #ffffff !important;
+        text-align: center !important;
+        padding-bottom: 2mm !important;
+    }
+
+    .print-sheet .label-box.format-gd-a6 .label-banner {
+        width: 100% !important;
+        height: 38mm !important;
+        border-bottom: 3px solid #000000 !important;
+        overflow: hidden !important;
+    }
+
+    .print-sheet .label-box.format-gd-a6 .label-banner svg {
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+    }
+
+    /* Tên sản phẩm GD đặt trên giá */
+    .print-sheet .label-box.format-gd-a6 .gd-tsp {
+        width: 90mm !important;
+        font-size: 6mm !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        margin-top: 2mm !important;
+        color: #000000 !important;
+    }
+
+    /* Giá niêm yết có gạch ngang */
+    .print-sheet .label-box.format-gd-a6 .gd-gg {
+        width: 90mm !important;
+        height: 16mm !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 14mm !important;
+        font-weight: bold !important;
+        color: #000000 !important;
+    }
+
+    .print-sheet .label-box.format-gd-a6 .gd-gg .strike-bar {
+        position: absolute !important;
+        top: 52% !important;
+        left: 10% !important;
+        right: 10% !important;
+        height: 3px !important;
+        background-color: #000000 !important;
+        border-top: 3px solid #000000 !important;
+    }
+
+    /* Giá khuyến mãi to đậm */
+    .print-sheet .label-box.format-gd-a6 .gd-gc {
+        font-size: 18mm !important;
+        font-weight: 900 !important;
+        line-height: 18mm !important;
+        color: #000000 !important;
+        margin-top: -1mm !important;
+    }
+
+    /* Trả góp 0% */
+    .print-sheet .label-box.format-gd-a6 .gd-htr {
+        font-size: 5mm !important;
+        font-weight: bold !important;
+        color: #000000 !important;
+        margin-top: -1mm !important;
+    }
+
+    /* Ngày in có viền trên dày 8px đặc trưng mientay2 */
+    .print-sheet .label-box.format-gd-a6 .gd-pdat {
+        width: 88mm !important;
+        height: 9mm !important;
+        border: 2px solid #000000 !important;
+        border-top: 6px solid #000000 !important;
+        font-size: 4.8mm !important;
+        text-align: center !important;
+        padding: 1mm !important;
+        background: transparent !important;
+        color: #000000 !important;
+        margin-top: 1mm !important;
+    }
+}

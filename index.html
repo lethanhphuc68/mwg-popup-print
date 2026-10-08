@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Tem POPUP Bảng Giá Siêu Thị - TV/Tủ Lạnh (A5) & Gia Dụng (A6)</title>
+    
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/print.css">
+
+    <!-- Vendor Libraries -->
+    <script src="assets/xlsx.full.min.js"></script>
+    <script src="assets/tesseract.min.js"></script>
+</head>
+<body>
+
+    <!-- Header ứng dụng -->
+    <header class="app-header no-print">
+        <div class="brand-section">
+            <span class="brand-badge">MWG PRINT</span>
+            <div>
+                <h1 class="app-title">HỆ THỐNG IN TEM BẢNG GIÁ POPUP SIÊU THỊ</h1>
+                <p class="app-subtitle">Mẫu TV & Tủ Lạnh (A5) • Mẫu Gia Dụng (A6) • Tự Động Lấy Giá Excel & Nhận Diện Ảnh</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button class="btn-header" id="btnDownloadSample" title="Tải file Excel mẫu">
+                📥 Tải file mẫu Excel
+            </button>
+            <button class="btn-header" id="btnGuide" title="Hướng dẫn in">
+                ❓ Hướng dẫn in
+            </button>
+            <button class="btn-header btn-header-primary" id="btnHeaderPrint" title="In toàn bộ tem đã chọn">
+                🖨️ In Ngay (Ctrl+P)
+            </button>
+        </div>
+    </header>
+
+    <!-- Nội dung chính -->
+    <main class="app-layout no-print">
+        
+        <!-- Cột trái: Bảng điều khiển & Cấu hình -->
+        <aside class="control-panel">
+            
+            <!-- 1. Nạp Dữ Liệu (Excel hoặc Ảnh Chụp OCR) -->
+            <div class="card">
+                <div class="card-title">
+                    <span>1. Nạp Dữ Liệu Bảng Giá</span>
+                    <span class="badge-num">Bước 1</span>
+                </div>
+                
+                <!-- Tab chuyển nguồn nạp -->
+                <div class="input-source-tabs">
+                    <button type="button" class="tab-source-btn active" data-tab="excel">📊 Nhập File Excel</button>
+                    <button type="button" class="tab-source-btn" data-tab="image">📸 Nhận Diện Ảnh (OCR)</button>
+                </div>
+
+                <!-- Tab 1: Excel -->
+                <div id="excelTabContent">
+                    <div class="upload-dropzone" id="uploadDropzone" onclick="document.getElementById('excelFileInput').click()">
+                        <div class="upload-icon">📊</div>
+                        <div class="upload-text">Kéo thả file Excel vào đây</div>
+                        <div class="upload-subtext">hoặc nhấp để chọn file (.xlsx, .xls, .csv)</div>
+                        <input type="file" id="excelFileInput" accept=".xlsx, .xls, .csv" style="display: none;" />
+                    </div>
+
+                    <div class="file-status-box" id="fileStatusBox">
+                        <span id="fileNameLabel">📁 Dữ liệu mẫu (HCM - Giờ Vàng)</span>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Hình ảnh OCR -->
+                <div id="imageTabContent" style="display: none;">
+                    <div class="upload-dropzone" onclick="document.getElementById('imageFileInput').click()">
+                        <div class="upload-icon">📷</div>
+                        <div class="upload-text">Tải ảnh chụp bảng giá lên</div>
+                        <div class="upload-subtext">Hỗ trợ nhận diện chữ tự động (.jpg, .png)</div>
+                        <input type="file" id="imageFileInput" accept="image/*" style="display: none;" />
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                        <button type="button" class="btn-header" id="btnLoadDefaultImage" style="width: 100%; justify-content: center; font-size: 11px; background: #f8fafc; color: #0284c7; border-color: #bae6fd;">
+                            ⚡ Nạp dữ liệu ảnh "HCM - Giờ Vàng" (27 Sản phẩm)
+                        </button>
+                    </div>
+
+                    <div id="ocrStatusLabel" style="font-size: 11px; color: #64748b; text-align: center; margin-top: 6px;"></div>
+                </div>
+            </div>
+
+            <!-- 2. Bộ lọc dữ liệu tự động -->
+            <div class="card">
+                <div class="card-title">
+                    <span>2. Lọc Dữ Liệu Tự Động</span>
+                    <span class="badge-num">Bước 2</span>
+                </div>
+
+                <!-- Lọc theo Vùng RSM -->
+                <div class="form-group">
+                    <label class="form-label" for="regionSelect">🏢 Vùng RSM (Tự động nhận diện):</label>
+                    <select class="form-select" id="regionSelect">
+                        <option value="Vùng Hồ Chí Minh" selected>Vùng Hồ Chí Minh</option>
+                    </select>
+                </div>
+
+                <!-- Lọc theo Nhóm sản phẩm -->
+                <div class="form-group">
+                    <label class="form-label" for="groupSelect">📦 Nhóm ngành hàng:</label>
+                    <select class="form-select" id="groupSelect">
+                        <option value="all">-- Tất cả nhóm hàng --</option>
+                    </select>
+                </div>
+
+                <!-- Tìm kiếm theo tên / mã -->
+                <div class="form-group">
+                    <label class="form-label" for="searchInput">🔍 Tìm kiếm Model / Mã SP:</label>
+                    <input type="text" class="form-input" id="searchInput" placeholder="Nhập tên TV, Nồi cơm, Lò vi sóng..." />
+                </div>
+            </div>
+
+            <!-- 3. Tùy chỉnh Tiêu đề Banner -->
+            <div class="card">
+                <div class="card-title">
+                    <span>3. Tiêu Đề Banner (In Trắng Đen)</span>
+                    <span class="badge-num">Bước 3</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="customTitleInput">Nội dung chữ tiêu đề:</label>
+                    <input type="text" class="form-input" id="customTitleInput" value="GIÁ RẺ QUÁ" placeholder="Nhập chữ tiêu đề..." />
+                    
+                    <div class="preset-tags">
+                        <span class="preset-chip active" data-text="GIÁ RẺ QUÁ">GIÁ RẺ QUÁ</span>
+                        <span class="preset-chip" data-text="GIỜ VÀNG GIÁ SỐC">GIỜ VÀNG GIÁ SỐC</span>
+                        <span class="preset-chip" data-text="KHUYẾN MÃI ĐẶC BIỆT">KHUYẾN MÃI ĐẶC BIỆT</span>
+                        <span class="preset-chip" data-text="XẢ KHO GIÁ SỐC">XẢ KHO GIÁ SỐC</span>
+                        <span class="preset-chip" data-text="CUỐI TUẦN GIẢM SỐC">CUỐI TUẦN GIẢM SỐC</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bannerThemeSelect">Kiểu Banner Chuyên Dụng In Trắng Đen:</label>
+                    <select class="form-select" id="bannerThemeSelect">
+                        <option value="bw_classic" selected>⭐ Nền trắng chữ đen đậm (Khuyên dùng - Cực nét, Tiết kiệm mực)</option>
+                        <option value="bw_ribbon">🎀 Khung Ruy Băng / Tia Chớp (Sự kiện giá sốc)</option>
+                        <option value="bw_shadow">✨ Chữ 3D Đổ Bóng Nét (Nền trắng nổi bật)</option>
+                        <option value="bw_invert">⬛ Nền Đen Chữ Trắng (Kiểu gốc mientay2)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin-top: 8px;">
+                    <label class="form-label" for="bannerUploadInput" style="font-size: 11px; color: #64748b;">Hoặc tải lên ảnh banner riêng (nếu có):</label>
+                    <input type="file" class="form-input" id="bannerUploadInput" accept="image/*" style="font-size: 11px; padding: 4px;" />
+                </div>
+            </div>
+
+            <!-- 4. Chọn Mẫu Tem & Bố Cục In -->
+            <div class="card">
+                <div class="card-title">
+                    <span>4. Mẫu Tem POPUP & Bố Cục</span>
+                    <span class="badge-num">Bước 4</span>
+                </div>
+
+                <!-- Chọn Mẫu Tem: TV/TL A5 hoặc Gia Dụng A6 -->
+                <div class="form-group">
+                    <label class="form-label">Chọn Mẫu Tem Cần In:</label>
+                    <div class="segmented-control">
+                        <button type="button" class="segmented-btn active" data-template="tvtl_a5" title="Mẫu TV & Tủ Lạnh: In 2 tem / tờ A4">
+                            📺 TV & Tủ Lạnh (A5)
+                        </button>
+                        <button type="button" class="segmented-btn" data-template="giadung_a6" title="Mẫu Gia Dụng: In 4 tem / tờ A4">
+                            🍳 Gia Dụng (A6)
+                        </button>
+                    </div>
+                    <div style="font-size: 11px; color: #64748b; margin-top: 4px;">
+                        • TV & Tủ Lạnh: 2 tem A5 / tờ A4<br>
+                        • Gia Dụng: 4 tem A6 / tờ A4 (Tên SP ở trên giá)
+                    </div>
+                </div>
+
+                <!-- Tùy chọn nhân đôi lấp đầy A4 -->
+                <label class="checkbox-inline" title="Nhân đôi để in đủ số lượng tem trên 1 tờ A4, tránh phí giấy">
+                    <input type="checkbox" id="duplicateSingleCb" checked />
+                    <span>Tự động nhân đôi lấp đầy tờ A4 khi in lẻ</span>
+                </label>
+
+                <!-- Dòng phụ ưu đãi -->
+                <div class="form-group" style="margin-top: 10px;">
+                    <label class="form-label" for="sublineInput">Dòng thông tin phụ / Ưu đãi:</label>
+                    <input type="text" class="form-input" id="sublineInput" value="+ TRẢ GÓP 0%" placeholder="+ TRẢ GÓP 0%" />
+                </div>
+
+                <!-- Ngày in / Khung giờ -->
+                <div class="form-group">
+                    <label class="form-label" for="dateModeSelect">Thông tin ngày in / Khung giờ:</label>
+                    <select class="form-select" id="dateModeSelect">
+                        <option value="today" selected>Tự động: Ngày in hôm nay</option>
+                        <option value="event_slot">Lấy theo cột Khung giờ / Suất trong Excel</option>
+                        <option value="custom">Nhập nội dung tùy chỉnh</option>
+                    </select>
+                    <input type="text" class="form-input" id="customDateInput" style="display: none; margin-top: 6px;" placeholder="Ví dụ: KHUNG GIỜ: 9H-12H" />
+                </div>
+            </div>
+
+            <!-- 5. Nút In Ngay -->
+            <div class="card print-actions-card">
+                <button type="button" class="btn-print-large" id="btnPrintAll">
+                    <img src="assets/print-icon.png" width="24" height="24" alt="" />
+                    IN TẤT CẢ ĐÃ CHỌN
+                </button>
+                <button type="button" class="btn-print-single" id="btnPrintSingle">
+                    🖨️ In riêng sản phẩm này (Lấp đầy tờ A4)
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- Cột phải: Xem trước tem in (Interactive Live Preview) & Danh sách sản phẩm -->
+        <section class="preview-panel">
+            
+            <!-- Thanh điều khiển Preview -->
+            <div class="preview-toolbar">
+                <div class="toolbar-title">
+                    <span>👁️ BẢN XEM TRƯỚC TỜ IN A4 TRẮNG ĐEN</span>
+                    <span class="toolbar-status" id="previewStatusBadge">TV & TL (2 tem/tờ)</span>
+                </div>
+
+                <div class="pager-controls">
+                    <button type="button" class="btn-pager" id="prevBtn" title="Tem trước">◀</button>
+                    <span class="page-indicator" id="previewIndexLabel">1 / 27</span>
+                    <button type="button" class="btn-pager" id="nextBtn" title="Tem kế tiếp">▶</button>
+                </div>
+            </div>
+
+            <!-- Vùng mô phỏng giấy in chuẩn A4 -->
+            <div class="paper-viewport">
+                <div class="paper-sheet size-a4 template-tvtl" id="previewPaperSheet">
+                    <!-- Tem render tại đây -->
+                </div>
+            </div>
+
+            <div style="font-size: 12px; color: #475569; text-align: center; margin-top: -10px;">
+                💡 <em>Tem được tối ưu nền trắng chữ đen sắc nét, đường kẻ gạch giá thực tế - In laser trắng đen siêu rõ và tiết kiệm mực!</em>
+            </div>
+
+            <!-- Bảng danh sách sản phẩm trích xuất từ Excel -->
+            <div class="table-card">
+                <div class="table-header-bar">
+                    <div style="font-size: 14px; font-weight: 700; color: #0f172a;">
+                        DANH SÁCH SẢN PHẨM (<span id="totalCountLabel">0 sản phẩm</span>)
+                    </div>
+                    <div style="font-size: 12px; font-weight: 600; color: #0284c7;" id="selectedCountLabel">
+                        Đang chọn: 0 sản phẩm
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th class="col-checkbox">
+                                    <input type="checkbox" id="selectAllCb" checked title="Chọn / Bỏ chọn tất cả" />
+                                </th>
+                                <th>Nhóm</th>
+                                <th>Mã SP</th>
+                                <th>SẢN PHẨM / MODEL</th>
+                                <th>Giá Niêm Yết (Gạch)</th>
+                                <th>Giá Bán Event Giờ Vàng</th>
+                                <th style="text-align: right;">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody">
+                            <!-- Dữ liệu render động -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Khung chứa dữ liệu in chuyên biệt khi bấm in (Chỉ hiển thị khi @media print) -->
+    <div id="printContainer" style="display: none;"></div>
+
+    <!-- Modal Hướng Dẫn In Ấn Chuẩn -->
+    <div class="modal-overlay" id="guideModal" style="display: none;">
+        <div class="modal-content">
+            <h2 class="modal-title">HƯỚNG DẪN IN CHUẨN MÁY IN TRẮNG ĐEN</h2>
+            <div style="font-size: 13px; line-height: 1.6; color: #334155;">
+                <p>Hệ thống đã tối ưu sẵn 100% cho máy in trắng đen:</p>
+                <ol style="padding-left: 20px; margin: 10px 0;">
+                    <li><strong>Máy in đích:</strong> Chọn máy in laser trắng đen của bạn hoặc <em>Lưu dưới dạng PDF</em>.</li>
+                    <li><strong>Khổ giấy (Paper size):</strong> Chọn <strong>A4</strong>.</li>
+                    <li><strong>Lề (Margins):</strong> Chọn <strong>Không (None)</strong> để tem nằm vừa khít 100% trên trang.</li>
+                    <li><strong>Mẫu TV & Tủ Lạnh:</strong> In ra 2 tem A5 trên 1 tờ A4.</li>
+                    <li><strong>Mẫu Gia Dụng:</strong> In ra 4 tem A6 trên 1 tờ A4.</li>
+                </ol>
+                <div style="text-align: center; margin-top: 12px;">
+                    <img src="assets/hd.png" alt="Hướng dẫn cài đặt in" style="max-width: 100%; border-radius: 6px; border: 1px solid #cbd5e1;" />
+                </div>
+            </div>
+            <div style="margin-top: 20px; text-align: right;">
+                <button type="button" class="btn-header btn-header-primary" id="btnCloseGuide">Đã hiểu & Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script App Logic -->
+    <script src="js/dummy-data.js"></script>
+    <script src="js/excel-parser.js"></script>
+    <script src="js/ocr-parser.js"></script>
+    <script src="js/banner-generator.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
