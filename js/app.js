@@ -242,8 +242,8 @@ class App {
 
             const isTv = this.templateType === 'tvtl_a5';
 
-            if (this.layoutMode === 'a6_doi_a5') {
-                // IN A6 ĐÔI BẰNG GIẤY A5 (2 tem A6 / tờ A5 nằm ngang - Chuẩn không lệch)
+            if (this.layoutMode === 'a5_2_a6' || this.layoutMode === 'a6_doi_a5') {
+                // IN A6 ĐÔI BẰNG GIẤY A5 (2 tem A6 / tờ A5 nằm ngang - Chuẩn Máy Giặt, Tủ Đông)
                 previewContainer.className = 'paper-sheet size-a5-landscape layout-a6-doi';
                 previewContainer.classList.add(isTv ? 'template-tvtl' : 'template-giadung');
 
@@ -258,7 +258,7 @@ class App {
                 }
                 previewContainer.innerHTML = html;
                 if (statusBadge) {
-                    statusBadge.textContent = `A6 Đôi - Giấy A5 (${currentSheetItems.length} tem / tờ A5 ngang)`;
+                    statusBadge.textContent = `Máy Giặt, Tủ Đông • A5 (2-A6 Đứng - ${currentSheetItems.length} tem / tờ A5 ngang)`;
                 }
             } else if (this.layoutMode === 'a4_4_a6') {
                 // IN TIẾT KIỆM A4 (4 tem / tờ A4 - Lưới 2x2)
@@ -483,12 +483,12 @@ class App {
                 printContainer.appendChild(sheet);
             }
         } else {
-            // In ghép: a5_4_a7 (4 tem A7 / tờ A5 đứng), a6_doi_a5 (2 tem A6 / tờ A5 ngang), a4_4_a6 (4 tem A6 / tờ A4), a4_2_a5 (2 tem A5 / tờ A4)
+            // In ghép: a5_4_a7 (4 tem A7 / tờ A5 đứng), a5_2_a6 (2 tem A6 / tờ A5 ngang), a4_4_a6 (4 tem A6 / tờ A4), a4_2_a5 (2 tem A5 / tờ A4)
             for (let i = 0; i < targetItems.length; i += itemsPerSheet) {
                 const sheet = document.createElement('div');
                 if (this.layoutMode === 'a5_4_a7') {
                     sheet.className = `print-sheet size-a5 layout-a5-4 ${templateClass}`;
-                } else if (this.layoutMode === 'a6_doi_a5') {
+                } else if (this.layoutMode === 'a5_2_a6' || this.layoutMode === 'a6_doi_a5') {
                     sheet.className = `print-sheet size-a5-landscape layout-a6-doi ${templateClass}`;
                 } else if (this.layoutMode === 'a4_4_a6') {
                     sheet.className = `print-sheet size-a4 layout-a4-4 ${templateClass}`;
@@ -552,7 +552,7 @@ class App {
             const sheet = document.createElement('div');
             if (this.layoutMode === 'a5_4_a7') {
                 sheet.className = `print-sheet size-a5 layout-a5-4 ${templateClass}`;
-            } else if (this.layoutMode === 'a6_doi_a5') {
+            } else if (this.layoutMode === 'a5_2_a6' || this.layoutMode === 'a6_doi_a5') {
                 sheet.className = `print-sheet size-a5-landscape layout-a6-doi ${templateClass}`;
             } else if (this.layoutMode === 'a4_4_a6') {
                 sheet.className = `print-sheet size-a4 layout-a4-4 ${templateClass}`;
@@ -658,6 +658,11 @@ class App {
         // Chọn Bố Cục Hiển Thị & In Tùy Chỉnh
         document.getElementById('layoutModeSelect')?.addEventListener('change', (e) => {
             this.layoutMode = e.target.value;
+            if (this.layoutMode === 'a4_2_a5') {
+                this.templateType = 'tvtl_a5';
+            } else if (this.layoutMode === 'a5_2_a6' || this.layoutMode === 'a5_4_a7' || this.layoutMode === 'a4_4_a6') {
+                this.templateType = 'giadung_a6';
+            }
             this.updatePreview();
             this.renderTable();
         });

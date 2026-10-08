@@ -81,6 +81,31 @@
         flex-shrink: 0 !important;
     }
 
+    .print-sheet.size-a5-landscape .label-box.format-a5 .label-banner {
+        height: 38mm !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-a5 .strike-number {
+        font-size: 14mm !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-a5 .txt-price-promo {
+        font-size: 18mm !important;
+        line-height: 18mm !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-a5 .txt-subline {
+        font-size: 5mm !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-a5 .label-footer {
+        height: 8mm !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-a5 .input-product-name {
+        width: 55mm !important;
+        font-size: 4.5mm !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-a5 .input-print-date {
+        width: 32mm !important;
+        font-size: 4.2mm !important;
+    }
+
     /* TỜ IN KHỔ A5 ĐỨNG: 1 TEM / TỜ A5 */
     .print-sheet.size-a5 {
         width: 148mm !important;
