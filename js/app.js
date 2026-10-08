@@ -441,7 +441,7 @@ class App {
     }
 
     bindEvents() {
-        // Chuyển Tab nguồn nạp: Excel hoặc Hình Ảnh OCR
+        // Chuyển Tab nguồn nạp: Excel, Hình Ảnh OCR hoặc Dán Chữ/Bảng
         document.querySelectorAll('.tab-source-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.tab-source-btn').forEach(b => b.classList.remove('active'));
@@ -450,7 +450,31 @@ class App {
 
                 document.getElementById('excelTabContent').style.display = targetTab === 'excel' ? 'block' : 'none';
                 document.getElementById('imageTabContent').style.display = targetTab === 'image' ? 'block' : 'none';
+                document.getElementById('pasteTabContent').style.display = targetTab === 'paste' ? 'block' : 'none';
             });
+        });
+
+        // Xử lý nút dán bảng giá từ Google Lens / Zalo / Excel
+        document.getElementById('btnParsePastedText')?.addEventListener('click', () => {
+            const textarea = document.getElementById('pasteTextarea');
+            const text = textarea?.value?.trim();
+            if (!text) {
+                alert('Vui lòng dán văn bản hoặc bảng giá vào ô trước khi trích xuất!');
+                return;
+            }
+
+            const products = OCRParser.parseSmartText(text);
+            if (!products || products.length === 0) {
+                alert('Không trích xuất được sản phẩm nào từ nội dung đã dán. Vui lòng kiểm tra lại văn bản.');
+                return;
+            }
+
+            this.products = products;
+            this.currentPreviewIndex = 0;
+            this.updateRegionList();
+            this.renderTable();
+            this.updatePreview();
+            alert(`Trích xuất thành công ${products.length} sản phẩm từ nội dung đã dán!`);
         });
 
         // Chọn Mẫu Tem (TV & Tủ Lạnh A5 vs Gia Dụng A6)

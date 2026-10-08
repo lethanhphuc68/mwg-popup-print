@@ -52,9 +52,10 @@
                 </div>
                 
                 <!-- Tab chuyển nguồn nạp -->
-                <div class="input-source-tabs">
-                    <button type="button" class="tab-source-btn active" data-tab="excel">📊 Nhập File Excel</button>
-                    <button type="button" class="tab-source-btn" data-tab="image">📸 Nhận Diện Ảnh (OCR)</button>
+                <div class="input-source-tabs" style="grid-template-columns: 1fr 1fr 1fr;">
+                    <button type="button" class="tab-source-btn active" data-tab="excel">📊 File Excel</button>
+                    <button type="button" class="tab-source-btn" data-tab="image">📸 Ảnh Chụp</button>
+                    <button type="button" class="tab-source-btn" data-tab="paste">📋 Dán Bảng</button>
                 </div>
 
                 <!-- Tab 1: Excel -->
@@ -81,12 +82,23 @@
                     </div>
 
                     <div style="margin-top: 10px;">
-                        <button type="button" class="btn-header" id="btnLoadDefaultImage" style="width: 100%; justify-content: center; font-size: 11px; background: #f8fafc; color: #0284c7; border-color: #bae6fd;">
-                            ⚡ Nạp dữ liệu ảnh "HCM - Giờ Vàng" (27 Sản phẩm)
+                        <button type="button" class="btn-header" id="btnLoadDefaultImage" style="width: 100%; justify-content: center; font-size: 11px; background: #ecfdf5; color: #047857; border-color: #a7f3d0; font-weight: 700;">
+                            ⚡ Nạp dữ liệu ảnh "HCM - Giờ Vàng" (27 Sản phẩm Chuẩn)
                         </button>
                     </div>
 
                     <div id="ocrStatusLabel" style="font-size: 11px; color: #64748b; text-align: center; margin-top: 6px;"></div>
+                </div>
+
+                <!-- Tab 3: Dán văn bản từ Google Lens / Zalo / Excel -->
+                <div id="pasteTabContent" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label" for="pasteTextarea" style="font-size: 11px;">Dán nội dung sao chép từ Google Lens, Zalo hoặc Excel:</label>
+                        <textarea id="pasteTextarea" class="form-input" style="height: 95px; font-size: 11px; font-family: monospace;" placeholder="Dán văn bản sao chép vào đây..."></textarea>
+                    </div>
+                    <button type="button" class="btn-header btn-header-primary" id="btnParsePastedText" style="width: 100%; justify-content: center; font-size: 12px;">
+                        ⚡ Trích xuất bảng giá ngay
+                    </button>
                 </div>
             </div>
 
