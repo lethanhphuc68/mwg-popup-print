@@ -145,31 +145,35 @@
                     <span class="badge-num">Bước 3</span>
                 </div>
 
-                <!-- Chọn Mẫu Tem: TV/TL A5 hoặc Gia Dụng A6 -->
+                <!-- Chọn Chuẩn Format In Theo Ngành Hàng (FROMT) -->
                 <div class="form-group">
-                    <label class="form-label">Chọn Mẫu Tem Cần In:</label>
-                    <div class="segmented-control">
-                        <button type="button" class="segmented-btn active" data-template="tvtl_a5" title="Mẫu TV & Tủ Lạnh: Tự động lọc sản phẩm TV/TL">
-                            📺 TV & Tủ Lạnh (A5)
+                    <label class="form-label">Chuẩn Format Ngành Hàng (FROMT):</label>
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <button type="button" class="segmented-btn active" data-fromt="tv_tl_loa" style="justify-content: flex-start; padding: 8px 12px; font-size: 12px; text-align: left;" title="Tivi, Tủ Lạnh, Loa: Giấy A4 in 2 tem A5 Đứng">
+                            📺 <strong>TIVI, TỦ LẠNH, LOA</strong> • A4 (2-A5 Đứng)
                         </button>
-                        <button type="button" class="segmented-btn" data-template="giadung_a6" title="Mẫu Gia Dụng: Tự động lọc ngành hàng Gia Dụng">
-                            🍳 Gia Dụng (A6)
+                        <button type="button" class="segmented-btn" data-fromt="maygiat_tudong" style="justify-content: flex-start; padding: 8px 12px; font-size: 12px; text-align: left;" title="Máy Giặt, Tủ Đông: Giấy A5 in 2 tem A6 Đứng">
+                            🧺 <strong>MÁY GIẶT, TỦ ĐÔNG</strong> • A5 (2-A6 Đứng)
+                        </button>
+                        <button type="button" class="segmented-btn" data-fromt="giadung" style="justify-content: flex-start; padding: 8px 12px; font-size: 12px; text-align: left;" title="Gia Dụng: Giấy A5 in 4 tem A7 Đứng">
+                            🍳 <strong>GIA DỤNG</strong> • A5 (4-A7 Đứng)
                         </button>
                     </div>
                 </div>
 
                 <!-- Bố cục in số lượng tem trên 1 trang & Khổ giấy -->
                 <div class="form-group">
-                    <label class="form-label" for="layoutModeSelect">Bố cục in ấn & Khổ giấy:</label>
+                    <label class="form-label" for="layoutModeSelect">Tùy chỉnh Bố cục in & Khổ giấy:</label>
                     <select class="form-select" id="layoutModeSelect">
-                        <option value="a6_doi_a5">📑 In A6 Đôi - Bằng giấy A5 (2 tem A6 / tờ A5 ngang - Chuẩn không lệch)</option>
-                        <option value="a4_4_a6">📑 In tiết kiệm A4: 4 tem A6 / tờ A4 (Lưới 2x2)</option>
-                        <option value="a4_2_a5">📑 In ghép A4: 2 tem A5 / tờ A4 (Trên & Dưới)</option>
-                        <option value="single_a5">📄 In 1 tem / tờ A5 (Chuẩn giấy A5 đứng)</option>
-                        <option value="single_a4" selected>📄 In 1 tem / tờ A4 (Chuẩn TV & Tủ Lạnh A5)</option>
+                        <option value="a4_2_a5" selected>📺 Tivi, Tủ Lạnh, Loa: A4 (2-A5 Đứng)</option>
+                        <option value="a5_2_a6">🧺 Máy Giặt, Tủ Đông: A5 (2-A6 Đứng - Chuẩn không lệch)</option>
+                        <option value="a5_4_a7">🍳 Gia Dụng: A5 (4-A7 Đứng - Siêu tiết kiệm)</option>
+                        <option value="a4_4_a6">📑 Khổ A4: In 4 tem A6 / tờ A4 (Lưới 2x2)</option>
+                        <option value="single_a5">📄 Khổ A5: In 1 tem / tờ A5</option>
+                        <option value="single_a4">📄 Khổ A4: In 1 tem / tờ A4</option>
                     </select>
                     <div style="font-size: 11px; color: #64748b; margin-top: 4px;" id="layoutHintText">
-                        • Tuỳ chọn in tự do: Gia dụng có thể in A5 hoặc A6, in 1 tem hoặc in ghép tiết kiệm.
+                        • Tự động chọn đúng chuẩn khổ giấy: A4 (2-A5), A5 (2-A6), A5 (4-A7).
                     </div>
                 </div>
 
@@ -243,21 +247,23 @@
                         <div style="font-size: 14px; font-weight: 700; color: #0f172a;">
                             DANH SÁCH SẢN PHẨM (<span id="totalCountLabel">27 sản phẩm</span>)
                         </div>
-                        <!-- Bộ lọc ưu tiên danh mục -->
-                        <div class="cat-filter-group" style="display: flex; gap: 4px;">
+                        <!-- Bộ lọc ưu tiên danh mục 3 nhóm chuẩn -->
+                        <div class="cat-filter-group" style="display: flex; gap: 4px; flex-wrap: wrap;">
                             <button type="button" class="btn-cat-filter active" data-cat="all">⭐ Tất cả (27)</button>
-                            <button type="button" class="btn-cat-filter" data-cat="tvtl">📺 TV & Điện Máy (19)</button>
+                            <button type="button" class="btn-cat-filter" data-cat="tv_tl_loa">📺 TV, TL, Loa (13)</button>
+                            <button type="button" class="btn-cat-filter" data-cat="maygiat_tudong">🧺 Giặt, Đông (6)</button>
                             <button type="button" class="btn-cat-filter" data-cat="giadung">🍳 Gia Dụng (8)</button>
                         </div>
-                        <input type="text" class="form-input" id="searchInput" style="width: 170px; padding: 4px 10px; font-size: 12px;" placeholder="🔍 Tìm Model / Mã..." />
+                        <input type="text" class="form-input" id="searchInput" style="width: 160px; padding: 4px 10px; font-size: 12px;" placeholder="🔍 Tìm Model / Mã..." />
                     </div>
-                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
                         <div style="font-size: 12px; font-weight: 600; color: #0284c7;" id="selectedCountLabel">
                             Đang chọn: 27 sản phẩm
                         </div>
                         <!-- Nút ưu tiên chọn nhanh -->
-                        <button type="button" class="btn-quick-sel" id="btnSelectGiaDung" title="Ưu tiên chọn các món Gia Dụng">🍳 Chọn Gia Dụng</button>
-                        <button type="button" class="btn-quick-sel" id="btnSelectTvTl" title="Ưu tiên chọn TV & Tủ Lạnh">📺 Chọn TV/TL</button>
+                        <button type="button" class="btn-quick-sel" id="btnSelectTvTlLoa" title="Ưu tiên chọn TV, Tủ Lạnh, Loa">📺 Chọn TV/TL/Loa</button>
+                        <button type="button" class="btn-quick-sel" id="btnSelectMayGiatTuDong" title="Ưu tiên chọn Máy Giặt, Tủ Đông">🧺 Chọn Giặt/Đông</button>
+                        <button type="button" class="btn-quick-sel" id="btnSelectGiaDung" title="Ưu tiên chọn Gia Dụng">🍳 Chọn Gia Dụng</button>
                     </div>
                 </div>
 
@@ -298,10 +304,14 @@
                 <p>Hệ thống đã tối ưu sẵn 100% cho máy in trắng đen:</p>
                 <ol style="padding-left: 20px; margin: 10px 0;">
                     <li><strong>Máy in đích:</strong> Chọn máy in laser trắng đen của bạn hoặc <em>Lưu dưới dạng PDF</em>.</li>
-                    <li><strong>Khổ giấy (Paper size):</strong> Chọn <strong>A4</strong>.</li>
-                    <li><strong>Lề (Margins):</strong> Chọn <strong>Không (None)</strong> để tem nằm vừa khít 100% trên trang.</li>
-                    <li><strong>Mẫu TV & Tủ Lạnh:</strong> In ra 2 tem A5 trên 1 tờ A4.</li>
-                    <li><strong>Mẫu Gia Dụng:</strong> In ra 4 tem A6 trên 1 tờ A4.</li>
+                    <li><strong>Khổ giấy & Chế độ in (FROMT):</strong>
+                        <ul>
+                            <li><strong>TIVI, TỦ LẠNH, LOA:</strong> Chọn giấy <strong>A4</strong> (In 2 tem A5 Đứng).</li>
+                            <li><strong>MÁY GIẶT, TỦ ĐÔNG:</strong> Chọn giấy <strong>A5</strong> (In 2 tem A6 Đứng - Tự động xoay chuẩn, không lệch).</li>
+                            <li><strong>GIA DỤNG:</strong> Chọn giấy <strong>A5</strong> (In 4 tem A7 Đứng - Siêu tiết kiệm giấy).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Lề (Margins):</strong> Chọn <strong>Không (None)</strong> hoặc <em>Mặc định (Default)</em> để tem nằm chuẩn 100%.</li>
                 </ol>
                 <div style="text-align: center; margin-top: 12px;">
                     <img src="assets/hd.png" alt="Hướng dẫn cài đặt in" style="max-width: 100%; border-radius: 6px; border: 1px solid #cbd5e1;" />

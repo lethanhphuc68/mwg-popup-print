@@ -8,20 +8,26 @@ class App {
     constructor() {
         this.products = [...DEFAULT_PRODUCTS];
         this.currentRegion = 'Vùng Hồ Chí Minh';
-        this.selectedCategory = 'all'; // 'all' (Mặc định: đầy đủ 27 sản phẩm, không ép cứng), 'tvtl', 'giadung'
+        
+        // Chuẩn Format ngành hàng (FROMT):
+        // 1. 'tv_tl_loa': Tivi, Tủ Lạnh, Loa -> Chuẩn Giấy A4 (2-A5 Đứng)
+        // 2. 'maygiat_tudong': Máy Giặt, Tủ Đông -> Chuẩn Giấy A5 (2-A6 Đứng)
+        // 3. 'giadung': Gia Dụng -> Chuẩn Giấy A5 (4-A7 Đứng)
+        this.currentFromt = 'tv_tl_loa';
+        this.selectedCategory = 'all'; // 'all' (Toàn bộ 27 sản phẩm), 'tv_tl_loa', 'maygiat_tudong', 'giadung'
         this.searchKeyword = '';
         this.currentProductIndex = 0; // Vị trí sản phẩm xem trước hiện tại (0 -> products.length - 1)
         
         // Bố cục in ấn & Khổ giấy linh hoạt:
-        // 'a6_doi_a5': In A6 Đôi bằng giấy A5 (2 tem A6 / tờ A5 ngang - Chuẩn không lệch)
-        // 'a4_4_a6': In tiết kiệm A4 (4 tem A6 / tờ A4)
-        // 'a4_2_a5': In ghép A4 (2 tem A5 / tờ A4)
-        // 'single_a5': In 1 tem / tờ A5
-        // 'single_a4': In 1 tem / tờ A4 (Chuẩn TV & Tủ Lạnh A5)
-        this.layoutMode = 'single_a4';
+        // 'a4_2_a5': Chuẩn Tivi, Tủ Lạnh, Loa - Giấy A4 (2-A5 Đứng)
+        // 'a5_2_a6': Chuẩn Máy Giặt, Tủ Đông - Giấy A5 (2-A6 Đứng)
+        // 'a5_4_a7': Chuẩn Gia Dụng - Giấy A5 (4-A7 Đứng)
+        // 'a4_4_a6': Khổ A4 (4 tem A6)
+        // 'single_a5': Khổ A5 (1 tem)
+        // 'single_a4': Khổ A4 (1 tem)
+        this.layoutMode = 'a4_2_a5';
 
-        // Chọn mẫu tem: 'tvtl_a5' (TV & Tủ Lạnh A5) hoặc 'giadung_a6' (Gia Dụng A6)
-        // Lưu ý: Mọi sản phẩm (dù là Gia Dụng hay TV) đều có thể in theo bất kỳ mẫu tem nào!
+        // Chọn mẫu tem: 'tvtl_a5' (Mẫu A5) hoặc 'giadung_a6' (Mẫu Gia Dụng Gạch Giá)
         this.templateType = 'tvtl_a5';
 
         // Tùy chọn banner & nội dung
@@ -41,12 +47,41 @@ class App {
         this.updatePreview();
     }
 
+    // PHÂN LOẠI 27 SẢN PHẨM THEO ĐÚNG 3 NHÓM NGÀNH HÀNG TỪNG YÊU CẦU:
+    // 1. TIVI, TỦ LẠNH, LOA (13 sản phẩm)
+    // 2. MÁY GIẶT, TỦ ĐÔNG (6 sản phẩm)
+    // 3. GIA DỤNG (8 sản phẩm)
+    getProductGroup(item) {
+        const nhomLower = (item.nhom || '').toLowerCase();
+        const tenLower = (item.tenSP || '').toLowerCase();
+
+        // 1. Gia Dụng: Máy lọc nước, Lò vi sóng, Nồi cơm, Bếp, Chảo, Bình đun...
+        if (nhomLower.includes('gia dụng') || nhomLower.includes('gd') ||
+            nhomLower.includes('máy lọc nước') || tenLower.includes('lọc nước') ||
+            tenLower.includes('lò vi sóng') || tenLower.includes('nồi cơm') ||
+            tenLower.includes('nồi') || tenLower.includes('chảo') ||
+            tenLower.includes('bếp') || tenLower.includes('bình đun') ||
+            tenLower.includes('quạt') || tenLower.includes('máy xay')) {
+            return 'giadung';
+        }
+
+        // 2. Máy Giặt, Tủ Đông
+        if (nhomLower.includes('máy giặt') || nhomLower.includes('giặt') ||
+            nhomLower.includes('tủ đông') || tenLower.includes('máy giặt') ||
+            tenLower.includes('tủ đông')) {
+            return 'maygiat_tudong';
+        }
+
+        // 3. Tivi, Tủ Lạnh, Loa (+ Tủ Mát)
+        return 'tv_tl_loa';
+    }
+
     getItemsPerSheet() {
         switch (this.layoutMode) {
-            case 'a6_doi_a5':
-                return 2;
+            case 'a5_4_a7':
             case 'a4_4_a6':
                 return 4;
+            case 'a5_2_a6':
             case 'a4_2_a5':
                 return 2;
             case 'single_a5':
@@ -56,7 +91,7 @@ class App {
         }
     }
 
-    // Thiết lập khổ giấy và lề in động để khi in bằng giấy A5 (A6 Đôi) không bị lệch
+    // Thiết lập khổ giấy và lề in động để chuẩn xác 100% không bị lệch
     applyDynamicPrintStyles() {
         let styleEl = document.getElementById('dynamicPrintPageStyle');
         if (!styleEl) {
@@ -65,24 +100,24 @@ class App {
             document.head.appendChild(styleEl);
         }
 
-        if (this.layoutMode === 'a6_doi_a5') {
+        if (this.layoutMode === 'a5_2_a6') {
             styleEl.textContent = `
                 @page {
-                    size: 210mm 148mm !important; /* Khổ giấy A5 Nằm Ngang: In 2 tem A6 cạnh nhau chuẩn 100% không lệch */
+                    size: 210mm 148mm !important; /* Khổ giấy A5 Ngang: 2 tem A6 Đứng cạnh nhau chuẩn không lệch */
                     margin: 0mm !important;
                 }
             `;
-        } else if (this.layoutMode === 'single_a5') {
+        } else if (this.layoutMode === 'a5_4_a7' || this.layoutMode === 'single_a5') {
             styleEl.textContent = `
                 @page {
-                    size: 148mm 210mm !important; /* Khổ giấy A5 Đứng */
+                    size: 148mm 210mm !important; /* Khổ giấy A5 Đứng: 4 tem A7 Đứng hoặc 1 tem A5 */
                     margin: 0mm !important;
                 }
             `;
         } else {
             styleEl.textContent = `
                 @page {
-                    size: 210mm 297mm !important; /* Khổ giấy A4 Chuẩn */
+                    size: 210mm 297mm !important; /* Khổ giấy A4 Chuẩn: 2 tem A5 Đứng hoặc 4 tem A6 */
                     margin: 0mm !important;
                 }
             `;
@@ -93,51 +128,25 @@ class App {
         // Tự động nhận diện dữ liệu
     }
 
-    // LỌC SẢN PHẨM: ƯU TIÊN DANH SÁCH CHỌN, KHÔNG ÉP CỨNG LOẠI BỎ SẢN PHẨM
-    // (Ví dụ: Sản phẩm gia dụng hoàn toàn có thể in mẫu A5, và TV có thể in mẫu A6)
+    // LỌC SẢN PHẨM: ƯU TIÊN THEO NHÓM NGÀNH HÀNG CHUẨN, KHÔNG ÉP CỨNG LOẠI BỎ SẢN PHẨM
     getFilteredProducts() {
         return this.products.filter(item => {
-            const nhomLower = (item.nhom || '').toLowerCase();
-            const tenSPLower = (item.tenSP || '').toLowerCase();
+            const group = this.getProductGroup(item);
 
-            // Nhận diện hàng Gia Dụng
-            const isGiaDung = nhomLower.includes('gia dụng') || 
-                              nhomLower.includes('gd') ||
-                              tenSPLower.includes('nồi') ||
-                              tenSPLower.includes('chảo') ||
-                              tenSPLower.includes('bếp') ||
-                              tenSPLower.includes('bình đun') ||
-                              tenSPLower.includes('lò vi sóng') ||
-                              tenSPLower.includes('quạt') ||
-                              tenSPLower.includes('máy xay') ||
-                              tenSPLower.includes('lọc nước');
-
-            // Nhận diện hàng TV, Tủ Lạnh, Điện Máy Lớn
-            const isTvTl = nhomLower.includes('tivi') || 
-                           nhomLower.includes('tv') || 
-                           nhomLower.includes('tủ lạnh') || 
-                           nhomLower.includes('tủ mát') || 
-                           nhomLower.includes('tủ đông') || 
-                           nhomLower.includes('máy giặt') ||
-                           nhomLower.includes('loa') ||
-                           tenSPLower.includes('tivi') || 
-                           tenSPLower.includes('tủ lạnh') ||
-                           tenSPLower.includes('sony') ||
-                           (tenSPLower.includes('samsung') && tenSPLower.includes('tv'));
-
-            // BỘ LỌC ƯU TIÊN: Chỉ lọc khi người dùng chủ động bấm chọn tab ưu tiên (tvtl hoặc giadung)
-            // Nếu là 'all' thì hiển thị toàn bộ 27 sản phẩm, không giấu bất kỳ sản phẩm nào!
+            // BỘ LỌC ƯU TIÊN DANH MỤC:
             if (this.selectedCategory === 'giadung') {
-                if (!isGiaDung && isTvTl) return false;
-            } else if (this.selectedCategory === 'tvtl') {
-                if (isGiaDung && !isTvTl) return false;
+                if (group !== 'giadung') return false;
+            } else if (this.selectedCategory === 'maygiat_tudong') {
+                if (group !== 'maygiat_tudong') return false;
+            } else if (this.selectedCategory === 'tv_tl_loa') {
+                if (group !== 'tv_tl_loa') return false;
             }
 
             if (this.searchKeyword) {
                 const kw = this.searchKeyword.toLowerCase();
-                const matchName = tenSPLower.includes(kw);
+                const matchName = (item.tenSP || '').toLowerCase().includes(kw);
                 const matchCode = (item.maSP || '').toLowerCase().includes(kw);
-                const matchNhom = nhomLower.includes(kw);
+                const matchNhom = (item.nhom || '').toLowerCase().includes(kw);
                 if (!matchName && !matchCode && !matchNhom) return false;
             }
 
@@ -270,7 +279,7 @@ class App {
                     statusBadge.textContent = `A4 Tiết kiệm (4 tem / tờ A4)`;
                 }
             } else if (this.layoutMode === 'a4_2_a5') {
-                // IN GHÉP A4 (2 tem A5 / tờ A4 - Trên & Dưới)
+                // IN GHÉP A4 (2 tem A5 / tờ A4 - Trên & Dưới - CHUẨN TIVI, TỦ LẠNH, LOA)
                 previewContainer.className = 'paper-sheet size-a4 layout-a4-2';
                 previewContainer.classList.add(isTv ? 'template-tvtl' : 'template-giadung');
 
@@ -281,7 +290,25 @@ class App {
                     ${item2 ? this.renderSingleLabelHTML(item2, bannerContent, this.getDateText(item2), this.templateType) : '<div style="height: 505px; border: 2px dashed #cbd5e1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 14px;">(Nửa dưới để trống)</div>'}
                 `;
                 if (statusBadge) {
-                    statusBadge.textContent = item2 ? `A4 Ghép 2 tem / tờ` : `A4 Ghép (1 tem / tờ)`;
+                    statusBadge.textContent = item2 ? `Tivi, TL, Loa • A4 (2-A5 Đứng - 2 tem / tờ)` : `Tivi, TL, Loa • A4 (1 tem / tờ)`;
+                }
+            } else if (this.layoutMode === 'a5_4_a7') {
+                // CHUẨN GIA DỤNG: GIẤY A5 (4 TEM A7 ĐỨNG - LƯỚI 2x2 SIÊU TIẾT KIỆM)
+                previewContainer.className = 'paper-sheet size-a5 layout-a5-4';
+                previewContainer.classList.add(isTv ? 'template-tvtl' : 'template-giadung');
+
+                let html = '';
+                for (let i = 0; i < 4; i++) {
+                    const it = currentSheetItems[i];
+                    if (it) {
+                        html += this.renderSingleLabelHTML(it, bannerContent, this.getDateText(it), this.templateType);
+                    } else {
+                        html += `<div style="height: 355px; border: 2px dashed #cbd5e1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 13px;">(Ô trống)</div>`;
+                    }
+                }
+                previewContainer.innerHTML = html;
+                if (statusBadge) {
+                    statusBadge.textContent = `Gia Dụng • A5 (4-A7 Đứng - ${currentSheetItems.length} tem / tờ A5)`;
                 }
             }
         }
@@ -456,10 +483,12 @@ class App {
                 printContainer.appendChild(sheet);
             }
         } else {
-            // In ghép: a6_doi_a5 (2 tem/tờ A5 ngang), a4_4_a6 (4 tem/tờ A4), a4_2_a5 (2 tem/tờ A4)
+            // In ghép: a5_4_a7 (4 tem A7 / tờ A5 đứng), a6_doi_a5 (2 tem A6 / tờ A5 ngang), a4_4_a6 (4 tem A6 / tờ A4), a4_2_a5 (2 tem A5 / tờ A4)
             for (let i = 0; i < targetItems.length; i += itemsPerSheet) {
                 const sheet = document.createElement('div');
-                if (this.layoutMode === 'a6_doi_a5') {
+                if (this.layoutMode === 'a5_4_a7') {
+                    sheet.className = `print-sheet size-a5 layout-a5-4 ${templateClass}`;
+                } else if (this.layoutMode === 'a6_doi_a5') {
                     sheet.className = `print-sheet size-a5-landscape layout-a6-doi ${templateClass}`;
                 } else if (this.layoutMode === 'a4_4_a6') {
                     sheet.className = `print-sheet size-a4 layout-a4-4 ${templateClass}`;
@@ -493,7 +522,7 @@ class App {
         window.print();
     }
 
-    // In tờ hiện tại đang xem (1 tem nếu chọn đơn lẻ, hoặc đúng tờ ghép A6 đôi / 4 tem nếu chọn ghép)
+    // In tờ hiện tại đang xem (1 tem nếu chọn đơn lẻ, hoặc đúng tờ ghép A6 đôi / 4 tem A7 nếu chọn ghép)
     printCurrentSingle() {
         const filtered = this.getFilteredProducts();
         if (filtered.length === 0) return;
@@ -521,7 +550,9 @@ class App {
             const currentSheetItems = filtered.slice(startIndex, startIndex + itemsPerSheet);
 
             const sheet = document.createElement('div');
-            if (this.layoutMode === 'a6_doi_a5') {
+            if (this.layoutMode === 'a5_4_a7') {
+                sheet.className = `print-sheet size-a5 layout-a5-4 ${templateClass}`;
+            } else if (this.layoutMode === 'a6_doi_a5') {
                 sheet.className = `print-sheet size-a5-landscape layout-a6-doi ${templateClass}`;
             } else if (this.layoutMode === 'a4_4_a6') {
                 sheet.className = `print-sheet size-a4 layout-a4-4 ${templateClass}`;
@@ -580,31 +611,58 @@ class App {
             alert(`Trích xuất thành công ${products.length} sản phẩm từ nội dung đã dán!`);
         });
 
-        // Chọn Mẫu Tem (TV & Tủ Lạnh A5 vs Gia Dụng A6)
-        document.querySelectorAll('button[data-template]').forEach(btn => {
+        // Chọn Chuẩn Format Theo Ngành Hàng (FROMT)
+        // - TIVI, TỦ LẠNH, LOA: A4 (2-A5 ĐỨNG)
+        // - MÁY GIẶT, TỦ ĐÔNG: A5 (2-A6 ĐỨNG)
+        // - GIA DỤNG: A5 (4-A7 ĐỨNG)
+        document.querySelectorAll('button[data-fromt]').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('button[data-template]').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('button[data-fromt]').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                this.templateType = btn.getAttribute('data-template');
+                const fromt = btn.getAttribute('data-fromt');
+                this.currentFromt = fromt;
+
                 const layoutSelect = document.getElementById('layoutModeSelect');
-                // GỢI Ý BỐ CỤC PHÙ HỢP NHƯNG KHÔNG ÉP CỨNG (Người dùng có toàn quyền chọn)
-                if (this.templateType === 'giadung_a6' && this.layoutMode === 'single_a4') {
-                    this.layoutMode = 'a6_doi_a5';
-                    if (layoutSelect) layoutSelect.value = 'a6_doi_a5';
+
+                if (fromt === 'tv_tl_loa') {
+                    // TIVI, TỦ LẠNH, LOA: A4 (2-A5 ĐỨNG)
+                    this.layoutMode = 'a4_2_a5';
+                    this.templateType = 'tvtl_a5';
+                    this.selectedCategory = 'tv_tl_loa';
+                    if (layoutSelect) layoutSelect.value = 'a4_2_a5';
+                } else if (fromt === 'maygiat_tudong') {
+                    // MÁY GIẶT, TỦ ĐÔNG: A5 (2-A6 ĐỨNG)
+                    this.layoutMode = 'a5_2_a6';
+                    this.templateType = 'giadung_a6';
+                    this.selectedCategory = 'maygiat_tudong';
+                    if (layoutSelect) layoutSelect.value = 'a5_2_a6';
+                } else if (fromt === 'giadung') {
+                    // GIA DỤNG: A5 (4-A7 ĐỨNG)
+                    this.layoutMode = 'a5_4_a7';
+                    this.templateType = 'giadung_a6';
+                    this.selectedCategory = 'giadung';
+                    if (layoutSelect) layoutSelect.value = 'a5_4_a7';
                 }
+
+                // Đồng bộ tab filter trên bảng
+                document.querySelectorAll('.btn-cat-filter').forEach(cb => {
+                    cb.classList.toggle('active', cb.getAttribute('data-cat') === this.selectedCategory);
+                });
+
+                this.currentProductIndex = 0;
                 this.updatePreview();
                 this.renderTable();
             });
         });
 
-        // Chọn Bố Cục Hiển Thị & In (In A6 Đôi giấy A5, In 4 tem A4, In 2 tem A4, In 1 tem)
+        // Chọn Bố Cục Hiển Thị & In Tùy Chỉnh
         document.getElementById('layoutModeSelect')?.addEventListener('change', (e) => {
             this.layoutMode = e.target.value;
             this.updatePreview();
             this.renderTable();
         });
 
-        // Bộ lọc ưu tiên danh mục (Tất cả, TV & Điện Máy, Gia Dụng)
+        // Bộ lọc ưu tiên danh mục 3 nhóm chuẩn (Tất cả, TV/TL/Loa, Máy Giặt/Tủ Đông, Gia Dụng)
         document.querySelectorAll('.btn-cat-filter').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.btn-cat-filter').forEach(b => b.classList.remove('active'));
@@ -616,31 +674,26 @@ class App {
             });
         });
 
-        // Nút ưu tiên chọn nhanh sản phẩm
-        document.getElementById('btnSelectGiaDung')?.addEventListener('click', () => {
+        // Nút ưu tiên chọn nhanh sản phẩm theo đúng 3 nhóm
+        document.getElementById('btnSelectTvTlLoa')?.addEventListener('click', () => {
             this.products.forEach(p => {
-                const nhomLower = (p.nhom || '').toLowerCase();
-                const tenLower = (p.tenSP || '').toLowerCase();
-                const isGd = nhomLower.includes('gia dụng') || nhomLower.includes('gd') ||
-                             tenLower.includes('nồi') || tenLower.includes('chảo') ||
-                             tenLower.includes('bếp') || tenLower.includes('bình đun') ||
-                             tenLower.includes('lò vi sóng') || tenLower.includes('quạt') ||
-                             tenLower.includes('máy xay') || tenLower.includes('lọc nước');
-                p.selected = isGd;
+                p.selected = this.getProductGroup(p) === 'tv_tl_loa';
             });
             this.renderTable();
             this.updatePreview();
         });
 
-        document.getElementById('btnSelectTvTl')?.addEventListener('click', () => {
+        document.getElementById('btnSelectMayGiatTuDong')?.addEventListener('click', () => {
             this.products.forEach(p => {
-                const nhomLower = (p.nhom || '').toLowerCase();
-                const tenLower = (p.tenSP || '').toLowerCase();
-                const isTv = nhomLower.includes('tivi') || nhomLower.includes('tv') ||
-                             nhomLower.includes('tủ lạnh') || nhomLower.includes('tủ mát') ||
-                             nhomLower.includes('tủ đông') || nhomLower.includes('máy giặt') ||
-                             nhomLower.includes('loa');
-                p.selected = isTv;
+                p.selected = this.getProductGroup(p) === 'maygiat_tudong';
+            });
+            this.renderTable();
+            this.updatePreview();
+        });
+
+        document.getElementById('btnSelectGiaDung')?.addEventListener('click', () => {
+            this.products.forEach(p => {
+                p.selected = this.getProductGroup(p) === 'giadung';
             });
             this.renderTable();
             this.updatePreview();

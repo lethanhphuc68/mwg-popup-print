@@ -962,10 +962,59 @@ body {
     align-items: center !important;
 }
 
-.paper-sheet.size-a5 .label-box.format-a5,
-.paper-sheet.size-a5 .label-box.format-gd-a6 {
+.paper-sheet.size-a5:not(.layout-a5-4) .label-box.format-a5,
+.paper-sheet.size-a5:not(.layout-a5-4) .label-box.format-gd-a6 {
     width: 490px !important;
     height: 710px !important;
+}
+
+/* PREVIEW KHỔ A5 ĐỨNG: 4 TEM A7 ĐỨNG (LƯỚI 2x2 CHUẨN GIA DỤNG) */
+.paper-sheet.size-a5.layout-a5-4 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+    gap: 10px !important;
+    padding: 12px 10px !important;
+    justify-content: center !important;
+    align-content: center !important;
+}
+
+.paper-sheet.size-a5.layout-a5-4 .label-box.format-gd-a6,
+.paper-sheet.size-a5.layout-a5-4 .label-box.format-a5 {
+    width: 245px !important;
+    height: 355px !important;
+    border: 2.5px solid #000000 !important;
+    padding-bottom: 4px !important;
+}
+
+.paper-sheet.size-a5.layout-a5-4 .label-banner {
+    height: 90px !important;
+}
+
+.paper-sheet.size-a5.layout-a5-4 .gd-tsp {
+    font-size: 15px !important;
+    margin-top: 3px !important;
+}
+
+.paper-sheet.size-a5.layout-a5-4 .gd-gg {
+    font-size: 28px !important;
+    height: 35px !important;
+}
+
+.paper-sheet.size-a5.layout-a5-4 .gd-gc {
+    font-size: 42px !important;
+    line-height: 42px !important;
+}
+
+.paper-sheet.size-a5.layout-a5-4 .gd-htr {
+    font-size: 12px !important;
+}
+
+.paper-sheet.size-a5.layout-a5-4 .gd-pdat {
+    font-size: 11px !important;
+    height: 22px !important;
+    padding: 1px !important;
+    border-top: 4px solid black !important;
 }
 
 /* LƯỚI A4 4 TEM A6 */
