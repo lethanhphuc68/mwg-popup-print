@@ -45,7 +45,7 @@ class App {
         });
     }
 
-    // Cấu hình chuẩn 4 Form CE theo yêu cầu người dùng
+    // Cấu hình chuẩn 4 Form CE theo yêu cầu người dùng - TOÀN BỘ LÀ GIẤY ĐỨNG (PORTRAIT)
     getFormConfig(formKey = this.currentForm) {
         switch (formKey) {
             case 'maygiat':
@@ -53,13 +53,13 @@ class App {
                     key: 'maygiat',
                     name: 'MÁY GIẶT - TỦ ĐÔNG',
                     paper: 'A5',
-                    orientation: 'landscape',
-                    pageSize: '210mm 148mm',
+                    orientation: 'portrait',
+                    pageSize: '148mm 210mm',
                     itemsPerSheet: 2,
-                    sheetClass: 'size-a5-landscape layout-mg-a5',
+                    sheetClass: 'size-a5 layout-mg-a5',
                     renderType: 'mg',
                     category: 'maygiat_tudong',
-                    desc: 'GIẤY A5 | POPUP: A6×2 | GẠCH GIÁ MÁY GIẶT',
+                    desc: 'GIẤY A5 ĐỨNG | POPUP: A6×2 | GẠCH GIÁ MÁY GIẶT',
                     sourceUrl: 'https://mientay2.pro/in-online/popup/mg/gach/'
                 };
             case 'giadung':
@@ -73,7 +73,7 @@ class App {
                     sheetClass: 'size-a5 layout-gd-a5',
                     renderType: 'gd',
                     category: 'giadung',
-                    desc: 'GIẤY A5 | POPUP: A7×4 | GẠCH GIÁ GIA DỤNG',
+                    desc: 'GIẤY A5 ĐỨNG | POPUP: A7×4 | GẠCH GIÁ GIA DỤNG',
                     sourceUrl: 'https://mientay2.pro/in-online/popup/gd/gach/'
                 };
             case 'maylocnuoc':
@@ -81,13 +81,13 @@ class App {
                     key: 'maylocnuoc',
                     name: 'MÁY LỌC NƯỚC',
                     paper: 'A5',
-                    orientation: 'landscape',
-                    pageSize: '210mm 148mm',
+                    orientation: 'portrait',
+                    pageSize: '148mm 210mm',
                     itemsPerSheet: 2,
-                    sheetClass: 'size-a5-landscape layout-mg-a5',
+                    sheetClass: 'size-a5 layout-mg-a5',
                     renderType: 'mg',
                     category: 'maylocnuoc',
-                    desc: 'GIẤY A5 | POPUP: A6×2 | GẠCH GIÁ MÁY GIẶT',
+                    desc: 'GIẤY A5 ĐỨNG | POPUP: A6×2 | GẠCH GIÁ MÁY GIẶT',
                     sourceUrl: 'https://mientay2.pro/in-online/popup/mg/gach/'
                 };
             case 'tvtl':
@@ -102,7 +102,7 @@ class App {
                     sheetClass: 'size-a4 layout-tvtl-a4',
                     renderType: 'tvtl',
                     category: 'tv_tl_loa',
-                    desc: 'GIẤY A4 | POPUP: A5×2 | GẠCH GIÁ TVTL',
+                    desc: 'GIẤY A4 ĐỨNG | POPUP: A5×2 | GẠCH GIÁ TVTL',
                     sourceUrl: 'https://mientay2.pro/in-online/popup/tvtl/gach/'
                 };
         }

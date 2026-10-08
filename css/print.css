@@ -48,13 +48,13 @@
         overflow: hidden !important;
     }
 
-    /* TỜ IN KHỔ A5 NGANG: IN A6 ĐÔI TRÊN GIẤY A5 - CHUẨN XÁC 100% KHÔNG LỆCH */
-    .print-sheet.size-a5-landscape,
-    .print-sheet.layout-mg-a5 {
-        width: 210mm !important;
-        height: 148mm !important;
-        max-height: 148mm !important;
-        padding: 4mm 5mm !important;
+    /* FORM 2 & 4: MÁY GIẶT - TỦ ĐÔNG & MÁY LỌC NƯỚC (GIẤY A5 ĐỨNG, 2 TEM A6 DỌC - SỐ TO LÊN) */
+    .print-sheet.layout-mg-a5,
+    .print-sheet.size-a5-landscape {
+        width: 148mm !important;
+        height: 210mm !important;
+        max-height: 210mm !important;
+        padding: 4mm 4mm !important;
         margin: 0 auto !important;
         page-break-after: always !important;
         break-after: page !important;
@@ -63,19 +63,17 @@
         box-sizing: border-box !important;
         overflow: hidden !important;
         display: flex !important;
-        flex-direction: row !important;
+        flex-direction: column !important; /* GIẤY ĐỨNG, 2 TEM DỌC TRÊN DƯỚI */
         justify-content: space-between !important;
         align-items: center !important;
         background: #ffffff !important;
     }
 
-    .print-sheet.size-a5-landscape .label-box.format-gd-a6,
-    .print-sheet.size-a5-landscape .label-box.format-mg-a6,
-    .print-sheet.size-a5-landscape .label-box.format-a5,
-    .print-sheet.layout-mg-a5 .label-box {
-        width: 98mm !important;
-        height: 140mm !important;
-        max-height: 140mm !important;
+    .print-sheet.layout-mg-a5 .label-box.format-mg-a6,
+    .print-sheet .label-box.format-mg-a6 {
+        width: 140mm !important; /* 100% CHIỀU RỘNG GIẤY A5 ĐỨNG */
+        height: 98mm !important;
+        max-height: 98mm !important;
         border: 3.5px solid #000000 !important;
         margin: 0 !important;
         box-sizing: border-box !important;
@@ -85,82 +83,126 @@
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        padding-bottom: 2mm !important;
+        padding-bottom: 1.5mm !important;
+        font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+        background: #ffffff !important;
     }
 
-    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .label-banner,
-    .print-sheet.layout-mg-a5 .label-box .label-banner {
-        height: 38mm !important;
+    .print-sheet .label-box.format-mg-a6 .label-banner {
+        width: 100% !important;
+        height: 25mm !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
         border-bottom: 3px solid #000000 !important;
     }
-    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .strike-number,
-    .print-sheet.layout-mg-a5 .label-box .strike-number {
-        font-size: 13.5mm !important;
+
+    .print-sheet .label-box.format-mg-a6 .label-banner svg {
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
     }
-    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .txt-price-promo,
-    .print-sheet.layout-mg-a5 .label-box .txt-price-promo {
-        font-size: 19mm !important;
-        line-height: 19mm !important;
+
+    .print-sheet .label-box.format-mg-a6 .txt-price-strike {
+        width: 100% !important;
+        height: 20mm !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
     }
-    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .txt-subline,
-    .print-sheet.layout-mg-a5 .label-box .txt-subline {
-        font-size: 5mm !important;
+
+    .print-sheet .label-box.format-mg-a6 .strike-number {
+        font-size: 19mm !important; /* SỐ GIÁ GẠCH TO LÊN RÕ RÀNG */
+        line-height: 20mm !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #000000 !important;
+        z-index: 1 !important;
     }
-    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .label-footer,
-    .print-sheet.layout-mg-a5 .label-box .label-footer {
-        height: 8.5mm !important;
+
+    .print-sheet .label-box.format-mg-a6 .strike-bar {
+        position: absolute !important;
+        top: 54% !important;
+        left: 8% !important;
+        right: 8% !important;
+        height: 3px !important;
+        background-color: #000000 !important;
+        border-top: 3px solid #000000 !important;
+        z-index: 2 !important;
+    }
+
+    .print-sheet .label-box.format-mg-a6 .txt-price-promo {
+        width: 100% !important;
+        font-size: 28mm !important; /* SỐ GIÁ BÁN TO LÊN VƯỢT TRỘI */
+        height: 27mm !important;
+        line-height: 27mm !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #000000 !important;
+        margin-top: -2mm !important;
+    }
+
+    .print-sheet .label-box.format-mg-a6 .txt-subline {
+        width: 100% !important;
+        height: 6mm !important;
+        line-height: 6mm !important;
+        font-size: 5.5mm !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #000000 !important;
+        margin: 0 !important;
+    }
+
+    .print-sheet .label-box.format-mg-a6 .label-footer {
+        height: 9mm !important;
         display: flex !important;
         justify-content: space-between !important;
+        align-items: center !important;
+        gap: 2mm !important;
         padding: 0 1.5mm !important;
     }
-    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .input-product-name,
-    .print-sheet.layout-mg-a5 .label-box .input-product-name {
-        width: 56mm !important;
-        font-size: 4.5mm !important;
-        height: 7.5mm !important;
-        border: 2px solid #000000 !important;
-        text-align: center !important;
-    }
-    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .input-print-date,
-    .print-sheet.layout-mg-a5 .label-box .input-print-date {
-        width: 34mm !important;
-        font-size: 4.2mm !important;
-        height: 7.5mm !important;
-        border: 2px solid #000000 !important;
-        text-align: center !important;
-    }
 
-    .print-sheet.size-a5-landscape .label-box.format-a5 .label-banner {
-        height: 38mm !important;
-    }
-    .print-sheet.size-a5-landscape .label-box.format-a5 .strike-number {
-        font-size: 14mm !important;
-    }
-    .print-sheet.size-a5-landscape .label-box.format-a5 .txt-price-promo {
-        font-size: 18mm !important;
-        line-height: 18mm !important;
-    }
-    .print-sheet.size-a5-landscape .label-box.format-a5 .txt-subline {
-        font-size: 5mm !important;
-    }
-    .print-sheet.size-a5-landscape .label-box.format-a5 .label-footer {
+    .print-sheet .label-box.format-mg-a6 .input-product-name {
+        width: 82mm !important;
         height: 8mm !important;
-    }
-    .print-sheet.size-a5-landscape .label-box.format-a5 .input-product-name {
-        width: 55mm !important;
         font-size: 4.5mm !important;
-    }
-    .print-sheet.size-a5-landscape .label-box.format-a5 .input-print-date {
-        width: 32mm !important;
-        font-size: 4.2mm !important;
+        font-weight: bold !important;
+        border: 2px solid #000000 !important;
+        text-align: center !important;
+        background: transparent !important;
+        color: #000000 !important;
+        font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
     }
 
-    /* TỜ IN KHỔ A5 ĐỨNG: 1 TEM / TỜ A5 */
-    .print-sheet.size-a5 {
+    .print-sheet .label-box.format-mg-a6 .input-print-date {
+        width: 52mm !important;
+        height: 8mm !important;
+        font-size: 4.2mm !important;
+        font-weight: bold !important;
+        border: 2px solid #000000 !important;
+        text-align: center !important;
+        background: transparent !important;
+        color: #000000 !important;
+        font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+    }
+
+    /* FORM 3: GIA DỤNG (GIẤY A5 ĐỨNG, 4 TEM A7 LƯỚI 2x2 - SỐ GIÁ TO LÊN GẤP ĐÔI) */
+    .print-sheet.layout-gd-a5,
+    .print-sheet.size-a5.layout-a5-4,
+    .print-sheet.size-a5.layout-gd-a5 {
         width: 148mm !important;
         height: 210mm !important;
         max-height: 210mm !important;
-        padding: 5mm !important;
+        display: grid !important;
+        grid-template-columns: 69mm 69mm !important;
+        grid-template-rows: 100mm 100mm !important;
+        gap: 3mm !important;
+        justify-content: center !important;
+        align-content: center !important;
+        padding: 3.5mm 3mm !important;
         margin: 0 auto !important;
         page-break-after: always !important;
         break-after: page !important;
@@ -168,93 +210,119 @@
         break-inside: avoid !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
         background: #ffffff !important;
     }
 
-    .print-sheet.size-a5 .label-box.format-a5,
-    .print-sheet.size-a5 .label-box.format-tvtl-a5 {
-        width: 138mm !important;
-        height: 198mm !important;
-        max-height: 198mm !important;
-        border: 4px solid #000000 !important;
-    }
-
-    .print-sheet.size-a5 .label-box.format-gd-a6,
-    .print-sheet.size-a5 .label-box.format-mg-a6 {
-        width: 135mm !important;
-        height: 195mm !important;
-        max-height: 195mm !important;
-        border: 4px solid #000000 !important;
-    }
-
-    /* TỜ IN KHỔ A5 ĐỨNG: 4 TEM A7 ĐỨNG TRÊN GIẤY A5 (CHUẨN GIA DỤNG) */
-    .print-sheet.size-a5.layout-a5-4,
-    .print-sheet.size-a5.layout-gd-a5,
-    .print-sheet.layout-gd-a5 {
-        display: grid !important;
-        grid-template-columns: 69mm 69mm !important;
-        grid-template-rows: 99mm 99mm !important;
-        gap: 3mm !important;
-        justify-content: center !important;
-        align-content: center !important;
-        padding: 4mm 2.5mm !important;
-    }
-
-    .print-sheet.size-a5.layout-a5-4 .label-box,
-    .print-sheet.layout-gd-a5 .label-box,
-    .print-sheet.size-a5 .label-box.format-gd-a7 {
+    .print-sheet.layout-gd-a5 .label-box.format-gd-a7,
+    .print-sheet .label-box.format-gd-a7 {
         width: 69mm !important;
-        height: 99mm !important;
-        max-height: 99mm !important;
-        border: 2.5px solid #000000 !important;
+        height: 100mm !important;
+        max-height: 100mm !important;
+        border: 3px solid #000000 !important;
         margin: 0 !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        text-align: center !important;
+        overflow: hidden !important;
         padding-bottom: 1.5mm !important;
+        font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+        background: #ffffff !important;
     }
 
-    .print-sheet.size-a5.layout-a5-4 .label-banner,
-    .print-sheet.layout-gd-a5 .label-banner {
-        height: 25mm !important;
-        border-bottom: 2px solid #000000 !important;
+    .print-sheet .label-box.format-gd-a7 .label-banner {
+        width: 100% !important;
+        height: 24mm !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+        border-bottom: 2.5px solid #000000 !important;
     }
 
-    .print-sheet.size-a5.layout-a5-4 .gd-tsp {
+    .print-sheet .label-box.format-gd-a7 .label-banner svg {
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+    }
+
+    .print-sheet .label-box.format-gd-a7 .gd-tsp {
         width: 65mm !important;
-        font-size: 4.2mm !important;
+        font-size: 5mm !important;
+        font-weight: bold !important;
         margin-top: 1mm !important;
+        text-align: center !important;
+        border: none !important;
+        background: transparent !important;
+        color: #000000 !important;
+        font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
     }
 
-    .print-sheet.size-a5.layout-a5-4 .gd-gg {
+    .print-sheet .label-box.format-gd-a7 .gd-gg {
         width: 65mm !important;
-        height: 11mm !important;
-        font-size: 9.5mm !important;
+        height: 13mm !important;
+        font-size: 13mm !important; /* GIÁ GẠCH TO LÊN RÕ RÀNG */
+        font-weight: bold !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
     }
 
-    .print-sheet.size-a5.layout-a5-4 .gd-gg .strike-bar {
-        height: 2px !important;
-        border-top: 2px solid #000000 !important;
-    }
-
-    .print-sheet.size-a5.layout-a5-4 .gd-gc {
+    .print-sheet .label-box.format-gd-a7 .gd-gg .strike-number {
         font-size: 13mm !important;
-        line-height: 13mm !important;
+        font-weight: bold !important;
+        z-index: 1 !important;
+    }
+
+    .print-sheet .label-box.format-gd-a7 .gd-gg .strike-bar {
+        position: absolute !important;
+        top: 52% !important;
+        left: 8% !important;
+        right: 8% !important;
+        height: 2.5px !important;
+        background-color: #000000 !important;
+        border-top: 2.5px solid #000000 !important;
+        z-index: 2 !important;
+    }
+
+    .print-sheet .label-box.format-gd-a7 .gd-gc {
+        font-size: 18mm !important; /* GIÁ BÁN TO LÊN VƯỢT TRỘI */
+        line-height: 17.5mm !important;
+        height: 17.5mm !important;
         font-weight: 900 !important;
+        text-align: center !important;
+        color: #000000 !important;
+        margin-top: -1.5mm !important;
     }
 
-    .print-sheet.size-a5.layout-a5-4 .gd-htr {
-        font-size: 3.5mm !important;
+    .print-sheet .label-box.format-gd-a7 .gd-htr {
+        font-size: 4.2mm !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        color: #000000 !important;
+        margin-top: -0.5mm !important;
     }
 
-    .print-sheet.size-a5.layout-a5-4 .gd-pdat {
+    .print-sheet .label-box.format-gd-a7 .gd-pdat {
         width: 64mm !important;
-        height: 6.5mm !important;
-        border: 1.5px solid #000000 !important;
-        border-top: 4px solid #000000 !important;
-        font-size: 3.2mm !important;
+        height: 7mm !important;
+        border: 2px solid #000000 !important;
+        border-top: 4.5px solid #000000 !important;
+        font-size: 3.8mm !important;
+        font-weight: bold !important;
         padding: 0.5mm !important;
+        text-align: center !important;
+        background: transparent !important;
+        color: #000000 !important;
+        font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+        margin-bottom: 0.5mm !important;
     }
 
     /* Mẫu A5 khi render vào tem A7 */
@@ -360,7 +428,8 @@
         background: #ffffff !important;
     }
 
-    .print-sheet .label-box.format-a5 .label-banner {
+    .print-sheet .label-box.format-a5 .label-banner,
+    .print-sheet .label-box.format-tvtl-a5 .label-banner {
         width: 100% !important;
         height: 40mm !important;
         display: flex !important;
@@ -370,13 +439,15 @@
         border-bottom: 3.5px solid #000000 !important;
     }
 
-    .print-sheet .label-box.format-a5 .label-banner svg {
+    .print-sheet .label-box.format-a5 .label-banner svg,
+    .print-sheet .label-box.format-tvtl-a5 .label-banner svg {
         width: 100% !important;
         height: 100% !important;
         display: block !important;
     }
 
-    .print-sheet .label-box.format-a5 .txt-price-strike {
+    .print-sheet .label-box.format-a5 .txt-price-strike,
+    .print-sheet .label-box.format-tvtl-a5 .txt-price-strike {
         width: 100% !important;
         height: 31mm !important;
         position: relative !important;
@@ -386,8 +457,9 @@
         margin: 0 !important;
     }
 
-    .print-sheet .label-box.format-a5 .strike-number {
-        font-size: 27mm !important;
+    .print-sheet .label-box.format-a5 .strike-number,
+    .print-sheet .label-box.format-tvtl-a5 .strike-number {
+        font-size: 28mm !important;
         line-height: 31mm !important;
         font-weight: bold !important;
         text-align: center !important;
@@ -395,7 +467,8 @@
         z-index: 1 !important;
     }
 
-    .print-sheet .label-box.format-a5 .strike-bar {
+    .print-sheet .label-box.format-a5 .strike-bar,
+    .print-sheet .label-box.format-tvtl-a5 .strike-bar {
         position: absolute !important;
         top: 54% !important;
         left: 8% !important;
@@ -406,29 +479,32 @@
         z-index: 2 !important;
     }
 
-    .print-sheet .label-box.format-a5 .txt-price-promo {
+    .print-sheet .label-box.format-a5 .txt-price-promo,
+    .print-sheet .label-box.format-tvtl-a5 .txt-price-promo {
         width: 100% !important;
-        height: 41mm !important;
-        line-height: 41mm !important;
+        height: 42mm !important;
+        line-height: 42mm !important;
         margin: 0 !important;
-        font-size: 40mm !important;
+        font-size: 42mm !important;
         font-weight: bold !important;
         text-align: center !important;
         color: #000000 !important;
     }
 
-    .print-sheet .label-box.format-a5 .txt-subline {
+    .print-sheet .label-box.format-a5 .txt-subline,
+    .print-sheet .label-box.format-tvtl-a5 .txt-subline {
         width: 100% !important;
         height: 8mm !important;
         line-height: 8mm !important;
-        font-size: 7mm !important;
+        font-size: 8mm !important;
         font-weight: bold !important;
         text-align: center !important;
         color: #000000 !important;
         margin: 0 !important;
     }
 
-    .print-sheet .label-box.format-a5 .label-footer {
+    .print-sheet .label-box.format-a5 .label-footer,
+    .print-sheet .label-box.format-tvtl-a5 .label-footer {
         height: 11mm !important;
         display: flex !important;
         justify-content: center !important;
@@ -438,10 +514,11 @@
         margin: 0 !important;
     }
 
-    .print-sheet .label-box.format-a5 .input-product-name {
-        width: 115mm !important;
+    .print-sheet .label-box.format-a5 .input-product-name,
+    .print-sheet .label-box.format-tvtl-a5 .input-product-name {
+        width: 120mm !important;
         height: 9.5mm !important;
-        font-size: 5mm !important;
+        font-size: 5.5mm !important;
         font-weight: bold !important;
         padding: 1mm 2mm !important;
         border: 2.5px solid #000000 !important;
@@ -450,10 +527,11 @@
         color: #000000 !important;
     }
 
-    .print-sheet .label-box.format-a5 .input-print-date {
+    .print-sheet .label-box.format-a5 .input-print-date,
+    .print-sheet .label-box.format-tvtl-a5 .input-print-date {
         width: 68mm !important;
         height: 9.5mm !important;
-        font-size: 4.8mm !important;
+        font-size: 5mm !important;
         padding: 1mm 2mm !important;
         border: 2.5px solid #000000 !important;
         text-align: center !important;

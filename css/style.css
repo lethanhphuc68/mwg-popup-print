@@ -1153,199 +1153,375 @@ body {
     color: #0284c7;
 }
 
-/* Ánh xạ class tem tương thích */
-.label-box.format-tvtl-a5 {
-    width: 100%;
-    height: 505px;
-    border: 4px solid #000000;
-    background: #ffffff;
-    box-sizing: border-box;
-    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-    padding-bottom: 6px;
-}
+/* ==============================================================
+   4 FORM CHUẨN NGÀNH HÀNG CE (TOÀN BỘ LÀ GIẤY ĐỨNG - PORTRAIT)
+   ============================================================== */
 
-.label-box.format-mg-a6 {
-    width: 355px;
-    height: 505px;
-    border: 4px solid #000000;
-    background: #ffffff;
-    box-sizing: border-box;
-    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-    padding-bottom: 6px;
-    flex-shrink: 0;
-}
-
-.label-box.format-mg-a6 .label-banner {
-    width: 100%;
-    height: 135px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-bottom: 3.5px solid #000000;
-}
-
-.label-box.format-mg-a6 .txt-price-strike {
-    font-size: 50px;
-    height: 60px;
-}
-
-.label-box.format-mg-a6 .txt-price-promo {
-    font-size: 72px;
-    line-height: 72px;
-}
-
-.label-box.format-mg-a6 .txt-subline {
-    font-size: 20px;
-}
-
-.label-box.format-mg-a6 .label-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 8px;
-    gap: 6px;
-    margin-top: auto;
-}
-
-.label-box.format-mg-a6 .input-product-name {
-    width: 205px;
-    font-size: 15px;
-    font-weight: bold;
-    border: 2.5px solid #000000;
-    padding: 3px;
-    text-align: center;
-    background: transparent;
-    color: #000000;
-    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
-}
-
-.label-box.format-mg-a6 .input-print-date {
-    width: 125px;
-    font-size: 13px;
-    font-weight: bold;
-    border: 2.5px solid #000000;
-    padding: 3px;
-    text-align: center;
-    background: transparent;
-    color: #000000;
-    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
-}
-
-.label-box.format-gd-a7 {
-    width: 245px;
-    height: 355px;
-    border: 2.5px solid #000000;
-    background: #ffffff;
-    box-sizing: border-box;
-    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    overflow: hidden;
-    padding-bottom: 4px;
-}
-
-.label-box.format-gd-a7 .label-banner {
-    width: 100%;
-    height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-bottom: 2.5px solid #000000;
-}
-
-.label-box.format-gd-a7 .gd-tsp {
-    font-size: 15px;
-    font-weight: bold;
-    margin-top: 3px;
-    width: 90%;
-    text-align: center;
-    border: none;
-    background: transparent;
-    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
-}
-
-.label-box.format-gd-a7 .gd-gg {
-    font-size: 28px;
-    height: 35px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.label-box.format-gd-a7 .gd-gg .strike-bar {
-    position: absolute;
-    top: 52%;
-    left: 10%;
-    right: 10%;
-    height: 3px;
-    background-color: #000000;
-    border-top: 3px solid #000000;
-}
-
-.label-box.format-gd-a7 .gd-gc {
-    font-size: 42px;
-    font-weight: 900;
-    line-height: 42px;
-}
-
-.label-box.format-gd-a7 .gd-htr {
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.label-box.format-gd-a7 .gd-pdat {
-    font-size: 11px;
-    height: 22px;
-    width: 90%;
-    border: 2px solid #000000;
-    border-top: 4px solid #000000;
-    padding: 1px;
-    text-align: center;
-    background: transparent;
-    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
-}
-
-/* Bố cục xem trước chuẩn */
+/* 1. TIVI - TỦ LẠNH (A4 ĐỨNG, 2 TEM A5 DỌC) - CHUẨN: mientay2.pro/in-online/popup/tvtl/gach/ */
 .paper-sheet.layout-tvtl-a4 {
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
     align-items: center !important;
     gap: 16px !important;
-    padding: 16px !important;
+    padding: 16px 20px !important;
+    width: 760px !important;
+    min-height: 1075px !important;
 }
 
+.label-box.format-tvtl-a5 {
+    width: 100% !important;
+    height: 515px !important;
+    border: 5px solid #000000 !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    overflow: hidden !important;
+    padding-bottom: 6px !important;
+    flex-shrink: 0 !important;
+}
+
+.label-box.format-tvtl-a5 .label-banner {
+    width: 100% !important;
+    height: 148px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    border-bottom: 4px solid #000000 !important;
+}
+
+.label-box.format-tvtl-a5 .label-banner svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+}
+
+.label-box.format-tvtl-a5 .txt-price-strike {
+    width: 100% !important;
+    height: 120px !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+}
+
+.label-box.format-tvtl-a5 .strike-number {
+    font-size: 105px !important; /* CHỮ TO CỰC ĐẠI THEO CHUẨN MIỀN TÂY 2 */
+    line-height: 120px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    color: #000000 !important;
+    z-index: 1 !important;
+}
+
+.label-box.format-tvtl-a5 .strike-bar {
+    position: absolute !important;
+    top: 55% !important;
+    left: 8% !important;
+    right: 8% !important;
+    height: 5px !important;
+    background-color: #000000 !important;
+    border-top: 5px solid #000000 !important;
+    z-index: 2 !important;
+}
+
+.label-box.format-tvtl-a5 .txt-price-promo {
+    width: 100% !important;
+    font-size: 155px !important; /* GIÁ KHUYẾN MÃI SIÊU TO KHỔNG LỒ 155PX */
+    height: 150px !important;
+    line-height: 150px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    color: #000000 !important;
+    margin-top: -15px !important;
+}
+
+.label-box.format-tvtl-a5 .txt-subline {
+    width: 100% !important;
+    font-size: 30px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    color: #000000 !important;
+    margin-top: 2px !important;
+}
+
+.label-box.format-tvtl-a5 .label-footer {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 0 10px !important;
+    margin-top: 7px !important;
+}
+
+.label-box.format-tvtl-a5 .input-product-name {
+    width: 440px !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    border: 3px solid #000000 !important;
+    padding: 7px !important;
+    text-align: center !important;
+    background: transparent !important;
+    color: #000000 !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+}
+
+.label-box.format-tvtl-a5 .input-print-date {
+    width: 260px !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    border: 3px solid #000000 !important;
+    padding: 7px !important;
+    text-align: center !important;
+    background: transparent !important;
+    color: #000000 !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+}
+
+/* 2 & 4. MÁY GIẶT - TỦ ĐÔNG & MÁY LỌC NƯỚC (GIẤY A5 ĐỨNG, 2 TEM A6 DỌC - SỐ TO LÊN) */
 .paper-sheet.layout-mg-a5 {
     display: flex !important;
-    flex-direction: row !important;
+    flex-direction: column !important; /* GIẤY ĐỨNG, 2 TEM XẾP DỌC TRÊN DƯỚI */
     justify-content: space-between !important;
     align-items: center !important;
     gap: 14px !important;
-    padding: 14px 16px !important;
+    padding: 16px !important;
+    width: 535px !important;
+    min-height: 760px !important;
 }
 
+.label-box.format-mg-a6 {
+    width: 100% !important; /* 100% CHIỀU RỘNG GIẤY ĐỨNG */
+    height: 355px !important;
+    border: 4.5px solid #000000 !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    overflow: hidden !important;
+    padding-bottom: 4px !important;
+    flex-shrink: 0 !important;
+}
+
+.label-box.format-mg-a6 .label-banner {
+    width: 100% !important;
+    height: 95px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    border-bottom: 3.5px solid #000000 !important;
+}
+
+.label-box.format-mg-a6 .label-banner svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+}
+
+.label-box.format-mg-a6 .txt-price-strike {
+    width: 100% !important;
+    height: 72px !important;
+    position: relative !important;
+    display: flex !align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+}
+
+.label-box.format-mg-a6 .strike-number {
+    font-size: 72px !important; /* SỐ GIÁ GẠCH TO LÊN RÕ NÉT */
+    line-height: 72px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    color: #000000 !important;
+    z-index: 1 !important;
+}
+
+.label-box.format-mg-a6 .strike-bar {
+    position: absolute !important;
+    top: 54% !important;
+    left: 8% !important;
+    right: 8% !important;
+    height: 4.5px !important;
+    background-color: #000000 !important;
+    border-top: 4.5px solid #000000 !important;
+    z-index: 2 !important;
+}
+
+.label-box.format-mg-a6 .txt-price-promo {
+    width: 100% !important;
+    font-size: 105px !important; /* SỐ GIÁ BÁN TO LÊN VƯỢT TRỘI */
+    height: 100px !important;
+    line-height: 100px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    color: #000000 !important;
+    margin-top: -10px !important;
+}
+
+.label-box.format-mg-a6 .txt-subline {
+    width: 100% !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    color: #000000 !important;
+    margin-top: 0px !important;
+}
+
+.label-box.format-mg-a6 .label-footer {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 0 8px !important;
+    margin-top: 2px !important;
+}
+
+.label-box.format-mg-a6 .input-product-name {
+    width: 300px !important;
+    font-size: 15px !important;
+    font-weight: bold !important;
+    border: 2.5px solid #000000 !important;
+    padding: 4px !important;
+    text-align: center !important;
+    background: transparent !important;
+    color: #000000 !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+}
+
+.label-box.format-mg-a6 .input-print-date {
+    width: 180px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    border: 2.5px solid #000000 !important;
+    padding: 4px !important;
+    text-align: center !important;
+    background: transparent !important;
+    color: #000000 !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+}
+
+/* 3. GIA DỤNG (GIẤY A5 ĐỨNG, 4 TEM A7 LƯỚI 2x2 - SỐ GIÁ TO LÊN GẤP ĐÔI) */
 .paper-sheet.layout-gd-a5 {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     grid-template-rows: 1fr 1fr !important;
-    gap: 10px !important;
-    padding: 12px 10px !important;
+    gap: 8px !important;
+    padding: 10px 8px !important;
     justify-content: center !important;
     align-content: center !important;
+    width: 535px !important;
+    min-height: 760px !important;
+}
+
+.label-box.format-gd-a7 {
+    width: 100% !important;
+    height: 360px !important;
+    border: 3.5px solid #000000 !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    text-align: center !important;
+    overflow: hidden !important;
+    padding-bottom: 2px !important;
+}
+
+.label-box.format-gd-a7 .label-banner {
+    width: 100% !important;
+    height: 92px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    border-bottom: 2.5px solid #000000 !important;
+}
+
+.label-box.format-gd-a7 .label-banner svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+}
+
+.label-box.format-gd-a7 .gd-tsp {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    margin-top: 2px !important;
+    width: 95% !important;
+    text-align: center !important;
+    border: none !important;
+    background: transparent !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.label-box.format-gd-a7 .gd-gg {
+    font-size: 46px !important; /* GIÁ GẠCH TO LÊN (CŨ 28px) */
+    height: 50px !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    font-weight: bold !important;
+    margin-top: -2px !important;
+}
+
+.label-box.format-gd-a7 .gd-gg .strike-number {
+    font-size: 46px !important;
+    font-weight: bold !important;
+    z-index: 1 !important;
+}
+
+.label-box.format-gd-a7 .gd-gg .strike-bar {
+    position: absolute !important;
+    top: 52% !important;
+    left: 8% !important;
+    right: 8% !important;
+    height: 3.5px !important;
+    background-color: #000000 !important;
+    border-top: 3.5px solid #000000 !important;
+    z-index: 2 !important;
+}
+
+.label-box.format-gd-a7 .gd-gc {
+    font-size: 65px !important; /* GIÁ BÁN TO LÊN SIÊU ĐẬM (CŨ 42px) */
+    font-weight: 900 !important;
+    line-height: 62px !important;
+    height: 62px !important;
+    margin-top: -6px !important;
+    color: #000000 !important;
+}
+
+.label-box.format-gd-a7 .gd-htr {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    margin-top: -2px !important;
+}
+
+.label-box.format-gd-a7 .gd-pdat {
+    font-size: 13.5px !important;
+    height: 24px !important;
+    width: 95% !important;
+    border: 2px solid #000000 !important;
+    border-top: 5px solid #000000 !important;
+    padding: 1px !important;
+    text-align: center !important;
+    background: transparent !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+    margin-bottom: 2px !important;
 }
 
 @media (max-width: 1200px) {
