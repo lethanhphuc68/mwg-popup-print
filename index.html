@@ -102,45 +102,15 @@
                 </div>
             </div>
 
-            <!-- 2. Bộ lọc dữ liệu tự động -->
+            <!-- 2. Tùy chỉnh Tiêu đề Banner -->
             <div class="card">
                 <div class="card-title">
-                    <span>2. Lọc Dữ Liệu Tự Động</span>
+                    <span>2. Tiêu Đề Banner (In Trắng Đen)</span>
                     <span class="badge-num">Bước 2</span>
                 </div>
 
-                <!-- Lọc theo Vùng RSM -->
                 <div class="form-group">
-                    <label class="form-label" for="regionSelect">🏢 Vùng RSM (Tự động nhận diện):</label>
-                    <select class="form-select" id="regionSelect">
-                        <option value="Vùng Hồ Chí Minh" selected>Vùng Hồ Chí Minh</option>
-                    </select>
-                </div>
-
-                <!-- Lọc theo Nhóm sản phẩm -->
-                <div class="form-group">
-                    <label class="form-label" for="groupSelect">📦 Nhóm ngành hàng:</label>
-                    <select class="form-select" id="groupSelect">
-                        <option value="all">-- Tất cả nhóm hàng --</option>
-                    </select>
-                </div>
-
-                <!-- Tìm kiếm theo tên / mã -->
-                <div class="form-group">
-                    <label class="form-label" for="searchInput">🔍 Tìm kiếm Model / Mã SP:</label>
-                    <input type="text" class="form-input" id="searchInput" placeholder="Nhập tên TV, Nồi cơm, Lò vi sóng..." />
-                </div>
-            </div>
-
-            <!-- 3. Tùy chỉnh Tiêu đề Banner -->
-            <div class="card">
-                <div class="card-title">
-                    <span>3. Tiêu Đề Banner (In Trắng Đen)</span>
-                    <span class="badge-num">Bước 3</span>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="customTitleInput">Nội dung chữ tiêu đề:</label>
+                    <label class="form-label" for="customTitleInput">Nội dung chữ tiêu đề (Chữ to, hấp dẫn):</label>
                     <input type="text" class="form-input" id="customTitleInput" value="GIÁ RẺ QUÁ" placeholder="Nhập chữ tiêu đề..." />
                     
                     <div class="preset-tags">
@@ -155,10 +125,10 @@
                 <div class="form-group">
                     <label class="form-label" for="bannerThemeSelect">Kiểu Banner Chuyên Dụng In Trắng Đen:</label>
                     <select class="form-select" id="bannerThemeSelect">
-                        <option value="bw_classic" selected>⭐ Nền trắng chữ đen đậm (Khuyên dùng - Cực nét, Tiết kiệm mực)</option>
-                        <option value="bw_ribbon">🎀 Khung Ruy Băng / Tia Chớp (Sự kiện giá sốc)</option>
-                        <option value="bw_shadow">✨ Chữ 3D Đổ Bóng Nét (Nền trắng nổi bật)</option>
-                        <option value="bw_invert">⬛ Nền Đen Chữ Trắng (Kiểu gốc mientay2)</option>
+                        <option value="bw_classic" selected>⭐ Nền trắng chữ đen đậm (Khuyên dùng - Chữ siêu to, Nét căng)</option>
+                        <option value="bw_ribbon">🎀 Khung Ruy Băng / Tia Chớp (Sự kiện giá sốc bùng nổ)</option>
+                        <option value="bw_shadow">✨ Chữ 3D Đổ Bóng Nét (Nổi khối mạnh mẽ, Bắt mắt)</option>
+                        <option value="bw_invert">⬛ Nền Đen Chữ Trắng (Kiểu gốc siêu thị MWG)</option>
                     </select>
                 </div>
 
@@ -168,35 +138,37 @@
                 </div>
             </div>
 
-            <!-- 4. Chọn Mẫu Tem & Bố Cục In -->
+            <!-- 3. Chọn Mẫu Tem & Bố Cục In -->
             <div class="card">
                 <div class="card-title">
-                    <span>4. Mẫu Tem POPUP & Bố Cục</span>
-                    <span class="badge-num">Bước 4</span>
+                    <span>3. Mẫu Tem POPUP & Bố Cục</span>
+                    <span class="badge-num">Bước 3</span>
                 </div>
 
                 <!-- Chọn Mẫu Tem: TV/TL A5 hoặc Gia Dụng A6 -->
                 <div class="form-group">
                     <label class="form-label">Chọn Mẫu Tem Cần In:</label>
                     <div class="segmented-control">
-                        <button type="button" class="segmented-btn active" data-template="tvtl_a5" title="Mẫu TV & Tủ Lạnh: In 2 tem / tờ A4">
+                        <button type="button" class="segmented-btn active" data-template="tvtl_a5" title="Mẫu TV & Tủ Lạnh: Tự động lọc sản phẩm TV/TL">
                             📺 TV & Tủ Lạnh (A5)
                         </button>
-                        <button type="button" class="segmented-btn" data-template="giadung_a6" title="Mẫu Gia Dụng: In 4 tem / tờ A4">
+                        <button type="button" class="segmented-btn" data-template="giadung_a6" title="Mẫu Gia Dụng: Tự động lọc ngành hàng Gia Dụng">
                             🍳 Gia Dụng (A6)
                         </button>
                     </div>
-                    <div style="font-size: 11px; color: #64748b; margin-top: 4px;">
-                        • TV & Tủ Lạnh: 2 tem A5 / tờ A4<br>
-                        • Gia Dụng: 4 tem A6 / tờ A4 (Tên SP ở trên giá)
-                    </div>
                 </div>
 
-                <!-- Tùy chọn nhân đôi lấp đầy A4 -->
-                <label class="checkbox-inline" title="Nhân đôi để in đủ số lượng tem trên 1 tờ A4, tránh phí giấy">
-                    <input type="checkbox" id="duplicateSingleCb" checked />
-                    <span>Tự động nhân đôi lấp đầy tờ A4 khi in lẻ</span>
-                </label>
+                <!-- Bố cục in số lượng tem trên 1 trang -->
+                <div class="form-group">
+                    <label class="form-label" for="layoutModeSelect">Bố cục hiển thị & in:</label>
+                    <select class="form-select" id="layoutModeSelect">
+                        <option value="single" selected>⭐ 1 Tem / Trang (Chuẩn Miền Tây 2 - Không trùng lặp)</option>
+                        <option value="multi">Ghép nhiều tem khác nhau / Tờ A4</option>
+                    </select>
+                    <div style="font-size: 11px; color: #64748b; margin-top: 4px;">
+                        • Mặc định: Mỗi sản phẩm in 1 tem riêng biệt, không bị trùng lặp.
+                    </div>
+                </div>
 
                 <!-- Dòng phụ ưu đãi -->
                 <div class="form-group" style="margin-top: 10px;">
@@ -204,26 +176,30 @@
                     <input type="text" class="form-input" id="sublineInput" value="+ TRẢ GÓP 0%" placeholder="+ TRẢ GÓP 0%" />
                 </div>
 
-                <!-- Ngày in / Khung giờ -->
+                <!-- Ngày áp dụng -->
                 <div class="form-group">
-                    <label class="form-label" for="dateModeSelect">Thông tin ngày in / Khung giờ:</label>
-                    <select class="form-select" id="dateModeSelect">
-                        <option value="today" selected>Tự động: Ngày in hôm nay</option>
-                        <option value="event_slot">Lấy theo cột Khung giờ / Suất trong Excel</option>
-                        <option value="custom">Nhập nội dung tùy chỉnh</option>
-                    </select>
-                    <input type="text" class="form-input" id="customDateInput" style="display: none; margin-top: 6px;" placeholder="Ví dụ: KHUNG GIỜ: 9H-12H" />
+                    <label class="form-label" for="customDateInput">Ngày áp dụng khuyến mãi:</label>
+                    <input type="text" class="form-input" id="customDateInput" value="ÁP DỤNG: 09/10 - 11/10" placeholder="Ví dụ: ÁP DỤNG 9/10 - 11/10" />
+                    <div class="preset-tags" style="margin-top: 6px;">
+                        <span class="preset-chip active" data-date="ÁP DỤNG: 09/10 - 11/10">09/10 - 11/10</span>
+                        <span class="preset-chip" data-date="ÁP DỤNG: 02/10 - 04/10">02/10 - 04/10</span>
+                        <span class="preset-chip" data-date="ÁP DỤNG: CUỐI TUẦN">Cuối tuần</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- 5. Nút In Ngay -->
+            <!-- 4. Nút In Ngay -->
             <div class="card print-actions-card">
+                <div class="card-title" style="margin-bottom: 8px;">
+                    <span>4. Thao Tác In</span>
+                    <span class="badge-num">Bước 4</span>
+                </div>
                 <button type="button" class="btn-print-large" id="btnPrintAll">
                     <img src="assets/print-icon.png" width="24" height="24" alt="" />
                     IN TẤT CẢ ĐÃ CHỌN
                 </button>
                 <button type="button" class="btn-print-single" id="btnPrintSingle">
-                    🖨️ In riêng sản phẩm này (Lấp đầy tờ A4)
+                    🖨️ In riêng sản phẩm này (1 tem)
                 </button>
             </div>
 
@@ -235,8 +211,8 @@
             <!-- Thanh điều khiển Preview -->
             <div class="preview-toolbar">
                 <div class="toolbar-title">
-                    <span>👁️ BẢN XEM TRƯỚC TỜ IN A4 TRẮNG ĐEN</span>
-                    <span class="toolbar-status" id="previewStatusBadge">TV & TL (2 tem/tờ)</span>
+                    <span>👁️ BẢN XEM TRƯỚC TEM POPUP</span>
+                    <span class="toolbar-status" id="previewStatusBadge">TV & TL (1 tem/trang)</span>
                 </div>
 
                 <div class="pager-controls">
@@ -260,8 +236,11 @@
             <!-- Bảng danh sách sản phẩm trích xuất từ Excel -->
             <div class="table-card">
                 <div class="table-header-bar">
-                    <div style="font-size: 14px; font-weight: 700; color: #0f172a;">
-                        DANH SÁCH SẢN PHẨM (<span id="totalCountLabel">0 sản phẩm</span>)
+                    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                        <div style="font-size: 14px; font-weight: 700; color: #0f172a;">
+                            DANH SÁCH SẢN PHẨM (<span id="totalCountLabel">0 sản phẩm</span>)
+                        </div>
+                        <input type="text" class="form-input" id="searchInput" style="width: 220px; padding: 4px 10px; font-size: 12px;" placeholder="🔍 Tìm kiếm Model / Mã..." />
                     </div>
                     <div style="font-size: 12px; font-weight: 600; color: #0284c7;" id="selectedCountLabel">
                         Đang chọn: 0 sản phẩm

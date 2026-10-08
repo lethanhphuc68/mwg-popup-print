@@ -513,7 +513,29 @@ body {
     padding: 16px 20px;
 }
 
-/* 1. LAYOUT MẪU TV & TỦ LẠNH (A5 - 2 TEM TRÊN TỜ A4) */
+/* Khung hiển thị 1 Tem POPUP duy nhất (Chuẩn Miền Tây 2) */
+.paper-sheet.layout-single {
+    width: 760px;
+    height: auto;
+    min-height: 545px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.paper-sheet.layout-single .label-box.format-a5 {
+    width: 100%;
+    height: 505px;
+}
+
+.paper-sheet.layout-single .label-box.format-gd-a6 {
+    width: 360px;
+    height: 535px;
+}
+
+/* 1. LAYOUT MẪU TV & TỦ LẠNH (A5) */
 .paper-sheet.template-tvtl {
     display: flex;
     flex-direction: column;

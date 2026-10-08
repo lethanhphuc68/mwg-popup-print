@@ -53,10 +53,35 @@
         break-after: avoid !important;
     }
 
+    /* TỜ IN 1 TEM DUY NHẤT (CHUẨN MIỀN TÂY 2) */
+    .print-sheet.layout-single {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding-top: 10mm !important;
+    }
+
+    .print-sheet.layout-single .label-box.format-a5 {
+        width: 190mm !important;
+        height: 139mm !important;
+        max-height: 139mm !important;
+        border: 4.5px solid #000000 !important;
+        margin: 0 auto !important;
+    }
+
+    .print-sheet.layout-single .label-box.format-gd-a6 {
+        width: 135mm !important;
+        height: 195mm !important;
+        max-height: 195mm !important;
+        border: 4.5px solid #000000 !important;
+        margin: 0 auto !important;
+    }
+
     /* ==============================================================
-       1. MẪU TV & TỦ LẠNH (A5 - 2 TEM / TỜ A4 TIẾT KIỆM)
+       1. MẪU TV & TỦ LẠNH (A5 - GHÉP 2 TEM KHÁC NHAU / TỜ A4)
        ============================================================== */
-    .print-sheet.template-tvtl {
+    .print-sheet.template-tvtl:not(.layout-single) {
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
