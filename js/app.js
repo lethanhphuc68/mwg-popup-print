@@ -31,7 +31,16 @@ class App {
     }
 
     init() {
+        if (typeof window !== 'undefined' && window.location) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const formParam = urlParams.get('form');
+            if (formParam && ['tvtl', 'maygiat', 'giadung', 'maylocnuoc'].includes(formParam)) {
+                this.currentForm = formParam;
+                this.selectedCategory = this.getFormConfig(formParam).category;
+            }
+        }
         this.bindEvents();
+        this.syncActiveFormAndCategory();
         this.renderTable();
         this.updatePreview();
     }

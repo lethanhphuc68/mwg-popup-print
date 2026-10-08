@@ -125,13 +125,15 @@
 
     .print-sheet .label-box.format-mg-a6 .strike-bar {
         position: absolute !important;
-        top: 54% !important;
-        left: 8% !important;
-        right: 8% !important;
-        height: 3px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        left: 10% !important;
+        right: 10% !important;
+        height: 3.5px !important;
         background-color: #000000 !important;
-        border-top: 3px solid #000000 !important;
+        border-top: 3.5px solid #000000 !important;
         z-index: 2 !important;
+        pointer-events: none !important;
     }
 
     .print-sheet .label-box.format-mg-a6 .txt-price-promo {

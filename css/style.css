@@ -1330,9 +1330,11 @@ body {
     width: 100% !important;
     height: 72px !important;
     position: relative !important;
-    display: flex !align-items: center !important;
+    display: flex !important;
+    align-items: center !important;
     justify-content: center !important;
-    margin: 0 !important;
+    text-align: center !important;
+    margin: 0 auto !important;
 }
 
 .label-box.format-mg-a6 .strike-number {
@@ -1342,17 +1344,21 @@ body {
     text-align: center !important;
     color: #000000 !important;
     z-index: 1 !important;
+    display: inline-block !important;
+    margin: 0 auto !important;
 }
 
 .label-box.format-mg-a6 .strike-bar {
     position: absolute !important;
-    top: 54% !important;
-    left: 8% !important;
-    right: 8% !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    left: 10% !important;
+    right: 10% !important;
     height: 4.5px !important;
     background-color: #000000 !important;
     border-top: 4.5px solid #000000 !important;
     z-index: 2 !important;
+    pointer-events: none !important;
 }
 
 .label-box.format-mg-a6 .txt-price-promo {
