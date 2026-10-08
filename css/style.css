@@ -1079,6 +1079,275 @@ body {
     color: #0284c7;
 }
 
+/* NÚT CHỌN FORM NGÀNH HÀNG (CE) */
+.form-card-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 12px;
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 100%;
+}
+
+.form-card-btn:hover {
+    border-color: #38bdf8;
+    background: #f8fafc;
+}
+
+.form-card-btn.active {
+    border-color: #0284c7;
+    background: #f0f9ff;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.15);
+}
+
+.form-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.form-card-icon {
+    font-size: 16px;
+}
+
+.form-card-name {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #0f172a;
+    flex: 1;
+}
+
+.form-card-btn.active .form-card-name {
+    color: #0369a1;
+}
+
+.form-card-badge {
+    background: #e2e8f0;
+    color: #475569;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.form-card-btn.active .form-card-badge {
+    background: #bae6fd;
+    color: #0369a1;
+}
+
+.form-card-specs {
+    font-size: 10.5px;
+    color: #64748b;
+    font-weight: 600;
+    margin-top: 4px;
+    letter-spacing: 0.2px;
+}
+
+.form-card-btn.active .form-card-specs {
+    color: #0284c7;
+}
+
+/* Ánh xạ class tem tương thích */
+.label-box.format-tvtl-a5 {
+    width: 100%;
+    height: 505px;
+    border: 4px solid #000000;
+    background: #ffffff;
+    box-sizing: border-box;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    padding-bottom: 6px;
+}
+
+.label-box.format-mg-a6 {
+    width: 355px;
+    height: 505px;
+    border: 4px solid #000000;
+    background: #ffffff;
+    box-sizing: border-box;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    padding-bottom: 6px;
+    flex-shrink: 0;
+}
+
+.label-box.format-mg-a6 .label-banner {
+    width: 100%;
+    height: 135px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 3.5px solid #000000;
+}
+
+.label-box.format-mg-a6 .txt-price-strike {
+    font-size: 50px;
+    height: 60px;
+}
+
+.label-box.format-mg-a6 .txt-price-promo {
+    font-size: 72px;
+    line-height: 72px;
+}
+
+.label-box.format-mg-a6 .txt-subline {
+    font-size: 20px;
+}
+
+.label-box.format-mg-a6 .label-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8px;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.label-box.format-mg-a6 .input-product-name {
+    width: 205px;
+    font-size: 15px;
+    font-weight: bold;
+    border: 2.5px solid #000000;
+    padding: 3px;
+    text-align: center;
+    background: transparent;
+    color: #000000;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
+}
+
+.label-box.format-mg-a6 .input-print-date {
+    width: 125px;
+    font-size: 13px;
+    font-weight: bold;
+    border: 2.5px solid #000000;
+    padding: 3px;
+    text-align: center;
+    background: transparent;
+    color: #000000;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
+}
+
+.label-box.format-gd-a7 {
+    width: 245px;
+    height: 355px;
+    border: 2.5px solid #000000;
+    background: #ffffff;
+    box-sizing: border-box;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 4px;
+}
+
+.label-box.format-gd-a7 .label-banner {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 2.5px solid #000000;
+}
+
+.label-box.format-gd-a7 .gd-tsp {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 3px;
+    width: 90%;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
+}
+
+.label-box.format-gd-a7 .gd-gg {
+    font-size: 28px;
+    height: 35px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.label-box.format-gd-a7 .gd-gg .strike-bar {
+    position: absolute;
+    top: 52%;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    background-color: #000000;
+    border-top: 3px solid #000000;
+}
+
+.label-box.format-gd-a7 .gd-gc {
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 42px;
+}
+
+.label-box.format-gd-a7 .gd-htr {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.label-box.format-gd-a7 .gd-pdat {
+    font-size: 11px;
+    height: 22px;
+    width: 90%;
+    border: 2px solid #000000;
+    border-top: 4px solid #000000;
+    padding: 1px;
+    text-align: center;
+    background: transparent;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif;
+}
+
+/* Bố cục xem trước chuẩn */
+.paper-sheet.layout-tvtl-a4 {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding: 16px !important;
+}
+
+.paper-sheet.layout-mg-a5 {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 14px !important;
+    padding: 14px 16px !important;
+}
+
+.paper-sheet.layout-gd-a5 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+    gap: 10px !important;
+    padding: 12px 10px !important;
+    justify-content: center !important;
+    align-content: center !important;
+}
+
 @media (max-width: 1200px) {
     .app-layout {
         grid-template-columns: 1fr;

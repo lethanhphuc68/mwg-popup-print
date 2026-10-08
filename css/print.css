@@ -49,7 +49,8 @@
     }
 
     /* TỜ IN KHỔ A5 NGANG: IN A6 ĐÔI TRÊN GIẤY A5 - CHUẨN XÁC 100% KHÔNG LỆCH */
-    .print-sheet.size-a5-landscape {
+    .print-sheet.size-a5-landscape,
+    .print-sheet.layout-mg-a5 {
         width: 210mm !important;
         height: 148mm !important;
         max-height: 148mm !important;
@@ -69,7 +70,9 @@
     }
 
     .print-sheet.size-a5-landscape .label-box.format-gd-a6,
-    .print-sheet.size-a5-landscape .label-box.format-a5 {
+    .print-sheet.size-a5-landscape .label-box.format-mg-a6,
+    .print-sheet.size-a5-landscape .label-box.format-a5,
+    .print-sheet.layout-mg-a5 .label-box {
         width: 98mm !important;
         height: 140mm !important;
         max-height: 140mm !important;
@@ -79,6 +82,52 @@
         page-break-inside: avoid !important;
         break-inside: avoid !important;
         flex-shrink: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding-bottom: 2mm !important;
+    }
+
+    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .label-banner,
+    .print-sheet.layout-mg-a5 .label-box .label-banner {
+        height: 38mm !important;
+        border-bottom: 3px solid #000000 !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .strike-number,
+    .print-sheet.layout-mg-a5 .label-box .strike-number {
+        font-size: 13.5mm !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .txt-price-promo,
+    .print-sheet.layout-mg-a5 .label-box .txt-price-promo {
+        font-size: 19mm !important;
+        line-height: 19mm !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .txt-subline,
+    .print-sheet.layout-mg-a5 .label-box .txt-subline {
+        font-size: 5mm !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .label-footer,
+    .print-sheet.layout-mg-a5 .label-box .label-footer {
+        height: 8.5mm !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        padding: 0 1.5mm !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .input-product-name,
+    .print-sheet.layout-mg-a5 .label-box .input-product-name {
+        width: 56mm !important;
+        font-size: 4.5mm !important;
+        height: 7.5mm !important;
+        border: 2px solid #000000 !important;
+        text-align: center !important;
+    }
+    .print-sheet.size-a5-landscape .label-box.format-mg-a6 .input-print-date,
+    .print-sheet.layout-mg-a5 .label-box .input-print-date {
+        width: 34mm !important;
+        font-size: 4.2mm !important;
+        height: 7.5mm !important;
+        border: 2px solid #000000 !important;
+        text-align: center !important;
     }
 
     .print-sheet.size-a5-landscape .label-box.format-a5 .label-banner {
@@ -126,14 +175,16 @@
         background: #ffffff !important;
     }
 
-    .print-sheet.size-a5 .label-box.format-a5 {
+    .print-sheet.size-a5 .label-box.format-a5,
+    .print-sheet.size-a5 .label-box.format-tvtl-a5 {
         width: 138mm !important;
         height: 198mm !important;
         max-height: 198mm !important;
         border: 4px solid #000000 !important;
     }
 
-    .print-sheet.size-a5 .label-box.format-gd-a6 {
+    .print-sheet.size-a5 .label-box.format-gd-a6,
+    .print-sheet.size-a5 .label-box.format-mg-a6 {
         width: 135mm !important;
         height: 195mm !important;
         max-height: 195mm !important;
@@ -141,7 +192,9 @@
     }
 
     /* TỜ IN KHỔ A5 ĐỨNG: 4 TEM A7 ĐỨNG TRÊN GIẤY A5 (CHUẨN GIA DỤNG) */
-    .print-sheet.size-a5.layout-a5-4 {
+    .print-sheet.size-a5.layout-a5-4,
+    .print-sheet.size-a5.layout-gd-a5,
+    .print-sheet.layout-gd-a5 {
         display: grid !important;
         grid-template-columns: 69mm 69mm !important;
         grid-template-rows: 99mm 99mm !important;
@@ -151,8 +204,9 @@
         padding: 4mm 2.5mm !important;
     }
 
-    .print-sheet.size-a5.layout-a5-4 .label-box.format-gd-a6,
-    .print-sheet.size-a5.layout-a5-4 .label-box.format-a5 {
+    .print-sheet.size-a5.layout-a5-4 .label-box,
+    .print-sheet.layout-gd-a5 .label-box,
+    .print-sheet.size-a5 .label-box.format-gd-a7 {
         width: 69mm !important;
         height: 99mm !important;
         max-height: 99mm !important;
@@ -161,7 +215,8 @@
         padding-bottom: 1.5mm !important;
     }
 
-    .print-sheet.size-a5.layout-a5-4 .label-banner {
+    .print-sheet.size-a5.layout-a5-4 .label-banner,
+    .print-sheet.layout-gd-a5 .label-banner {
         height: 25mm !important;
         border-bottom: 2px solid #000000 !important;
     }
@@ -279,13 +334,15 @@
        1. MẪU TV & TỦ LẠNH (A5 - GHÉP 2 TEM KHÁC NHAU / TỜ A4)
        ============================================================== */
     .print-sheet.layout-a4-2,
+    .print-sheet.layout-tvtl-a4,
     .print-sheet.template-tvtl:not(.layout-single):not(.size-a5-landscape):not(.size-a5):not(.layout-a4-4) {
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
     }
 
-    .print-sheet .label-box.format-a5 {
+    .print-sheet .label-box.format-a5,
+    .print-sheet .label-box.format-tvtl-a5 {
         width: 190mm !important;
         height: 139mm !important;
         max-height: 139mm !important;
