@@ -1,20 +1,3 @@
-/* Khai báo font gốc UTM-Colossalis & mt2-mincap cho in ấn */
-@font-face {
-    font-family: 'mt2-mincap';
-    src: url('../assets/mt2-mincap.woff2') format('woff2');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'UTM-Colossalis';
-    src: url('../assets/UTM-Colossalis.ttf') format('truetype');
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-}
-
 /* CSS Chuyên Dụng Khi In Ấn (window.print) - TỐI ƯU CẢ MẪU TV/TL (A5) VÀ GIA DỤNG (A6) */
 @page {
     size: A4 portrait;

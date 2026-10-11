@@ -23,7 +23,7 @@ class App {
         this.bannerMode = 'svg';
         this.customTitleText = 'GIÁ RẺ QUÁ';
         this.bannerTheme = 'bw_classic';
-        this.customSubline = '+ TRẢ GÓP 0% LÃI SUẤT';
+        this.customSubline = '+ TRẢ GÓP 0%';
         this.uploadedBannerUrl = null;
         this.customDateText = 'ÁP DỤNG: 09/10 - 11/10';
 
