@@ -744,19 +744,19 @@
         color: #ffffff !important;
     }
 
-    /* 2. GIÁ SỐC (DÒNG RIÊNG, CHỮ TO) */
+    /* 2. GIÁ SỐC (DÒNG RIÊNG, TO BẰNG -45%) */
     .print-sheet .format-mln-a4-full .mln-shock-box {
         width: 100% !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        padding: 1mm 0 0 0 !important;
+        padding: 0 !important;
     }
 
     .print-sheet .format-mln-a4-full .mln-shock-title {
         font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-        font-size: 27mm !important;
-        line-height: 1 !important;
+        font-size: 46mm !important;
+        line-height: 0.95 !important;
         font-weight: 900 !important;
         letter-spacing: 2px !important;
         text-transform: uppercase !important;
@@ -774,7 +774,7 @@
 
     .print-sheet .format-mln-a4-full .mln-discount-badge {
         font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-        font-size: 58mm !important;
+        font-size: 50mm !important;
         line-height: 0.88 !important;
         font-weight: 900 !important;
         background: transparent !important;
@@ -785,7 +785,7 @@
         display: inline-block !important;
     }
 
-    /* 4. KHUNG MODEL (ĐÓNG KHUNG CHỮ NHẬT VIỀN ĐEN MỎNG) */
+    /* 4. KHUNG MODEL (ĐỔI FONT CHỮ GỌN ĐẸP, CHỮ NHỎ LẠI ĐỂ VỪA TÊN DÀI) */
     .print-sheet .format-mln-a4-full .mln-model-box {
         width: 100% !important;
         display: flex !important;
@@ -796,8 +796,8 @@
 
     .print-sheet .format-mln-a4-full .mln-model-inner {
         width: 100% !important;
-        border: 1.8px solid #000000 !important;
-        padding: 1.2mm 2mm !important;
+        border: 1.5px solid #000000 !important;
+        padding: 1mm 2.5mm !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -807,23 +807,26 @@
 
     .print-sheet .format-mln-a4-full .mln-model-input {
         width: 100% !important;
-        height: 7.5mm !important;
-        font-size: 6.8mm !important;
+        height: 6mm !important;
+        font-size: 4.5mm !important;
         line-height: 1 !important;
-        font-weight: 900 !important;
+        font-weight: 800 !important;
         text-align: center !important;
         border: none !important;
         background: transparent !important;
         color: #000000 !important;
         text-transform: uppercase !important;
-        font-family: 'Arial Black', 'Arial', sans-serif !important;
-        letter-spacing: 0.5px !important;
+        font-family: 'Plus Jakarta Sans', 'Arial', sans-serif !important;
+        letter-spacing: 0.2px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
     }
 
     /* 5. GIÁ GỐC (GẠCH GIÁ VỚI VẠCH ĐEN DÀY THÒ RA 2 BÊN) */
     .print-sheet .format-mln-a4-full .mln-strike-box {
         width: 100% !important;
-        height: 22mm !important;
+        height: 20mm !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -840,7 +843,7 @@
 
     .print-sheet .format-mln-a4-full .strike-number {
         font-family: 'Arial Black', 'Arial', sans-serif !important;
-        font-size: 19mm !important;
+        font-size: 17mm !important;
         line-height: 1 !important;
         font-weight: 900 !important;
         text-align: center !important;
@@ -853,16 +856,16 @@
         position: absolute !important;
         top: 50% !important;
         transform: translateY(-50%) !important;
-        left: -14mm !important;
-        right: -14mm !important;
-        height: 3.2px !important;
+        left: -12mm !important;
+        right: -12mm !important;
+        height: 2.8px !important;
         background-color: #000000 !important;
-        border-top: 3.2px solid #000000 !important;
+        border-top: 2.8px solid #000000 !important;
         z-index: 2 !important;
         pointer-events: none !important;
     }
 
-    /* 6. GIÁ GIẢM (SỐ CHÍNH TO + .000đ NGANG HÀNG Ở CHÂN) */
+    /* 6. GIÁ GIẢM (SỐ CHÍNH TO BẰNG -45% + .000đ NGANG HÀNG Ở CHÂN) */
     .print-sheet .format-mln-a4-full .mln-price-box {
         width: 100% !important;
         display: flex !important;
@@ -882,7 +885,7 @@
 
     .print-sheet .format-mln-a4-full .mln-price-big {
         font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-        font-size: 44mm !important;
+        font-size: 50mm !important;
         line-height: 0.82 !important;
         font-weight: 900 !important;
         color: #000000 !important;
@@ -892,7 +895,7 @@
 
     .print-sheet .format-mln-a4-full .mln-price-small {
         font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-        font-size: 15mm !important;
+        font-size: 16mm !important;
         line-height: 1 !important;
         font-weight: 900 !important;
         color: #000000 !important;

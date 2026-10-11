@@ -1595,21 +1595,21 @@ body {
     cursor: pointer;
 }
 
-/* 2. GIÁ SỐC (DÒNG RIÊNG, CHỮ TO) */
+/* 2. GIÁ SỐC (DÒNG RIÊNG, TO BẰNG -45%) */
 .label-box.format-mln-a4-full .mln-shock-box {
     width: 100% !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    padding: 4px 0 0 0 !important;
+    padding: 0 !important;
 }
 
 .label-box.format-mln-a4-full .mln-shock-title {
     font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-    font-size: 96px !important;
-    line-height: 1 !important;
+    font-size: 160px !important;
+    line-height: 0.95 !important;
     font-weight: 900 !important;
-    letter-spacing: 4px !important;
+    letter-spacing: 2px !important;
     text-transform: uppercase !important;
     color: #000000 !important;
     cursor: pointer;
@@ -1626,7 +1626,7 @@ body {
 
 .label-box.format-mln-a4-full .mln-discount-badge {
     font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-    font-size: 200px !important;
+    font-size: 175px !important;
     line-height: 0.88 !important;
     font-weight: 900 !important;
     background: transparent !important;
@@ -1638,7 +1638,7 @@ body {
     display: inline-block !important;
 }
 
-/* 4. KHUNG MODEL (ĐÓNG KHUNG CHỮ NHẬT VIỀN ĐEN MỎNG) */
+/* 4. KHUNG MODEL (ĐỔI FONT CHỮ GỌN ĐẸP, CHỮ NHỎ LẠI ĐỂ VỪA TÊN DÀI) */
 .label-box.format-mln-a4-full .mln-model-box {
     width: 100% !important;
     display: flex !important;
@@ -1649,8 +1649,8 @@ body {
 
 .label-box.format-mln-a4-full .mln-model-inner {
     width: 100% !important;
-    border: 2px solid #000000 !important;
-    padding: 4px 8px !important;
+    border: 1.5px solid #000000 !important;
+    padding: 3px 8px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -1660,23 +1660,26 @@ body {
 
 .label-box.format-mln-a4-full .mln-model-input {
     width: 100% !important;
-    height: 28px !important;
-    font-size: 23px !important;
+    height: 22px !important;
+    font-size: 15.5px !important;
     line-height: 1 !important;
-    font-weight: 900 !important;
+    font-weight: 800 !important;
     text-align: center !important;
     border: none !important;
     background: transparent !important;
     color: #000000 !important;
     text-transform: uppercase !important;
-    font-family: 'Arial Black', 'Arial', sans-serif !important;
-    letter-spacing: 1px !important;
+    font-family: 'Plus Jakarta Sans', 'Arial', sans-serif !important;
+    letter-spacing: 0.2px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 /* 5. GIÁ GỐC (GẠCH GIÁ VỚI VẠCH ĐEN DÀY THÒ RA 2 BÊN) */
 .label-box.format-mln-a4-full .mln-strike-box {
     width: 100% !important;
-    height: 75px !important;
+    height: 70px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -1693,7 +1696,7 @@ body {
 
 .label-box.format-mln-a4-full .strike-number {
     font-family: 'Arial Black', 'Arial', sans-serif !important;
-    font-size: 66px !important;
+    font-size: 60px !important;
     line-height: 1 !important;
     font-weight: 900 !important;
     text-align: center !important;
@@ -1716,7 +1719,7 @@ body {
     pointer-events: none !important;
 }
 
-/* 6. GIÁ GIẢM (SỐ CHÍNH TO + .000đ NGANG HÀNG Ở CHÂN) */
+/* 6. GIÁ GIẢM (SỐ CHÍNH TO BẰNG -45% + .000đ NGANG HÀNG Ở CHÂN) */
 .label-box.format-mln-a4-full .mln-price-box {
     width: 100% !important;
     display: flex !important;
@@ -1736,7 +1739,7 @@ body {
 
 .label-box.format-mln-a4-full .mln-price-big {
     font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-    font-size: 156px !important;
+    font-size: 175px !important;
     line-height: 0.82 !important;
     font-weight: 900 !important;
     color: #000000 !important;
@@ -1748,7 +1751,7 @@ body {
 
 .label-box.format-mln-a4-full .mln-price-small {
     font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-    font-size: 52px !important;
+    font-size: 56px !important;
     line-height: 1 !important;
     font-weight: 900 !important;
     color: #000000 !important;
