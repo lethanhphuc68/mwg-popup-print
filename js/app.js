@@ -23,7 +23,7 @@ class App {
         this.bannerMode = 'svg';
         this.customTitleText = 'GIÁ RẺ QUÁ';
         this.bannerTheme = 'bw_classic';
-        this.customSubline = '+ TRẢ GÓP 0%';
+        this.customSubline = '+ TRẢ GÓP 0% LÃI SUẤT';
         this.uploadedBannerUrl = null;
         this.customDateText = 'ÁP DỤNG: 09/10 - 11/10';
 
@@ -137,13 +137,13 @@ class App {
         }
     }
 
-    // Tách giá thành phần số chính (5 ký tự đầu chữ to) và đuôi 000đ (chữ nhỏ xuống dưới)
+    // Tách giá thành phần số chính (chữ to) và đuôi .000đ (chữ nhỏ nằm ngang hàng ở chân phải theo mẫu IMG_4689.JPG)
     splitPriceParts(num) {
         const str = ExcelParser.formatPrice(num);
         if (str.endsWith('.000')) {
             return {
                 main: str.slice(0, -4),
-                suffix: '000đ'
+                suffix: '.000đ'
             };
         }
         const parts = str.split('.');
@@ -151,12 +151,12 @@ class App {
             const last = parts.pop();
             return {
                 main: parts.join('.'),
-                suffix: last + 'đ'
+                suffix: '.' + last + 'đ'
             };
         }
         return {
             main: str,
-            suffix: '000đ'
+            suffix: '.000đ'
         };
     }
 
@@ -341,58 +341,66 @@ class App {
         const subline = this.customSubline || '+ TRẢ GÓP 0%';
 
         if (renderType === 'mln_a4') {
-            // Chuẩn MÁY LỌC NƯỚC A4 FULL: Xoá các đường line, Máy lọc nước nền đen chữ trắng to, Giảm sốc chữ to, -46% to lên nữa, Model nhỏ lại, 5 số đầu to nữa, 000đ xuống dưới, xoá khung trả góp
+            // Chuẩn MÁY LỌC NƯỚC A4 FULL theo mẫu ảnh thật IMG_4689.JPG:
+            // 1. MÁY LỌC NƯỚC: Hộp nền đen chữ trắng
+            // 2. GIÁ SỐC: Dòng riêng, chữ to font UTM-Colossalis / mt2-mincap
+            // 3. -% GIẢM GIÁ (VD: -24%): Dòng riêng, chữ đen siêu to khổng lồ trên nền giấy
+            // 4. MODEL: Khung viền chữ nhật nét đen mỏng [ MÁY LỌC NƯỚC KANGAROO KG12A6 ]
+            // 5. GIÁ GỐC: 11.590.000đ có vạch gạch ngang dày thò ra 2 bên
+            // 6. GIÁ GIẢM: 8.740 (chữ siêu to) + .000đ (chữ nhỏ nằm ngang hàng ở chân phải)
+            // 7. ƯU ĐÃI: + TRẢ GÓP 0% LÃI SUẤT (chữ in đậm)
             const diff = (item.giaNiemYet || 0) - (item.giaEvent || 0);
-            const percent = (item.giaNiemYet > 0 && diff > 0) ? Math.round((diff / item.giaNiemYet) * 100) : 46;
+            const percent = (item.giaNiemYet > 0 && diff > 0) ? Math.floor((diff / item.giaNiemYet) * 100) : 24;
             const discountStr = this.customMlnDiscount || `-${percent}%`;
             const catTitle = this.customMlnCategory || 'MÁY LỌC NƯỚC';
-            const shockTitle = this.customMlnShock || 'GIẢM SỐC';
-            const subline = this.customSubline || 'TRẢ GÓP 0%';
+            const shockTitle = this.customMlnShock || 'GIÁ SỐC';
+            const subline = (this.customSubline && this.customSubline !== '+ TRẢ GÓP 0%') ? this.customSubline : '+ TRẢ GÓP 0% LÃI SUẤT';
             const priceSplit = this.splitPriceParts(item.giaEvent);
             const priceSuffix = this.customPriceSuffix || priceSplit.suffix;
 
             return `
                 <div class="label-box format-mln-a4-full" data-item-id="${item.id}">
-                    <!-- 1. MÁY LỌC NƯỚC CHỮ TO LÊN. NỀN ĐEN CHỮ TRẮNG -->
+                    <!-- 1. BANNER: MÁY LỌC NƯỚC (NỀN ĐEN CHỮ TRẮNG) -->
                     <div class="mln-section mln-banner-top">
                         <div class="mln-cat-title editable-field" contenteditable="true" data-field="customHeaderCategory" title="Nhấp để sửa">${catTitle}</div>
                     </div>
 
-                    <!-- GIẢM SỐC Ở DƯỚI CHỮ MÁY LỌC NƯỚC (CHỮ TO) - 46% TO LÊN NỮA -->
-                    <div class="mln-section mln-promo-row">
+                    <!-- 2. GIÁ SỐC (DÒNG RIÊNG, CHỮ TO) -->
+                    <div class="mln-section mln-shock-box">
                         <div class="mln-shock-title editable-field" contenteditable="true" data-field="customHeaderShock" title="Nhấp để sửa chữ">${shockTitle}</div>
+                    </div>
+
+                    <!-- 3. -% GIẢM GIÁ (DÒNG RIÊNG, SIÊU TO KHỔNG LỒ) -->
+                    <div class="mln-section mln-discount-box">
                         <div class="mln-discount-badge editable-field" contenteditable="true" data-field="customDiscount" title="Nhấp để sửa % giảm">${discountStr}</div>
                     </div>
 
-                    <!-- 2. MODE : CHỮ NHỎ LẠI TÝ -->
+                    <!-- 4. KHUNG MODEL (ĐÓNG KHUNG CHỮ NHẬT VIỀN ĐEN) -->
                     <div class="mln-section mln-model-box">
-                        <input type="text" class="mln-model-input editable-field" data-field="tenSP" value="${item.tenSP || 'TÊN SẢN PHẨM'}" title="Nhấp để sửa tên model" />
+                        <div class="mln-model-inner">
+                            <input type="text" class="mln-model-input editable-field" data-field="tenSP" value="${item.tenSP || 'TÊN SẢN PHẨM'}" title="Nhấp để sửa tên model" />
+                        </div>
                     </div>
 
-                    <!-- 3. GIÁ GỐC GIỮ NGUYÊN (GÁCH GIÁ, CHỮ VỪA) -->
+                    <!-- 5. GIÁ GỐC (GẠCH GIÁ VỚI VẠCH ĐEN DÀY THÒ RA 2 BÊN) -->
                     <div class="mln-section mln-strike-box">
                         <div class="mln-strike-inner">
-                            <span class="strike-number editable-field" contenteditable="true" data-field="giaNiemYet" title="Nhấp để sửa giá niêm yết">${giaNiemYetStr}</span>
+                            <span class="strike-number editable-field" contenteditable="true" data-field="giaNiemYet" title="Nhấp để sửa giá niêm yết">${giaNiemYetStr}đ</span>
                             <div class="strike-bar"></div>
                         </div>
                     </div>
 
-                    <!-- 4. GIÁ GIẢM: 5 KÝ TỰ ĐẦU TO NỮA : 000đ XUỐNG DƯỚI GIÁ GIẢM -->
+                    <!-- 6. GIÁ GIẢM (SỐ CHÍNH TO + .000đ NGANG HÀNG Ở CHÂN) -->
                     <div class="mln-section mln-price-box">
                         <div class="mln-price-wrap" title="Nhấp vào số để sửa giá khuyến mãi">
-                            <div class="mln-price-big editable-field" contenteditable="true" data-field="giaEventMain">${priceSplit.main}</div>
-                            <div class="mln-price-small editable-field" contenteditable="true" data-field="giaEventSuffix">${priceSuffix}</div>
+                            <span class="mln-price-big editable-field" contenteditable="true" data-field="giaEventMain">${priceSplit.main}</span>
+                            <span class="mln-price-small editable-field" contenteditable="true" data-field="giaEventSuffix">${priceSuffix}</span>
                         </div>
                     </div>
 
-                    <!-- 5. TRẢ GÓP 0% (XOÁ KHUNG) -->
+                    <!-- 7. ƯU ĐÃI (+ TRẢ GÓP 0% LÃI SUẤT) -->
                     <div class="mln-section mln-subline-box">
                         <div class="mln-subline-text editable-field" contenteditable="true" data-field="subline" title="Nhấp để sửa ưu đãi">${subline}</div>
-                    </div>
-
-                    <!-- 6. FOOTER: NGÀY ÁP DỤNG -->
-                    <div class="mln-section mln-footer-box">
-                        <input type="text" class="mln-date-input editable-field" data-field="dateText" value="${dateText}" title="Nhấp để sửa ngày áp dụng" />
                     </div>
                 </div>
             `;

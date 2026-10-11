@@ -4,7 +4,7 @@
 @font-face {
     font-family: 'mt2-mincap';
     src: url('../assets/mt2-mincap.woff2') format('woff2');
-    font-weight: normal;
+    font-weight: 100 900;
     font-style: normal;
     font-display: swap;
 }
@@ -12,7 +12,7 @@
 @font-face {
     font-family: 'UTM-Colossalis';
     src: url('../assets/UTM-Colossalis.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: 100 900;
     font-style: normal;
     font-display: swap;
 }
@@ -1548,7 +1548,7 @@ body {
 .label-box.format-mln-a4-full {
     width: 100% !important;
     height: 1035px !important;
-    border: 6px solid #000000 !important;
+    border: 5px solid #000000 !important;
     background: #ffffff !important;
     box-sizing: border-box !important;
     font-family: 'mt2-mincap', 'UTM-Colossalis', 'Arial Black', sans-serif !important;
@@ -1558,7 +1558,7 @@ body {
     justify-content: space-between !important;
     align-items: center !important;
     overflow: hidden !important;
-    padding: 0 0 10px 0 !important;
+    padding: 16px 14px 14px 14px !important;
     flex-shrink: 0 !important;
     color: #000000 !important;
 }
@@ -1572,12 +1572,12 @@ body {
     border: none !important;
 }
 
-/* 1. MÁY LỌC NƯỚC: NỀN ĐEN CHỮ TRẮNG, CHỮ TO LÊN */
+/* 1. BANNER: MÁY LỌC NƯỚC (NỀN ĐEN CHỮ TRẮNG) */
 .label-box.format-mln-a4-full .mln-banner-top {
     background: #000000 !important;
     color: #ffffff !important;
     width: 100% !important;
-    padding: 14px 10px !important;
+    padding: 10px 8px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -1585,77 +1585,98 @@ body {
 }
 
 .label-box.format-mln-a4-full .mln-cat-title {
-    font-size: 50px !important;
-    line-height: 52px !important;
+    font-family: 'Arial Black', 'Montserrat', 'Inter', sans-serif !important;
+    font-size: 46px !important;
+    line-height: 1 !important;
     font-weight: 900 !important;
-    letter-spacing: 3px !important;
+    letter-spacing: 4px !important;
     text-transform: uppercase !important;
     color: #ffffff !important;
     cursor: pointer;
 }
 
-/* GIẢM SỐC Ở DƯỚI CHỮ MÁY LỌC NƯỚC (CHỮ TO) - 46% TO LÊN NỮA */
-.label-box.format-mln-a4-full .mln-promo-row {
+/* 2. GIÁ SỐC (DÒNG RIÊNG, CHỮ TO) */
+.label-box.format-mln-a4-full .mln-shock-box {
     width: 100% !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 24px !important;
-    padding: 6px 0 !important;
-    border: none !important;
+    padding: 4px 0 0 0 !important;
 }
 
 .label-box.format-mln-a4-full .mln-shock-title {
-    font-size: 105px !important;
-    line-height: 100px !important;
+    font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
+    font-size: 96px !important;
+    line-height: 1 !important;
     font-weight: 900 !important;
-    letter-spacing: 2px !important;
+    letter-spacing: 4px !important;
     text-transform: uppercase !important;
     color: #000000 !important;
     cursor: pointer;
 }
 
+/* 3. -% GIẢM GIÁ (DÒNG RIÊNG, SIÊU TO KHỔNG LỒ) */
+.label-box.format-mln-a4-full .mln-discount-box {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+}
+
 .label-box.format-mln-a4-full .mln-discount-badge {
-    font-size: 88px !important;
-    line-height: 85px !important;
+    font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
+    font-size: 200px !important;
+    line-height: 0.88 !important;
     font-weight: 900 !important;
-    background: #000000 !important;
-    color: #ffffff !important;
-    padding: 6px 22px !important;
-    border-radius: 8px !important;
-    white-space: nowrap !important;
+    background: transparent !important;
+    color: #000000 !important;
+    letter-spacing: -6px !important;
     text-transform: uppercase !important;
     cursor: pointer;
     border: none !important;
     display: inline-block !important;
 }
 
-/* 2. MODE : CHỮ NHỎ LẠI TÝ */
+/* 4. KHUNG MODEL (ĐÓNG KHUNG CHỮ NHẬT VIỀN ĐEN MỎNG) */
 .label-box.format-mln-a4-full .mln-model-box {
-    padding: 4px 14px !important;
+    width: 100% !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    border: none !important;
+    padding: 0 4px !important;
+}
+
+.label-box.format-mln-a4-full .mln-model-inner {
+    width: 100% !important;
+    border: 2px solid #000000 !important;
+    padding: 4px 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    box-sizing: border-box !important;
 }
 
 .label-box.format-mln-a4-full .mln-model-input {
     width: 100% !important;
-    height: 38px !important;
-    font-size: 24px !important;
-    font-weight: 800 !important;
+    height: 28px !important;
+    font-size: 23px !important;
+    line-height: 1 !important;
+    font-weight: 900 !important;
     text-align: center !important;
     border: none !important;
     background: transparent !important;
     color: #000000 !important;
     text-transform: uppercase !important;
-    font-family: inherit !important;
-    letter-spacing: 0.5px !important;
+    font-family: 'Arial Black', 'Arial', sans-serif !important;
+    letter-spacing: 1px !important;
 }
 
-/* 3. GIÁ GỐC GIỮ NGUYÊN (GÁCH GIÁ, CHỮ VỪA) */
+/* 5. GIÁ GỐC (GẠCH GIÁ VỚI VẠCH ĐEN DÀY THÒ RA 2 BÊN) */
 .label-box.format-mln-a4-full .mln-strike-box {
-    height: 120px !important;
+    width: 100% !important;
+    height: 75px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -1671,8 +1692,9 @@ body {
 }
 
 .label-box.format-mln-a4-full .strike-number {
-    font-size: 96px !important;
-    line-height: 100px !important;
+    font-family: 'Arial Black', 'Arial', sans-serif !important;
+    font-size: 66px !important;
+    line-height: 1 !important;
     font-weight: 900 !important;
     text-align: center !important;
     color: #000000 !important;
@@ -1683,102 +1705,80 @@ body {
 
 .label-box.format-mln-a4-full .strike-bar {
     position: absolute !important;
-    top: 52% !important;
+    top: 50% !important;
     transform: translateY(-50%) !important;
-    left: -4% !important;
-    right: -4% !important;
-    height: 5px !important;
+    left: -45px !important;
+    right: -45px !important;
+    height: 4px !important;
     background-color: #000000 !important;
-    border-top: 5px solid #000000 !important;
+    border-top: 4px solid #000000 !important;
     z-index: 2 !important;
     pointer-events: none !important;
 }
 
-/* 4. GIÁ GIẢM: 5 KÝ TỰ ĐẦU TO NỮA : 000đ XUỐNG DƯỚI GIÁ GIẢM */
+/* 6. GIÁ GIẢM (SỐ CHÍNH TO + .000đ NGANG HÀNG Ở CHÂN) */
 .label-box.format-mln-a4-full .mln-price-box {
+    width: 100% !important;
     display: flex !important;
-    flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     overflow: hidden !important;
     border: none !important;
-    padding: 6px 0 !important;
 }
 
 .label-box.format-mln-a4-full .mln-price-wrap {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: baseline !important;
     justify-content: center !important;
-    text-align: center !important;
-    width: 100% !important;
-    line-height: 0.9 !important;
+    line-height: 1 !important;
 }
 
 .label-box.format-mln-a4-full .mln-price-big {
-    font-size: 250px !important;
-    line-height: 235px !important;
+    font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
+    font-size: 156px !important;
+    line-height: 0.82 !important;
     font-weight: 900 !important;
     color: #000000 !important;
-    letter-spacing: -12px !important;
-    display: block !important;
+    letter-spacing: -6px !important;
+    display: inline-block !important;
     text-align: center !important;
     cursor: pointer;
 }
 
 .label-box.format-mln-a4-full .mln-price-small {
-    font-size: 65px !important;
-    line-height: 65px !important;
+    font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
+    font-size: 52px !important;
+    line-height: 1 !important;
     font-weight: 900 !important;
     color: #000000 !important;
-    margin-top: -8px !important;
-    display: block !important;
-    text-align: center !important;
     letter-spacing: -1px !important;
+    display: inline-block !important;
+    margin-left: 2px !important;
     cursor: pointer;
 }
 
-/* 5. TRẢ GÓP 0% (XOÁ KHUNG) */
+/* 7. ƯU ĐÃI (+ TRẢ GÓP 0% LÃI SUẤT) */
 .label-box.format-mln-a4-full .mln-subline-box {
-    padding: 8px 0 !important;
+    width: 100% !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    padding: 0 0 4px 0 !important;
     border: none !important;
 }
 
 .label-box.format-mln-a4-full .mln-subline-text {
-    font-size: 38px !important;
-    line-height: 42px !important;
+    font-family: 'Arial Black', 'Arial', sans-serif !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
     font-weight: 900 !important;
     border: none !important;
     padding: 0 !important;
     color: #000000 !important;
-    letter-spacing: 2px !important;
+    letter-spacing: 1px !important;
     text-transform: uppercase !important;
     cursor: pointer;
-}
-
-/* 6. FOOTER: NGÀY ÁP DỤNG */
-.label-box.format-mln-a4-full .mln-footer-box {
-    padding: 4px 12px 10px 12px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border: none !important;
-}
-
-.label-box.format-mln-a4-full .mln-date-input {
-    width: 100% !important;
-    height: 26px !important;
-    font-size: 20px !important;
-    font-weight: 800 !important;
-    text-align: center !important;
-    border: none !important;
-    background: transparent !important;
-    color: #000000 !important;
-    text-transform: uppercase !important;
-    font-family: inherit !important;
 }
 
 @media (max-width: 1200px) {

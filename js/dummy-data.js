@@ -240,9 +240,9 @@ const DEFAULT_PRODUCTS = [
         nhom: "Máy Lọc Nước",
         vung: "Vùng Hồ Chí Minh",
         maSP: "1114171000197",
-        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Hòa Phát HPN639 12 lõi (Imei)",
+        tenSP: "MÁY LỌC NƯỚC KANGAROO KG12A6",
         giaNiemYet: 11590000,
-        giaEvent: 6290000,
+        giaEvent: 8740000,
         khungGio: "3 suất / siêu thị",
         ghiChu: "Giờ vàng giá sốc",
         selected: true
