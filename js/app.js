@@ -27,6 +27,12 @@ class App {
         this.uploadedBannerUrl = null;
         this.customDateText = 'ÁP DỤNG: 09/10 - 11/10';
 
+        // Tùy chỉnh riêng cho Form Máy Lọc Nước A4 Full
+        this.customMlnCategory = '';
+        this.customMlnShock = '';
+        this.customMlnDiscount = '';
+        this.customPriceSuffix = '';
+
         this.init();
     }
 
@@ -34,7 +40,7 @@ class App {
         if (typeof window !== 'undefined' && window.location) {
             const urlParams = new URLSearchParams(window.location.search);
             const formParam = urlParams.get('form');
-            if (formParam && ['tvtl', 'maygiat', 'giadung', 'maylocnuoc'].includes(formParam)) {
+            if (formParam && ['tvtl', 'maygiat', 'giadung', 'maylocnuoc', 'maylocnuoc_a4'].includes(formParam)) {
                 this.currentForm = formParam;
                 this.selectedCategory = this.getFormConfig(formParam).category;
             }
@@ -88,7 +94,7 @@ class App {
             case 'maylocnuoc':
                 return {
                     key: 'maylocnuoc',
-                    name: 'MÁY LỌC NƯỚC',
+                    name: 'MÁY LỌC NƯỚC (A5)',
                     paper: 'A5',
                     orientation: 'portrait',
                     pageSize: '148mm 210mm',
@@ -98,6 +104,20 @@ class App {
                     category: 'maylocnuoc',
                     desc: 'GIẤY A5 ĐỨNG | POPUP: A6×2 | GẠCH GIÁ MÁY GIẶT',
                     sourceUrl: 'https://mientay2.pro/in-online/popup/mg/gach/'
+                };
+            case 'maylocnuoc_a4':
+                return {
+                    key: 'maylocnuoc_a4',
+                    name: 'MÁY LỌC NƯỚC A4 FULL',
+                    paper: 'A4',
+                    orientation: 'portrait',
+                    pageSize: '210mm 297mm',
+                    itemsPerSheet: 1,
+                    sheetClass: 'size-a4 layout-mln-a4-full',
+                    renderType: 'mln_a4',
+                    category: 'maylocnuoc',
+                    desc: 'GIẤY A4 ĐỨNG | POPUP: A4 FULL (1 TEM) | ĐÓNG KHUNG IN ĐẬM',
+                    sourceUrl: ''
                 };
             case 'tvtl':
             default:
@@ -115,6 +135,29 @@ class App {
                     sourceUrl: 'https://mientay2.pro/in-online/popup/tvtl/gach/'
                 };
         }
+    }
+
+    // Tách giá thành phần số chính (chữ to) và đuôi .000đ (chữ nhỏ) chuẩn MWG
+    splitPriceParts(num) {
+        const str = ExcelParser.formatPrice(num);
+        if (str.endsWith('.000')) {
+            return {
+                main: str.slice(0, -4),
+                suffix: '.000đ'
+            };
+        }
+        const parts = str.split('.');
+        if (parts.length >= 2) {
+            const last = parts.pop();
+            return {
+                main: parts.join('.'),
+                suffix: '.' + last + 'đ'
+            };
+        }
+        return {
+            main: str,
+            suffix: 'đ'
+        };
     }
 
     // PHÂN LOẠI 27 SẢN PHẨM THEO ĐÚNG 4 NHÓM NGÀNH HÀNG:
@@ -278,7 +321,7 @@ class App {
             if (it) {
                 html += this.renderSingleLabelHTML(it, bannerContent, this.getDateText(it), config.renderType);
             } else {
-                const emptyH = itemsPerSheet === 4 ? '355px' : '505px';
+                const emptyH = itemsPerSheet === 4 ? '355px' : (itemsPerSheet === 1 ? '1020px' : '505px');
                 html += `<div style="height: ${emptyH}; border: 2px dashed #cbd5e1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 13px;">(Ô trống)</div>`;
             }
         }
@@ -297,7 +340,61 @@ class App {
         const giaEventStr = ExcelParser.formatPrice(item.giaEvent);
         const subline = this.customSubline || '+ TRẢ GÓP 0%';
 
-        if (renderType === 'gd') {
+        if (renderType === 'mln_a4') {
+            // Chuẩn MÁY LỌC NƯỚC A4 FULL: 1 tem trọn vẹn khổ A4, đóng khung in đậm
+            const diff = (item.giaNiemYet || 0) - (item.giaEvent || 0);
+            const percent = (item.giaNiemYet > 0 && diff > 0) ? Math.round((diff / item.giaNiemYet) * 100) : 30;
+            const discountStr = this.customMlnDiscount || `-${percent}% GIẢM GIÁ`;
+            const catTitle = this.customMlnCategory || 'MÁY LỌC NƯỚC';
+            const shockTitle = this.customMlnShock || 'GIÁ SỐC';
+            const subline = this.customSubline || 'TRẢ GÓP 0%';
+            const priceSplit = this.splitPriceParts(item.giaEvent);
+            const priceSuffix = this.customPriceSuffix || priceSplit.suffix;
+
+            return `
+                <div class="label-box format-mln-a4-full" data-item-id="${item.id}">
+                    <!-- 1. TIÊU ĐỀ: MÁY LỌC NƯỚC (CHỮ VỪA) - GIÁ SỐC - -% GIẢM GIÁ -->
+                    <div class="mln-section mln-header-box">
+                        <div class="mln-cat-title editable-field" contenteditable="true" data-field="customHeaderCategory" title="Nhấp để sửa tiêu đề danh mục">${catTitle}</div>
+                        <div class="mln-promo-title-row">
+                            <div class="mln-shock-title editable-field" contenteditable="true" data-field="customHeaderShock" title="Nhấp để sửa chữ">${shockTitle}</div>
+                            <div class="mln-discount-badge editable-field" contenteditable="true" data-field="customDiscount" title="Nhấp để sửa % giảm">${discountStr}</div>
+                        </div>
+                    </div>
+
+                    <!-- 2. MODEL (MODE) -->
+                    <div class="mln-section mln-model-box">
+                        <input type="text" class="mln-model-input editable-field" data-field="tenSP" value="${item.tenSP || 'TÊN SẢN PHẨM'}" title="Nhấp để sửa tên model" />
+                    </div>
+
+                    <!-- 3. GIÁ GỐC (GÁCH GIÁ, CHỮ VỪA) -->
+                    <div class="mln-section mln-strike-box">
+                        <div class="mln-strike-inner">
+                            <span class="strike-number editable-field" contenteditable="true" data-field="giaNiemYet" title="Nhấp để sửa giá niêm yết">${giaNiemYetStr}</span>
+                            <div class="strike-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- 4. GIÁ GIẢM (CHỮ TO) 000đ (chữ nhỏ) -->
+                    <div class="mln-section mln-price-box">
+                        <div class="mln-price-wrap" title="Nhấp vào số để sửa giá khuyến mãi">
+                            <span class="mln-price-big editable-field" contenteditable="true" data-field="giaEventMain">${priceSplit.main}</span>
+                            <span class="mln-price-small editable-field" contenteditable="true" data-field="giaEventSuffix">${priceSuffix}</span>
+                        </div>
+                    </div>
+
+                    <!-- 5. TRẢ GÓP 0% (CHỮ NHỎ) -->
+                    <div class="mln-section mln-subline-box">
+                        <div class="mln-subline-tag editable-field" contenteditable="true" data-field="subline" title="Nhấp để sửa ưu đãi">${subline}</div>
+                    </div>
+
+                    <!-- 6. FOOTER: NGÀY ÁP DỤNG -->
+                    <div class="mln-section mln-footer-box">
+                        <input type="text" class="mln-date-input editable-field" data-field="dateText" value="${dateText}" title="Nhấp để sửa ngày áp dụng" />
+                    </div>
+                </div>
+            `;
+        } else if (renderType === 'gd') {
             // Chuẩn GIA DỤNG (A7 x 4): https://mientay2.pro/in-online/popup/gd/gach/
             return `
                 <div class="label-box format-gd-a7" data-item-id="${item.id}">
@@ -351,6 +448,13 @@ class App {
 
     bindInlineEditEvents(container) {
         container.querySelectorAll('.editable-field').forEach(el => {
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    el.blur();
+                }
+            });
+
             el.addEventListener('blur', () => {
                 const labelBox = el.closest('.label-box');
                 const itemId = labelBox?.getAttribute('data-item-id');
@@ -364,17 +468,33 @@ class App {
 
                 if (field === 'giaNiemYet') {
                     targetItem.giaNiemYet = ExcelParser.parsePrice(val);
-                    el.textContent = ExcelParser.formatPrice(targetItem.giaNiemYet);
                 } else if (field === 'giaEvent') {
                     targetItem.giaEvent = ExcelParser.parsePrice(val);
-                    el.textContent = ExcelParser.formatPrice(targetItem.giaEvent);
+                } else if (field === 'giaEventMain') {
+                    const parsed = ExcelParser.parsePrice(val);
+                    if (parsed > 0 && parsed < 100000) {
+                        targetItem.giaEvent = parsed * 1000;
+                    } else if (parsed >= 100000) {
+                        targetItem.giaEvent = parsed;
+                    }
+                } else if (field === 'giaEventSuffix') {
+                    this.customPriceSuffix = val;
                 } else if (field === 'tenSP') {
                     targetItem.tenSP = val;
                 } else if (field === 'subline') {
                     this.customSubline = val;
+                } else if (field === 'customHeaderCategory') {
+                    this.customMlnCategory = val;
+                } else if (field === 'customHeaderShock') {
+                    this.customMlnShock = val;
+                } else if (field === 'customDiscount') {
+                    this.customMlnDiscount = val;
+                } else if (field === 'dateText') {
+                    this.customDateText = val;
                 }
 
                 this.renderTable();
+                this.updatePreview();
             });
         });
     }
@@ -597,7 +717,11 @@ class App {
                 if (cat === 'tv_tl_loa') this.currentForm = 'tvtl';
                 else if (cat === 'maygiat_tudong') this.currentForm = 'maygiat';
                 else if (cat === 'giadung') this.currentForm = 'giadung';
-                else if (cat === 'maylocnuoc') this.currentForm = 'maylocnuoc';
+                else if (cat === 'maylocnuoc') {
+                    if (this.currentForm !== 'maylocnuoc' && this.currentForm !== 'maylocnuoc_a4') {
+                        this.currentForm = 'maylocnuoc_a4';
+                    }
+                }
 
                 this.syncActiveFormAndCategory();
                 this.currentProductIndex = 0;
@@ -641,7 +765,9 @@ class App {
         });
 
         document.getElementById('btnSelectMayLocNuoc')?.addEventListener('click', () => {
-            this.currentForm = 'maylocnuoc';
+            if (this.currentForm !== 'maylocnuoc' && this.currentForm !== 'maylocnuoc_a4') {
+                this.currentForm = 'maylocnuoc_a4';
+            }
             this.selectedCategory = 'maylocnuoc';
             this.syncActiveFormAndCategory();
             this.products.forEach(p => {

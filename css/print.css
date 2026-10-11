@@ -652,4 +652,246 @@
         color: #000000 !important;
         margin-top: 1mm !important;
     }
+
+    /* ==============================================================
+       FORM 5: MÁY LỌC NƯỚC A4 FULL (1 TEM KHỔ A4 ĐỨNG, ĐÓNG KHUNG IN ĐẬM)
+       ============================================================== */
+    .print-sheet.layout-mln-a4-full {
+        width: 210mm !important;
+        height: 296mm !important;
+        max-height: 296mm !important;
+        padding: 6mm 8mm !important;
+        margin: 0 auto !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        background: #ffffff !important;
+    }
+
+    .print-sheet .label-box.format-mln-a4-full {
+        width: 194mm !important;
+        height: 284mm !important;
+        max-height: 284mm !important;
+        border: 6.5px solid #000000 !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        font-family: 'mt2-mincap', 'UTM-Colossalis', 'Arial Black', sans-serif !important;
+        font-weight: 900 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+    }
+
+    /* Các section chia đều nhau trong khung A4 */
+    .print-sheet .format-mln-a4-full .mln-section {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        font-weight: 900 !important;
+    }
+
+    /* 1. Tiêu đề: MÁY LỌC NƯỚC (chữ vừa) - GIÁ SỐC (chữ to) - -% GIẢM GIÁ */
+    .print-sheet .format-mln-a4-full .mln-header-box {
+        border-bottom: 5px solid #000000 !important;
+        padding: 4mm 4mm !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 2mm !important;
+        background: #ffffff !important;
+    }
+
+    .print-sheet .format-mln-a4-full .mln-cat-title {
+        font-size: 11.5mm !important;
+        line-height: 12mm !important;
+        font-weight: 900 !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        color: #000000 !important;
+    }
+
+    .print-sheet .format-mln-a4-full .mln-promo-title-row {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 5mm !important;
+    }
+
+    .print-sheet .format-mln-a4-full .mln-shock-title {
+        font-size: 26mm !important;
+        line-height: 26mm !important;
+        font-weight: 900 !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        color: #000000 !important;
+    }
+
+    .print-sheet .format-mln-a4-full .mln-discount-badge {
+        font-size: 11mm !important;
+        line-height: 11mm !important;
+        font-weight: 900 !important;
+        border: 4.5px solid #000000 !important;
+        background: #000000 !important;
+        color: #ffffff !important;
+        padding: 2.5mm 5mm !important;
+        border-radius: 4px !important;
+        white-space: nowrap !important;
+        text-transform: uppercase !important;
+    }
+
+    /* 2. Model (MODE) */
+    .print-sheet .format-mln-a4-full .mln-model-box {
+        border-bottom: 4.5px solid #000000 !important;
+        padding: 3mm 3mm !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .print-sheet .format-mln-a4-full .mln-model-input {
+        width: 100% !important;
+        height: 13mm !important;
+        font-size: 9mm !important;
+        font-weight: 900 !important;
+        text-align: center !important;
+        border: none !important;
+        background: transparent !important;
+        color: #000000 !important;
+        text-transform: uppercase !important;
+        font-family: inherit !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    /* 3. Giá gốc (gạch giá, chữ vừa) */
+    .print-sheet .format-mln-a4-full .mln-strike-box {
+        border-bottom: 4.5px solid #000000 !important;
+        height: 35mm !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: relative !important;
+    }
+
+    .print-sheet .format-mln-a4-full .mln-strike-inner {
+        position: relative !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .print-sheet .format-mln-a4-full .strike-number {
+        font-size: 27mm !important;
+        line-height: 29mm !important;
+        font-weight: 900 !important;
+        text-align: center !important;
+        color: #000000 !important;
+        z-index: 1 !important;
+        letter-spacing: -0.5px !important;
+    }
+
+    .print-sheet .format-mln-a4-full .strike-bar {
+        position: absolute !important;
+        top: 52% !important;
+        transform: translateY(-50%) !important;
+        left: -4% !important;
+        right: -4% !important;
+        height: 5px !important;
+        background-color: #000000 !important;
+        border-top: 5px solid #000000 !important;
+        z-index: 2 !important;
+        pointer-events: none !important;
+    }
+
+    /* 4. Giá giảm (chữ to) 000đ (chữ nhỏ) */
+    .print-sheet .format-mln-a4-full .mln-price-box {
+        border-bottom: 4.5px solid #000000 !important;
+        height: 78mm !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+    }
+
+    .print-sheet .format-mln-a4-full .mln-price-wrap {
+        display: flex !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+        gap: 1.5mm !important;
+        line-height: 0.9 !important;
+    }
+
+    .print-sheet .format-mln-a4-full .mln-price-big {
+        font-size: 60mm !important;
+        line-height: 58mm !important;
+        font-weight: 900 !important;
+        color: #000000 !important;
+        letter-spacing: -3.5px !important;
+        display: inline-block !important;
+    }
+
+    .print-sheet .format-mln-a4-full .mln-price-small {
+        font-size: 21mm !important;
+        line-height: 21mm !important;
+        font-weight: 900 !important;
+        color: #000000 !important;
+        margin-top: 2.5mm !important;
+        display: inline-block !important;
+        letter-spacing: -0.5px !important;
+    }
+
+    /* 5. Trả góp 0% (chữ nhỏ) */
+    .print-sheet .format-mln-a4-full .mln-subline-box {
+        padding: 3.5mm 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .print-sheet .format-mln-a4-full .mln-subline-tag {
+        font-size: 10.5mm !important;
+        line-height: 11.5mm !important;
+        font-weight: 900 !important;
+        border: 4.5px solid #000000 !important;
+        padding: 2.5mm 14mm !important;
+        border-radius: 4px !important;
+        color: #000000 !important;
+        letter-spacing: 1.5px !important;
+        text-transform: uppercase !important;
+    }
+
+    /* 6. Footer: Ngày áp dụng */
+    .print-sheet .format-mln-a4-full .mln-footer-box {
+        padding: 2.5mm 3mm 3.5mm 3mm !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .print-sheet .format-mln-a4-full .mln-date-input {
+        width: 100% !important;
+        height: 7.5mm !important;
+        font-size: 6mm !important;
+        font-weight: 900 !important;
+        text-align: center !important;
+        border: none !important;
+        background: transparent !important;
+        color: #000000 !important;
+        text-transform: uppercase !important;
+        font-family: inherit !important;
+    }
 }

@@ -1530,6 +1530,244 @@ body {
     margin-bottom: 2px !important;
 }
 
+/* ==============================================================
+   FORM 5: MÁY LỌC NƯỚC A4 FULL (SCREEN PREVIEW)
+   ============================================================== */
+.paper-sheet.layout-mln-a4-full {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 20px 24px !important;
+    width: 760px !important;
+    min-height: 1075px !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+}
+
+.label-box.format-mln-a4-full {
+    width: 100% !important;
+    height: 1035px !important;
+    border: 6px solid #000000 !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', 'Arial Black', sans-serif !important;
+    font-weight: 900 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+    color: #000000 !important;
+}
+
+.label-box.format-mln-a4-full .mln-section {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    font-weight: 900 !important;
+}
+
+/* 1. Tiêu đề: MÁY LỌC NƯỚC (chữ vừa) - GIÁ SỐC (chữ to) - -% GIẢM GIÁ */
+.label-box.format-mln-a4-full .mln-header-box {
+    border-bottom: 5px solid #000000 !important;
+    padding: 14px 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: #ffffff !important;
+}
+
+.label-box.format-mln-a4-full .mln-cat-title {
+    font-size: 38px !important;
+    line-height: 42px !important;
+    font-weight: 900 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: #000000 !important;
+    cursor: pointer;
+}
+
+.label-box.format-mln-a4-full .mln-promo-title-row {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 20px !important;
+}
+
+.label-box.format-mln-a4-full .mln-shock-title {
+    font-size: 92px !important;
+    line-height: 90px !important;
+    font-weight: 900 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    color: #000000 !important;
+    cursor: pointer;
+}
+
+.label-box.format-mln-a4-full .mln-discount-badge {
+    font-size: 38px !important;
+    line-height: 38px !important;
+    font-weight: 900 !important;
+    border: 4.5px solid #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+    padding: 8px 18px !important;
+    border-radius: 6px !important;
+    white-space: nowrap !important;
+    text-transform: uppercase !important;
+    cursor: pointer;
+}
+
+/* 2. Model (MODE) */
+.label-box.format-mln-a4-full .mln-model-box {
+    border-bottom: 4.5px solid #000000 !important;
+    padding: 10px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.label-box.format-mln-a4-full .mln-model-input {
+    width: 100% !important;
+    height: 48px !important;
+    font-size: 32px !important;
+    font-weight: 900 !important;
+    text-align: center !important;
+    border: none !important;
+    background: transparent !important;
+    color: #000000 !important;
+    text-transform: uppercase !important;
+    font-family: inherit !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* 3. Giá gốc (gạch giá, chữ vừa) */
+.label-box.format-mln-a4-full .mln-strike-box {
+    border-bottom: 4.5px solid #000000 !important;
+    height: 130px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+}
+
+.label-box.format-mln-a4-full .mln-strike-inner {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.label-box.format-mln-a4-full .strike-number {
+    font-size: 96px !important;
+    line-height: 100px !important;
+    font-weight: 900 !important;
+    text-align: center !important;
+    color: #000000 !important;
+    z-index: 1 !important;
+    letter-spacing: -1px !important;
+    cursor: pointer;
+}
+
+.label-box.format-mln-a4-full .strike-bar {
+    position: absolute !important;
+    top: 52% !important;
+    transform: translateY(-50%) !important;
+    left: -4% !important;
+    right: -4% !important;
+    height: 5px !important;
+    background-color: #000000 !important;
+    border-top: 5px solid #000000 !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+
+/* 4. Giá giảm (chữ to) 000đ (chữ nhỏ) */
+.label-box.format-mln-a4-full .mln-price-box {
+    border-bottom: 4.5px solid #000000 !important;
+    height: 280px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+}
+
+.label-box.format-mln-a4-full .mln-price-wrap {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    line-height: 0.9 !important;
+}
+
+.label-box.format-mln-a4-full .mln-price-big {
+    font-size: 215px !important;
+    line-height: 200px !important;
+    font-weight: 900 !important;
+    color: #000000 !important;
+    letter-spacing: -8px !important;
+    display: inline-block !important;
+    cursor: pointer;
+}
+
+.label-box.format-mln-a4-full .mln-price-small {
+    font-size: 75px !important;
+    line-height: 75px !important;
+    font-weight: 900 !important;
+    color: #000000 !important;
+    margin-top: 10px !important;
+    display: inline-block !important;
+    letter-spacing: -1px !important;
+    cursor: pointer;
+}
+
+/* 5. Trả góp 0% (chữ nhỏ) */
+.label-box.format-mln-a4-full .mln-subline-box {
+    padding: 12px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.label-box.format-mln-a4-full .mln-subline-tag {
+    font-size: 38px !important;
+    line-height: 42px !important;
+    font-weight: 900 !important;
+    border: 4.5px solid #000000 !important;
+    padding: 8px 36px !important;
+    border-radius: 6px !important;
+    color: #000000 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    cursor: pointer;
+}
+
+/* 6. Footer: Ngày áp dụng */
+.label-box.format-mln-a4-full .mln-footer-box {
+    padding: 8px 12px 14px 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.label-box.format-mln-a4-full .mln-date-input {
+    width: 100% !important;
+    height: 28px !important;
+    font-size: 22px !important;
+    font-weight: 900 !important;
+    text-align: center !important;
+    border: none !important;
+    background: transparent !important;
+    color: #000000 !important;
+    text-transform: uppercase !important;
+    font-family: inherit !important;
+}
+
 @media (max-width: 1200px) {
     .app-layout {
         grid-template-columns: 1fr;
