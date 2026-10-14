@@ -25,7 +25,7 @@ class App {
         this.bannerTheme = 'bw_classic';
         this.customSubline = '+ TRẢ GÓP 0%';
         this.uploadedBannerUrl = null;
-        this.customDateText = 'ÁP DỤNG: 09/10 - 11/10';
+        this.customDateText = 'ÁP DỤNG: 16/10 - 18/10';
 
         // Tùy chỉnh riêng cho Form Máy Lọc Nước A4 Full
         this.customMlnCategory = '';
@@ -796,15 +796,32 @@ class App {
             });
         }
 
-        // Nút nạp nhanh bảng giá từ ảnh chụp HCM
+        // Nút nạp nhanh bảng giá Giờ Vàng Mới (16/10 - 18/10) [28 SP]
         document.getElementById('btnLoadDefaultImage')?.addEventListener('click', (e) => {
             e.preventDefault();
-            this.products = [...DEFAULT_PRODUCTS];
+            this.products = [...PRODUCTS_GVGS_1610_1810];
             this.currentProductIndex = 0;
+            this.customDateText = 'ÁP DỤNG: 16/10 - 18/10';
+            const customDateInput = document.getElementById('customDateInput');
+            if (customDateInput) customDateInput.value = this.customDateText;
             this.updateRegionList();
             this.renderTable();
             this.updatePreview();
-            alert('Đã nạp đầy đủ 27 sản phẩm chính xác từ ảnh chụp "HCM - Giờ Vàng Giá Sốc"!');
+            alert('Đã nạp đầy đủ 28 sản phẩm chính xác từ ảnh "HCM - Giờ Vàng Giá Sốc 16/10 - 18/10"!');
+        });
+
+        // Nút nạp nhanh bảng giá đợt cũ (02/10 - 04/10) [27 SP]
+        document.getElementById('btnLoadOldImage')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.products = [...PRODUCTS_GVGS_0210_0410];
+            this.currentProductIndex = 0;
+            this.customDateText = 'ÁP DỤNG: 02/10 - 04/10';
+            const customDateInput = document.getElementById('customDateInput');
+            if (customDateInput) customDateInput.value = this.customDateText;
+            this.updateRegionList();
+            this.renderTable();
+            this.updatePreview();
+            alert('Đã nạp 27 sản phẩm đợt cũ "HCM - Giờ Vàng Giá Sốc 02/10 - 04/10"!');
         });
 
         // Tải file Excel qua Input
@@ -1002,9 +1019,12 @@ class App {
         try {
             if (ocrStatusEl) ocrStatusEl.textContent = 'Đang phân tích hình ảnh...';
 
-            const products = await OCRParser.recognizeImage(file, (pct, statusText) => {
+            const res = await OCRParser.recognizeImage(file, (pct, statusText) => {
                 if (ocrStatusEl) ocrStatusEl.textContent = `${statusText}`;
             });
+
+            const products = Array.isArray(res) ? res : (res?.products || []);
+            const campaign = res?.campaign;
 
             if (!products || products.length === 0) {
                 alert('Không trích xuất được bảng giá từ ảnh này. Bạn có thể dùng tab [📋 Dán Bảng] để dán chữ từ Google Lens / Zalo.');
@@ -1014,12 +1034,20 @@ class App {
 
             this.products = products;
             this.currentProductIndex = 0;
+
+            if (campaign && campaign.dateText) {
+                this.customDateText = campaign.dateText;
+                const customDateInput = document.getElementById('customDateInput');
+                if (customDateInput) customDateInput.value = campaign.dateText;
+            }
+
             this.updateRegionList();
             this.renderTable();
             this.updatePreview();
 
-            if (ocrStatusEl) ocrStatusEl.textContent = `✅ Đã trích xuất ${products.length} sản phẩm từ ảnh!`;
-            alert(`Nhận diện thành công ${products.length} sản phẩm từ hình ảnh!`);
+            const campaignName = campaign ? ` (${campaign.title})` : '';
+            if (ocrStatusEl) ocrStatusEl.textContent = `✅ Đã trích xuất ${products.length} sản phẩm${campaignName}!`;
+            alert(`Nhận diện thành công ${products.length} sản phẩm từ hình ảnh${campaignName}!`);
         } catch (err) {
             console.error(err);
             if (ocrStatusEl) ocrStatusEl.textContent = 'Lỗi nhận diện ảnh';
