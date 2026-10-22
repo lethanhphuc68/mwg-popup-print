@@ -58,6 +58,43 @@ class App {
         document.querySelectorAll('.btn-cat-filter').forEach(cb => {
             cb.classList.toggle('active', cb.getAttribute('data-cat') === this.selectedCategory);
         });
+        this.updateCategoryCounts();
+    }
+
+    // Tự động tính toán và đồng bộ số lượng sản phẩm lên các nhãn form và bộ lọc
+    updateCategoryCounts() {
+        const counts = { tv_tl_loa: 0, maygiat_tudong: 0, giadung: 0, maylocnuoc: 0 };
+        this.products.forEach(p => {
+            const g = this.getProductGroup(p);
+            if (counts[g] !== undefined) counts[g]++;
+        });
+
+        const tvtlBadge = document.querySelector('[data-form="tvtl"] .form-card-badge');
+        if (tvtlBadge) tvtlBadge.textContent = `${counts.tv_tl_loa} SP`;
+
+        const mgBadge = document.querySelector('[data-form="maygiat"] .form-card-badge');
+        if (mgBadge) mgBadge.textContent = `${counts.maygiat_tudong} SP`;
+
+        const gdBadge = document.querySelector('[data-form="giadung"] .form-card-badge');
+        if (gdBadge) gdBadge.textContent = `${counts.giadung} SP`;
+
+        const mlnBadge = document.querySelector('[data-form="maylocnuoc"] .form-card-badge');
+        if (mlnBadge) mlnBadge.textContent = `${counts.maylocnuoc} SP`;
+
+        const catAll = document.querySelector('.btn-cat-filter[data-cat="all"]');
+        if (catAll) catAll.textContent = `⭐ Tất cả (${this.products.length})`;
+
+        const catTv = document.querySelector('.btn-cat-filter[data-cat="tv_tl_loa"]');
+        if (catTv) catTv.textContent = `📺 TV, TL (${counts.tv_tl_loa})`;
+
+        const catMg = document.querySelector('.btn-cat-filter[data-cat="maygiat_tudong"]');
+        if (catMg) catMg.textContent = `🧺 Giặt, Đông (${counts.maygiat_tudong})`;
+
+        const catGd = document.querySelector('.btn-cat-filter[data-cat="giadung"]');
+        if (catGd) catGd.textContent = `🍳 Gia Dụng (${counts.giadung})`;
+
+        const catMln = document.querySelector('.btn-cat-filter[data-cat="maylocnuoc"]');
+        if (catMln) catMln.textContent = `💧 Lọc Nước (${counts.maylocnuoc})`;
     }
 
     // Cấu hình chuẩn 4 Form CE theo yêu cầu người dùng - TOÀN BỘ LÀ GIẤY ĐỨNG (PORTRAIT)
@@ -537,19 +574,21 @@ class App {
             return;
         }
 
+        this.updateCategoryCounts();
         tableBody.innerHTML = filtered.map((item, idx) => {
             const isCurrent = itemsPerSheet === 1
                 ? idx === this.currentProductIndex
                 : Math.floor(idx / itemsPerSheet) === Math.floor(this.currentProductIndex / itemsPerSheet);
             const diff = item.giaNiemYet - item.giaEvent;
             const percent = item.giaNiemYet > 0 ? Math.round((diff / item.giaNiemYet) * 100) : 0;
+            const groupKey = this.getProductGroup(item);
 
             return `
                 <tr class="${isCurrent ? 'active-row' : ''}">
                     <td class="col-checkbox">
                         <input type="checkbox" class="row-select" data-id="${item.id}" ${item.selected ? 'checked' : ''} />
                     </td>
-                    <td><span class="badge-group">${item.nhom || '-'}</span></td>
+                    <td><span class="badge-group badge-group-${groupKey}">${item.nhom || '-'}</span></td>
                     <td style="font-family: monospace; font-size: 11px; color: #475569;">${item.maSP || '-'}</td>
                     <td style="font-weight: 600; max-width: 260px;">
                         ${item.tenSP || '-'}
@@ -845,6 +884,21 @@ class App {
                 this.renderTable();
                 this.updatePreview();
             });
+        });
+
+        // Nút chọn nhanh tất cả hoặc bỏ chọn tất cả
+        document.getElementById('btnSelectAllQuick')?.addEventListener('click', () => {
+            const filtered = this.getFilteredProducts();
+            filtered.forEach(p => p.selected = true);
+            this.renderTable();
+            this.updatePreview();
+        });
+
+        document.getElementById('btnDeselectAllQuick')?.addEventListener('click', () => {
+            const filtered = this.getFilteredProducts();
+            filtered.forEach(p => p.selected = false);
+            this.renderTable();
+            this.updatePreview();
         });
 
         // Nút ưu tiên chọn nhanh sản phẩm theo đúng 4 nhóm ngành hàng CE

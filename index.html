@@ -6,8 +6,8 @@
     <title>In Tem POPUP Bảng Giá Siêu Thị - TV/Tủ Lạnh (A5) & Gia Dụng (A6)</title>
     
     <!-- CSS Styles -->
-    <link rel="stylesheet" href="css/style.css?v=20261022_v2">
-    <link rel="stylesheet" href="css/print.css?v=20261022_v2">
+    <link rel="stylesheet" href="css/style.css?v=20261022_v7">
+    <link rel="stylesheet" href="css/print.css?v=20261022_v7">
 
     <!-- Vendor Libraries -->
     <script src="assets/xlsx.full.min.js"></script>
@@ -45,10 +45,10 @@
         <aside class="control-panel">
             
             <!-- 1. Nạp Dữ Liệu (Excel hoặc Ảnh Chụp OCR) -->
-            <div class="card">
+            <div class="card card-step card-step-1">
                 <div class="card-title">
                     <span>1. Nạp Dữ Liệu Bảng Giá</span>
-                    <span class="badge-num">Bước 1</span>
+                    <span class="badge-num badge-num-1">Bước 1</span>
                 </div>
                 
                 <!-- Tab chuyển nguồn nạp -->
@@ -116,59 +116,64 @@
             </div>
 
             <!-- 2. Chọn Mẫu POPUP Ngành Hàng (CE) -->
-            <div class="card">
+            <div class="card card-step card-step-2">
                 <div class="card-title">
                     <span>2. Mẫu POPUP Ngành Hàng (CE)</span>
-                    <span class="badge-num">Bước 2</span>
+                    <span class="badge-num badge-num-2">Bước 2</span>
                 </div>
 
                 <div class="form-selector-list" style="display: flex; flex-direction: column; gap: 8px;">
                     <!-- Form 1: Tivi - Tủ Lạnh -->
-                    <button type="button" class="form-card-btn active" data-form="tvtl" title="Tivi, Tủ Lạnh, Loa: Giấy A4 in 2 tem A5 Đứng">
+                    <button type="button" class="form-card-btn form-card-tvtl active" data-form="tvtl" title="Tivi, Tủ Lạnh, Loa: Giấy A4 in 2 tem A5 Đứng">
                         <div class="form-card-header">
                             <span class="form-card-icon">📺</span>
                             <span class="form-card-name">TIVI - TỦ LẠNH</span>
                             <span class="form-card-badge">13 SP</span>
+                            <span class="form-card-status">✓ Đang chọn</span>
                         </div>
                         <div class="form-card-specs">GIẤY A4 ĐỨNG | POPUP: A5×2 | GẠCH GIÁ TVTL</div>
                     </button>
 
                     <!-- Form 2: Máy Giặt - Tủ Đông -->
-                    <button type="button" class="form-card-btn" data-form="maygiat" title="Máy Giặt, Tủ Đông: Giấy A5 in 2 tem A6 Đứng">
+                    <button type="button" class="form-card-btn form-card-maygiat" data-form="maygiat" title="Máy Giặt, Tủ Đông: Giấy A5 in 2 tem A6 Đứng">
                         <div class="form-card-header">
                             <span class="form-card-icon">🧺</span>
                             <span class="form-card-name">MÁY GIẶT - TỦ ĐÔNG</span>
-                            <span class="form-card-badge">6 SP</span>
+                            <span class="form-card-badge">7 SP</span>
+                            <span class="form-card-status">✓ Đang chọn</span>
                         </div>
                         <div class="form-card-specs">GIẤY A5 ĐỨNG | POPUP: A6×2 | GẠCH GIÁ MÁY GIẶT</div>
                     </button>
 
                     <!-- Form 3: Gia Dụng -->
-                    <button type="button" class="form-card-btn" data-form="giadung" title="Gia Dụng: Giấy A5 in 4 tem A7 Đứng">
+                    <button type="button" class="form-card-btn form-card-giadung" data-form="giadung" title="Gia Dụng: Giấy A5 in 4 tem A7 Đứng">
                         <div class="form-card-header">
                             <span class="form-card-icon">🍳</span>
                             <span class="form-card-name">GIA DỤNG</span>
                             <span class="form-card-badge">4 SP</span>
+                            <span class="form-card-status">✓ Đang chọn</span>
                         </div>
                         <div class="form-card-specs">GIẤY A5 ĐỨNG | POPUP: A7×4 | GẠCH GIÁ GIA DỤNG</div>
                     </button>
 
                     <!-- Form 4: Máy Lọc Nước A5 (2 Tem A6) -->
-                    <button type="button" class="form-card-btn" data-form="maylocnuoc" title="Máy Lọc Nước: Giấy A5 in 2 tem A6 Đứng">
+                    <button type="button" class="form-card-btn form-card-maylocnuoc" data-form="maylocnuoc" title="Máy Lọc Nước: Giấy A5 in 2 tem A6 Đứng">
                         <div class="form-card-header">
                             <span class="form-card-icon">💧</span>
                             <span class="form-card-name">MÁY LỌC NƯỚC (A5)</span>
                             <span class="form-card-badge">4 SP</span>
+                            <span class="form-card-status">✓ Đang chọn</span>
                         </div>
                         <div class="form-card-specs">GIẤY A5 ĐỨNG | POPUP: A6×2 | GẠCH GIÁ MÁY GIẶT</div>
                     </button>
 
                     <!-- Form 5: Máy Lọc Nước A4 Full (MỚI) -->
-                    <button type="button" class="form-card-btn" data-form="maylocnuoc_a4" title="Máy Lọc Nước A4 Full: Giấy A4 in 1 tem A4 Đứng cực lớn">
+                    <button type="button" class="form-card-btn form-card-mln-a4" data-form="maylocnuoc_a4" title="Máy Lọc Nước A4 Full: Giấy A4 in 1 tem A4 Đứng cực lớn">
                         <div class="form-card-header">
                             <span class="form-card-icon">🚰</span>
                             <span class="form-card-name">MÁY LỌC NƯỚC A4 FULL</span>
-                            <span class="form-card-badge">4 SP</span>
+                            <span class="form-card-badge" style="background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7;">HOT 🔥 1 TEM A4</span>
+                            <span class="form-card-status">✓ Đang chọn</span>
                         </div>
                         <div class="form-card-specs">GIẤY A4 ĐỨNG | POPUP: A4 FULL (1 TEM) | ĐÓNG KHUNG IN ĐẬM</div>
                     </button>
@@ -176,10 +181,10 @@
             </div>
 
             <!-- 3. Tùy Chỉnh Tiêu Đề Banner & Ngày Áp Dụng -->
-            <div class="card">
+            <div class="card card-step card-step-3">
                 <div class="card-title">
                     <span>3. Tùy Chỉnh Nội Dung Banner</span>
-                    <span class="badge-num">Bước 3</span>
+                    <span class="badge-num badge-num-3">Bước 3</span>
                 </div>
 
                 <div class="form-group">
@@ -228,10 +233,10 @@
             </div>
 
             <!-- 4. Nút In Ngay -->
-            <div class="card print-actions-card">
+            <div class="card card-step card-step-4 print-actions-card">
                 <div class="card-title" style="margin-bottom: 8px;">
                     <span>4. Thao Tác In</span>
-                    <span class="badge-num">Bước 4</span>
+                    <span class="badge-num badge-num-4">Bước 4</span>
                 </div>
                 <button type="button" class="btn-print-large" id="btnPrintAll">
                     <img src="assets/print-icon.png" width="24" height="24" alt="" />
@@ -291,18 +296,20 @@
                     </div>
                     <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap;">
                         <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                            <div style="font-size: 12px; font-weight: 600; color: #0284c7;" id="selectedCountLabel">
-                                Đang chọn: 28 sản phẩm
+                            <div style="font-size: 12px; font-weight: 700; color: #0284c7; padding: 4px 8px; background: #e0f2fe; border-radius: 6px;" id="selectedCountLabel">
+                                Đang chọn: 28 SP
                             </div>
                             <!-- Nút ưu tiên chọn nhanh -->
-                            <button type="button" class="btn-quick-sel" id="btnSelectTvTlLoa" title="Chọn TV, Tủ Lạnh, Loa">📺 Chọn TV/TL</button>
-                            <button type="button" class="btn-quick-sel" id="btnSelectMayGiatTuDong" title="Chọn Máy Giặt, Tủ Đông">🧺 Chọn Giặt/Đông</button>
-                            <button type="button" class="btn-quick-sel" id="btnSelectGiaDung" title="Chọn Gia Dụng">🍳 Chọn Gia Dụng</button>
-                            <button type="button" class="btn-quick-sel" id="btnSelectMayLocNuoc" title="Chọn Máy Lọc Nước">💧 Chọn Lọc Nước</button>
+                            <button type="button" class="btn-quick-sel btn-sel-all" id="btnSelectAllQuick" title="Chọn toàn bộ sản phẩm">✅ Chọn tất cả</button>
+                            <button type="button" class="btn-quick-sel btn-desel-all" id="btnDeselectAllQuick" title="Bỏ chọn tất cả sản phẩm">◻️ Bỏ chọn hết</button>
+                            <button type="button" class="btn-quick-sel" id="btnSelectTvTlLoa" title="Chọn nhanh TV, Tủ Lạnh, Loa">📺 TV/TL</button>
+                            <button type="button" class="btn-quick-sel" id="btnSelectMayGiatTuDong" title="Chọn nhanh Máy Giặt, Tủ Đông">🧺 Giặt/Đông</button>
+                            <button type="button" class="btn-quick-sel" id="btnSelectGiaDung" title="Chọn nhanh Gia Dụng">🍳 Gia Dụng</button>
+                            <button type="button" class="btn-quick-sel" id="btnSelectMayLocNuoc" title="Chọn nhanh Máy Lọc Nước">💧 Lọc Nước</button>
                         </div>
                         <div style="display: flex; align-items: center; gap: 6px;">
-                            <button type="button" class="btn-quick-sel" id="btnClearSelected" style="color: #dc2626; border-color: #fca5a5; background: #fff5f5; font-weight: 600;" title="Xoá các sản phẩm đang được tick chọn khỏi bảng">🗑️ Xoá mục đã chọn</button>
-                            <button type="button" class="btn-quick-sel" id="btnClearAllData" style="color: #b91c1c; border-color: #f87171; background: #fee2e2; font-weight: 700;" title="Xoá toàn bộ sản phẩm trong bảng để nạp mới">🗑️ Xoá tất cả</button>
+                            <button type="button" class="btn-quick-sel" id="btnClearSelected" style="color: #dc2626; border-color: #fca5a5; background: #fff5f5; font-weight: 700;" title="Xoá các sản phẩm đang được tick chọn khỏi bảng">🗑️ Xoá mục đã chọn</button>
+                            <button type="button" class="btn-quick-sel" id="btnClearAllData" style="color: #b91c1c; border-color: #f87171; background: #fee2e2; font-weight: 800;" title="Xoá toàn bộ sản phẩm trong bảng để nạp mới">🗑️ Xoá tất cả</button>
                         </div>
                     </div>
                 </div>
@@ -364,10 +371,10 @@
     </div>
 
     <!-- Script App Logic -->
-    <script src="js/dummy-data.js?v=20261022_v5"></script>
-    <script src="js/excel-parser.js?v=20261022_v5"></script>
-    <script src="js/ocr-parser.js?v=20261022_v5"></script>
-    <script src="js/banner-generator.js?v=20261022_v5"></script>
-    <script src="js/app.js?v=20261022_v5"></script>
+    <script src="js/dummy-data.js?v=20261022_v7"></script>
+    <script src="js/excel-parser.js?v=20261022_v7"></script>
+    <script src="js/ocr-parser.js?v=20261022_v7"></script>
+    <script src="js/banner-generator.js?v=20261022_v7"></script>
+    <script src="js/app.js?v=20261022_v7"></script>
 </body>
 </html>

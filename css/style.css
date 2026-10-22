@@ -144,15 +144,26 @@ body {
     border-radius: 12px;
     border: 1px solid var(--border-color);
     padding: 16px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s ease;
 }
 
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+/* Điểm nhấn màu sắc cho từng Bước quy trình */
+.card-step-1 { border-left: 5px solid #2563eb; }
+.card-step-2 { border-left: 5px solid #7c3aed; }
+.card-step-3 { border-left: 5px solid #ea580c; }
+.card-step-4 { border-left: 5px solid #059669; }
+
 .card-title {
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 13.5px;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #334155;
+    color: #1e293b;
     margin-bottom: 12px;
     display: flex;
     align-items: center;
@@ -160,41 +171,69 @@ body {
 }
 
 .card-title span.badge-num {
-    background: #e0f2fe;
-    color: #0369a1;
     font-size: 11px;
-    padding: 2px 8px;
+    font-weight: 700;
+    padding: 3px 10px;
     border-radius: 12px;
+    letter-spacing: 0.3px;
 }
 
-/* Tabs nạp dữ liệu: Excel hoặc Hình ảnh */
+.badge-num-1 { background: #dbeafe !important; color: #1e40af !important; border: 1px solid #bfdbfe; }
+.badge-num-2 { background: #ede9fe !important; color: #5b21b6 !important; border: 1px solid #ddd6fe; }
+.badge-num-3 { background: #ffedd5 !important; color: #9a3412 !important; border: 1px solid #fed7aa; }
+.badge-num-4 { background: #d1fae5 !important; color: #065f46 !important; border: 1px solid #a7f3d0; }
+
+/* Tabs nạp dữ liệu: Excel, Hình ảnh hoặc Dán chữ */
 .input-source-tabs {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 4px;
-    background: #f1f5f9;
-    padding: 3px;
-    border-radius: 8px;
+    background: #e2e8f0;
+    padding: 4px;
+    border-radius: 10px;
     margin-bottom: 12px;
 }
 
 .tab-source-btn {
     border: none;
     background: transparent;
-    padding: 7px 10px;
-    border-radius: 6px;
+    padding: 8px 10px;
+    border-radius: 7px;
     font-size: 12px;
-    font-weight: 600;
-    color: #64748b;
+    font-weight: 700;
+    color: #475569;
     cursor: pointer;
     text-align: center;
-    transition: all 0.15s;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.tab-source-btn:hover {
+    color: #0f172a;
+    background: rgba(255, 255, 255, 0.6);
 }
 
 .tab-source-btn.active {
     background: #ffffff;
-    color: #0f172a;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.tab-source-btn[data-tab="excel"].active {
+    color: #15803d;
+    border-bottom: 2px solid #16a34a;
+}
+
+.tab-source-btn[data-tab="image"].active {
+    color: #0284c7;
+    border-bottom: 2px solid #0284c7;
+}
+
+.tab-source-btn[data-tab="paste"].active {
+    color: #7c3aed;
+    border-bottom: 2px solid #7c3aed;
 }
 
 /* Vùng Upload */
@@ -317,25 +356,37 @@ body {
 }
 
 .preset-chip {
-    font-size: 11px;
-    background: #f1f5f9;
-    color: #475569;
-    padding: 4px 8px;
-    border-radius: 4px;
+    font-size: 11.5px;
+    font-weight: 700;
+    background: #f8fafc;
+    color: #334155;
+    padding: 5px 10px;
+    border-radius: 6px;
     cursor: pointer;
-    border: 1px solid #e2e8f0;
-    transition: all 0.15s;
+    border: 1px solid #cbd5e1;
+    transition: all 0.15s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .preset-chip:hover {
     background: #e2e8f0;
     color: #0f172a;
+    border-color: #94a3b8;
+    transform: translateY(-1px);
 }
 
 .preset-chip.active {
-    background: #0f172a;
+    background: #ea580c;
     color: #ffffff;
-    border-color: #0f172a;
+    border-color: #ea580c;
+    box-shadow: 0 2px 6px rgba(234, 88, 12, 0.35);
+}
+
+.preset-chip[data-date].active {
+    background: #dc2626;
+    color: #ffffff;
+    border-color: #dc2626;
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35);
 }
 
 /* Checkbox switch tiện lợi */
@@ -837,66 +888,108 @@ body {
 }
 
 .data-table tr:hover {
-    background: #f1f5f9;
+    background: #f8fafc;
 }
 
 .data-table tr.active-row {
-    background: #fef3c7;
+    background: #fef9c3 !important;
+    border-left: 5px solid #eab308 !important;
 }
 
 .col-checkbox {
-    width: 36px;
+    width: 38px;
     text-align: center;
 }
 
+.col-checkbox input[type="checkbox"], .row-select {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    accent-color: #0284c7;
+}
+
 .badge-group {
-    background: #ecfdf5;
-    color: #065f46;
     font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 10px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 12px;
     display: inline-block;
+    letter-spacing: 0.2px;
+}
+
+.badge-group-tv_tl_loa {
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
+
+.badge-group-maygiat_tudong {
+    background: #f5f3ff;
+    color: #6d28d9;
+    border: 1px solid #ddd6fe;
+}
+
+.badge-group-giadung {
+    background: #fff7ed;
+    color: #c2410c;
+    border: 1px solid #fed7aa;
+}
+
+.badge-group-maylocnuoc {
+    background: #ecfeff;
+    color: #0e7490;
+    border: 1px solid #a5f3fc;
 }
 
 .price-strike-val {
     text-decoration: line-through;
     color: #64748b;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 13px;
 }
 
 .price-promo-val {
     color: #dc2626;
-    font-weight: 700;
-    font-size: 14px;
+    font-weight: 800;
+    font-size: 14.5px;
 }
 
 .badge-discount {
     background: #fee2e2;
-    color: #991b1b;
+    color: #b91c1c;
+    border: 1px solid #fca5a5;
     font-size: 11px;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 4px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 6px;
     margin-left: 6px;
+    display: inline-block;
 }
 
 .btn-table-action {
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    padding: 4px 10px;
+    background: #eff6ff;
+    border: 1.5px solid #93c5fd;
+    padding: 5px 12px;
     border-radius: 6px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    color: #0284c7;
-    transition: all 0.15s;
+    color: #1d4ed8;
+    transition: all 0.15s ease;
 }
 
 .btn-table-action:hover {
-    background: #0284c7;
+    background: #2563eb;
     color: #ffffff;
-    border-color: #0284c7;
+    border-color: #2563eb;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+}
+
+.btn-delete-row:hover {
+    background: #dc2626 !important;
+    color: #ffffff !important;
+    border-color: #dc2626 !important;
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.3) !important;
 }
 
 .btn-delete-row:hover {
@@ -1042,73 +1135,199 @@ body {
     padding: 16px !important;
 }
 
-/* Nút lọc ưu tiên danh mục */
+/* ==============================================================
+   BỘ LỌC NGÀNH HÀNG VÀ NÚT CHỌN NHANH (MÀU SẮC TRỰC QUAN, RÕ RÀNG)
+   ============================================================== */
+
+/* 1. Bộ lọc danh mục (5 Nhóm ngành hàng) */
+.cat-filter-group {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
 .btn-cat-filter {
-    background: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    color: #475569;
-    padding: 3px 9px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
+    padding: 5px 11px;
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.15s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .btn-cat-filter:hover {
-    background: #e2e8f0;
-    color: #0f172a;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-cat-filter.active {
-    background: #0284c7;
-    border-color: #0284c7;
-    color: #ffffff;
-}
-
-/* Nút ưu tiên chọn nhanh */
-.btn-quick-sel {
+/* Tất cả: Gam tối tinh tế */
+.btn-cat-filter[data-cat="all"] {
     background: #f8fafc;
-    border: 1px dashed #94a3b8;
+    border: 1.5px solid #cbd5e1;
     color: #334155;
-    padding: 3px 8px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
+}
+.btn-cat-filter[data-cat="all"].active {
+    background: #0f172a;
+    border-color: #0f172a;
+    color: #ffffff;
+    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.35);
+}
+
+/* Tivi - Tủ Lạnh: Xanh Dương (Blue) */
+.btn-cat-filter[data-cat="tv_tl_loa"] {
+    background: #eff6ff;
+    border: 1.5px solid #bfdbfe;
+    color: #1d4ed8;
+}
+.btn-cat-filter[data-cat="tv_tl_loa"].active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff;
+    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.35);
+}
+
+/* Máy Giặt - Tủ Đông: Tím Chàm (Indigo) */
+.btn-cat-filter[data-cat="maygiat_tudong"] {
+    background: #f5f3ff;
+    border: 1.5px solid #ddd6fe;
+    color: #6d28d9;
+}
+.btn-cat-filter[data-cat="maygiat_tudong"].active {
+    background: #7c3aed;
+    border-color: #7c3aed;
+    color: #ffffff;
+    box-shadow: 0 3px 8px rgba(124, 58, 237, 0.35);
+}
+
+/* Gia Dụng: Cam / Hổ Phách (Amber/Orange) */
+.btn-cat-filter[data-cat="giadung"] {
+    background: #fff7ed;
+    border: 1.5px solid #fed7aa;
+    color: #c2410c;
+}
+.btn-cat-filter[data-cat="giadung"].active {
+    background: #ea580c;
+    border-color: #ea580c;
+    color: #ffffff;
+    box-shadow: 0 3px 8px rgba(234, 88, 12, 0.35);
+}
+
+/* Máy Lọc Nước: Xanh Ngọc Biển (Cyan/Teal) */
+.btn-cat-filter[data-cat="maylocnuoc"] {
+    background: #ecfeff;
+    border: 1.5px solid #a5f3fc;
+    color: #0e7490;
+}
+.btn-cat-filter[data-cat="maylocnuoc"].active {
+    background: #0891b2;
+    border-color: #0891b2;
+    color: #ffffff;
+    box-shadow: 0 3px 8px rgba(8, 145, 178, 0.35);
+}
+
+/* 2. Nút ưu tiên chọn nhanh (Quick-Select) */
+.btn-quick-sel {
+    padding: 5px 10px;
+    border-radius: 7px;
+    font-size: 11.5px;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .btn-quick-sel:hover {
-    background: #e0f2fe;
-    border-color: #0284c7;
-    color: #0284c7;
+    transform: translateY(-1px);
 }
 
-/* NÚT CHỌN FORM NGÀNH HÀNG (CE) */
+#btnSelectTvTlLoa {
+    background: #eff6ff;
+    border: 1px solid #93c5fd;
+    color: #1d4ed8;
+}
+#btnSelectTvTlLoa:hover {
+    background: #dbeafe;
+    border-color: #60a5fa;
+}
+
+#btnSelectMayGiatTuDong {
+    background: #f5f3ff;
+    border: 1px solid #c4b5fd;
+    color: #6d28d9;
+}
+#btnSelectMayGiatTuDong:hover {
+    background: #ede9fe;
+    border-color: #a78bfa;
+}
+
+#btnSelectGiaDung {
+    background: #fff7ed;
+    border: 1px solid #fdba74;
+    color: #c2410c;
+}
+#btnSelectGiaDung:hover {
+    background: #ffedd5;
+    border-color: #fb923c;
+}
+
+#btnSelectMayLocNuoc {
+    background: #ecfeff;
+    border: 1px solid #67e8f9;
+    color: #0e7490;
+}
+#btnSelectMayLocNuoc:hover {
+    background: #cffafe;
+    border-color: #22d3ee;
+}
+
+.btn-sel-all {
+    background: #f0fdf4 !important;
+    border: 1px solid #86efac !important;
+    color: #15803d !important;
+}
+.btn-sel-all:hover {
+    background: #dcfce7 !important;
+    border-color: #4ade80 !important;
+}
+
+.btn-desel-all {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #475569 !important;
+}
+.btn-desel-all:hover {
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+/* ==============================================================
+   NÚT CHỌN FORM NGÀNH HÀNG (CE) - ĐA MÀU SẮC THEO TỪNG NHÓM
+   ============================================================== */
+
 .form-card-btn {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 10px 12px;
-    background: #ffffff;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
+    padding: 12px 14px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: left;
     width: 100%;
+    position: relative;
+    border-width: 2px;
+    border-style: solid;
 }
 
 .form-card-btn:hover {
-    border-color: #38bdf8;
-    background: #f8fafc;
-}
-
-.form-card-btn.active {
-    border-color: #0284c7;
-    background: #f0f9ff;
-    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .form-card-header {
@@ -1119,44 +1338,163 @@ body {
 }
 
 .form-card-icon {
-    font-size: 16px;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
 }
 
 .form-card-name {
-    font-size: 12.5px;
-    font-weight: 700;
-    color: #0f172a;
+    font-size: 13px;
+    font-weight: 800;
     flex: 1;
-}
-
-.form-card-btn.active .form-card-name {
-    color: #0369a1;
-}
-
-.form-card-badge {
-    background: #e2e8f0;
-    color: #475569;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-
-.form-card-btn.active .form-card-badge {
-    background: #bae6fd;
-    color: #0369a1;
-}
-
-.form-card-specs {
-    font-size: 10.5px;
-    color: #64748b;
-    font-weight: 600;
-    margin-top: 4px;
     letter-spacing: 0.2px;
 }
 
-.form-card-btn.active .form-card-specs {
-    color: #0284c7;
+.form-card-badge {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 12px;
+    letter-spacing: 0.3px;
+}
+
+.form-card-status {
+    display: none;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.form-card-btn.active .form-card-status {
+    display: inline-flex;
+}
+
+.form-card-specs {
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 5px;
+    letter-spacing: 0.2px;
+}
+
+/* --- Form 1: TIVI - TỦ LẠNH (Blue Theme) --- */
+.form-card-btn[data-form="tvtl"], .form-card-tvtl {
+    background: #f8faff;
+    border-color: #bfdbfe;
+}
+.form-card-btn[data-form="tvtl"] .form-card-name { color: #1e3a8a; }
+.form-card-btn[data-form="tvtl"] .form-card-badge {
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #93c5fd;
+}
+.form-card-btn[data-form="tvtl"] .form-card-specs { color: #3b82f6; }
+.form-card-btn[data-form="tvtl"].active {
+    border-color: #2563eb;
+    border-left: 6px solid #2563eb;
+    background: #eff6ff;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.22);
+}
+.form-card-btn[data-form="tvtl"].active .form-card-status {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+/* --- Form 2: MÁY GIẶT - TỦ ĐÔNG (Indigo Theme) --- */
+.form-card-btn[data-form="maygiat"], .form-card-maygiat {
+    background: #faf5ff;
+    border-color: #ddd6fe;
+}
+.form-card-btn[data-form="maygiat"] .form-card-name { color: #4c1d95; }
+.form-card-btn[data-form="maygiat"] .form-card-badge {
+    background: #ede9fe;
+    color: #5b21b6;
+    border: 1px solid #c4b5fd;
+}
+.form-card-btn[data-form="maygiat"] .form-card-specs { color: #7c3aed; }
+.form-card-btn[data-form="maygiat"].active {
+    border-color: #7c3aed;
+    border-left: 6px solid #7c3aed;
+    background: #f5f3ff;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.22);
+}
+.form-card-btn[data-form="maygiat"].active .form-card-status {
+    background: #7c3aed;
+    color: #ffffff;
+}
+
+/* --- Form 3: GIA DỤNG (Warm Orange/Amber Theme) --- */
+.form-card-btn[data-form="giadung"], .form-card-giadung {
+    background: #fffdf5;
+    border-color: #fed7aa;
+}
+.form-card-btn[data-form="giadung"] .form-card-name { color: #7c2d12; }
+.form-card-btn[data-form="giadung"] .form-card-badge {
+    background: #ffedd5;
+    color: #9a3412;
+    border: 1px solid #fdba74;
+}
+.form-card-btn[data-form="giadung"] .form-card-specs { color: #ea580c; }
+.form-card-btn[data-form="giadung"].active {
+    border-color: #ea580c;
+    border-left: 6px solid #ea580c;
+    background: #fff7ed;
+    box-shadow: 0 4px 14px rgba(234, 88, 12, 0.22);
+}
+.form-card-btn[data-form="giadung"].active .form-card-status {
+    background: #ea580c;
+    color: #ffffff;
+}
+
+/* --- Form 4: MÁY LỌC NƯỚC A5 (Cyan/Teal Theme) --- */
+.form-card-btn[data-form="maylocnuoc"], .form-card-maylocnuoc {
+    background: #f0fdfa;
+    border-color: #a5f3fc;
+}
+.form-card-btn[data-form="maylocnuoc"] .form-card-name { color: #164e63; }
+.form-card-btn[data-form="maylocnuoc"] .form-card-badge {
+    background: #cffafe;
+    color: #155e75;
+    border: 1px solid #67e8f9;
+}
+.form-card-btn[data-form="maylocnuoc"] .form-card-specs { color: #0891b2; }
+.form-card-btn[data-form="maylocnuoc"].active {
+    border-color: #0891b2;
+    border-left: 6px solid #0891b2;
+    background: #ecfeff;
+    box-shadow: 0 4px 14px rgba(8, 145, 178, 0.22);
+}
+.form-card-btn[data-form="maylocnuoc"].active .form-card-status {
+    background: #0891b2;
+    color: #ffffff;
+}
+
+/* --- Form 5: MÁY LỌC NƯỚC A4 FULL (Emerald Green Theme) --- */
+.form-card-btn[data-form="maylocnuoc_a4"], .form-card-mln-a4 {
+    background: #f0fdf4;
+    border-color: #a7f3d0;
+}
+.form-card-btn[data-form="maylocnuoc_a4"] .form-card-name { color: #064e3b; }
+.form-card-btn[data-form="maylocnuoc_a4"] .form-card-badge {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+}
+.form-card-btn[data-form="maylocnuoc_a4"] .form-card-specs { color: #059669; }
+.form-card-btn[data-form="maylocnuoc_a4"].active {
+    border-color: #059669;
+    border-left: 6px solid #059669;
+    background: #ecfdf5;
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25);
+}
+.form-card-btn[data-form="maylocnuoc_a4"].active .form-card-status {
+    background: #059669;
+    color: #ffffff;
 }
 
 /* ==============================================================
