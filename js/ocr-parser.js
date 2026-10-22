@@ -261,7 +261,18 @@ class OCRParser {
             }
         }
 
-        return products;
+        // Khử trùng lặp theo mã SP hoặc tên SP
+        const uniqueProducts = [];
+        const seen = new Set();
+        for (const p of products) {
+            const key = p.maSP ? `sku_${p.maSP}` : `name_${(p.tenSP || '').toLowerCase().trim()}`;
+            if (!seen.has(key)) {
+                seen.add(key);
+                uniqueProducts.push(p);
+            }
+        }
+
+        return uniqueProducts;
     }
 
     static detectGroup(name) {

@@ -899,6 +899,12 @@ body {
     border-color: #0284c7;
 }
 
+.btn-delete-row:hover {
+    background: #dc2626 !important;
+    color: #ffffff !important;
+    border-color: #dc2626 !important;
+}
+
 /* Modal hướng dẫn in */
 .modal-overlay {
     position: fixed;

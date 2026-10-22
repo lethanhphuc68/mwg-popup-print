@@ -115,8 +115,25 @@ class ExcelParser {
             const ghiChu = columnMapping.ghiChu !== -1 ? String(row[columnMapping.ghiChu] || '').trim() : '';
             const khungGio = columnMapping.khungGio !== -1 ? String(row[columnMapping.khungGio] || '').trim() : '';
 
-            const giaNiemYet = this.parsePrice(giaNiemYetRaw);
-            const giaEvent = this.parsePrice(giaEventRaw);
+            let giaNiemYet = this.parsePrice(giaNiemYetRaw);
+            let giaEvent = this.parsePrice(giaEventRaw);
+
+            // Tự động chuẩn hóa: Giá niêm yết (gốc gạch đi) luôn là số lớn hơn, Giá Event (bán) luôn là số nhỏ hơn
+            if (giaNiemYet > 0 && giaEvent > 0) {
+                const maxVal = Math.max(giaNiemYet, giaEvent);
+                const minVal = Math.min(giaNiemYet, giaEvent);
+                giaNiemYet = maxVal;
+                giaEvent = minVal;
+            } else if (giaNiemYet === 0 && giaEvent > 0) {
+                giaNiemYet = Math.round(giaEvent * 1.25);
+            } else if (giaEvent === 0 && giaNiemYet > 0) {
+                giaEvent = Math.round(giaNiemYet * 0.8);
+            }
+
+            // Khử trùng lặp sản phẩm (nếu file Excel có nhiều dòng cùng 1 SKU hoặc Model)
+            const dedupeKey = maSP ? `sku_${maSP.trim()}` : `name_${tenSP.toLowerCase().trim()}`;
+            if (regionsSet.has(dedupeKey)) continue;
+            regionsSet.add(dedupeKey);
 
             if (vung) regionsSet.add(vung);
             if (nhom) groupsSet.add(nhom);
@@ -173,16 +190,16 @@ class ExcelParser {
                 mapping.maSP = idx;
             }
             // Model Giờ Vàng / Tên sản phẩm
-            else if (mapping.tenSP === -1 && (norm.includes('model gio vang') || norm.includes('model') || norm.includes('san pham') || norm.includes('ten sp') || norm.includes('ten hang'))) {
+            else if (mapping.tenSP === -1 && (norm.includes('model') || norm.includes('san pham') || norm.includes('ten sp') || norm.includes('ten hang'))) {
                 mapping.tenSP = idx;
             }
-            // Giá niêm yết (Gạch)
-            else if (mapping.giaNiemYet === -1 && (norm.includes('niem yet') || norm.includes('gia ny') || norm.includes('gia goc') || norm.includes('gia cu') || norm.includes('gach'))) {
-                mapping.giaNiemYet = idx;
-            }
-            // Giá bán Event Giờ Vàng (Khuyến mãi)
-            else if (mapping.giaEvent === -1 && (norm.includes('event') || norm.includes('gio vang') || norm.includes('khuyen mai') || norm.includes('gia ban') || norm.includes('gia km') || norm.includes('gia soc'))) {
+            // 1. Giá bán Event Giờ Vàng (Khuyến mãi) - QUÉT GVGS TRƯỚC VÌ CÓ CHỮ "GIÁ SỐC GVGS"
+            else if (mapping.giaEvent === -1 && (norm.includes('gvgs') || norm.includes('gia soc gvgs') || norm.includes('gia gvgs') || norm.includes('gio vang') || norm.includes('event') || norm.includes('gia ban') || norm.includes('gia km') || norm.includes('gia giam') || norm.includes('khuyen mai'))) {
                 mapping.giaEvent = idx;
+            }
+            // 2. Giá niêm yết (Gốc / Gạch) - Cột "GIÁ SỐC" trong bảng MWG là giá niêm yết
+            else if (mapping.giaNiemYet === -1 && (norm.includes('niem yet') || norm.includes('gia ny') || norm.includes('gia goc') || norm.includes('gia cu') || norm.includes('gach') || norm.includes('gia soc') || norm === 'gia')) {
+                mapping.giaNiemYet = idx;
             }
             // Khung giờ
             else if (mapping.khungGio === -1 && (norm.includes('khung gio') || norm.includes('suat') || norm.includes('gio') || norm.includes('ngay'))) {
@@ -194,15 +211,15 @@ class ExcelParser {
             }
         });
 
-        // Nếu chưa tìm thấy giá niêm yết hoặc giá event nhưng có 2 cột chứa từ "gia"
+        // Nếu chưa tìm thấy nhưng có các cột chứa từ "gia"
         if (mapping.giaNiemYet === -1 || mapping.giaEvent === -1) {
             headerRow.forEach((cell, idx) => {
                 const norm = this.normalizeHeader(cell);
-                if (norm.includes('gia')) {
-                    if (mapping.giaNiemYet === -1 && (norm.includes('niem yet') || norm.includes('goc'))) {
-                        mapping.giaNiemYet = idx;
-                    } else if (mapping.giaEvent === -1 && (norm.includes('ban') || norm.includes('km') || norm.includes('event'))) {
+                if (norm.includes('gia') || norm.includes('gvgs')) {
+                    if (mapping.giaEvent === -1 && (norm.includes('gvgs') || norm.includes('ban') || norm.includes('km') || norm.includes('event') || norm.includes('giam'))) {
                         mapping.giaEvent = idx;
+                    } else if (mapping.giaNiemYet === -1 && (norm.includes('niem yet') || norm.includes('goc') || norm.includes('soc') || norm === 'gia')) {
+                        mapping.giaNiemYet = idx;
                     }
                 }
             });

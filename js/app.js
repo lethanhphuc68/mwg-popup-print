@@ -559,7 +559,8 @@ class App {
                         ${percent > 0 ? `<span class="badge-discount">-${percent}%</span>` : ''}
                     </td>
                     <td style="text-align: right; white-space: nowrap;">
-                        <button class="btn-table-action" data-action="preview" data-idx="${idx}">Xem tem</button>
+                        <button class="btn-table-action" data-action="preview" data-idx="${idx}" title="Xem trước tem này">Xem tem</button>
+                        <button class="btn-table-action btn-delete-row" data-action="delete" data-id="${item.id}" style="color: #dc2626; border-color: #fecaca; background: #fff5f5; margin-left: 4px;" title="Xoá sản phẩm này khỏi bảng">🗑️</button>
                     </td>
                 </tr>
             `;
@@ -583,6 +584,108 @@ class App {
                 document.getElementById('previewPaperSheet')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             });
         });
+
+        tableBody.querySelectorAll('button[data-action="delete"]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = btn.getAttribute('data-id');
+                this.deleteSingleProduct(id);
+            });
+        });
+    }
+
+    // Xoá toàn bộ dữ liệu bảng sản phẩm để làm mới
+    clearAllData() {
+        if (this.products.length === 0) {
+            alert('Bảng dữ liệu hiện tại đã trống!');
+            return;
+        }
+
+        const confirmClear = confirm(`Bạn có chắc chắn muốn xoá toàn bộ ${this.products.length} sản phẩm trong bảng để nạp mới?`);
+        if (!confirmClear) return;
+
+        this.products = [];
+        this.currentProductIndex = 0;
+        this.searchKeyword = '';
+
+        const fileNameLabel = document.getElementById('fileNameLabel');
+        if (fileNameLabel) {
+            fileNameLabel.innerHTML = '📁 <em>Chưa có dữ liệu (Bảng trống)</em>';
+        }
+
+        const ocrStatusLabel = document.getElementById('ocrStatusLabel');
+        if (ocrStatusLabel) {
+            ocrStatusLabel.textContent = '';
+        }
+
+        const pasteTextarea = document.getElementById('pasteTextarea');
+        if (pasteTextarea) {
+            pasteTextarea.value = '';
+        }
+
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.value = '';
+        }
+
+        const excelInput = document.getElementById('excelFileInput');
+        if (excelInput) excelInput.value = '';
+
+        const imageInput = document.getElementById('imageFileInput');
+        if (imageInput) imageInput.value = '';
+
+        this.updateRegionList();
+        this.renderTable();
+        this.updatePreview();
+
+        alert('Đã xoá sạch toàn bộ dữ liệu! Bạn có thể nạp file Excel, ảnh hoặc dán bảng mới.');
+    }
+
+    // Xoá các sản phẩm đang được tick chọn
+    clearSelectedProducts() {
+        const filtered = this.getFilteredProducts();
+        const selectedIds = new Set(filtered.filter(p => p.selected).map(p => p.id));
+
+        if (selectedIds.size === 0) {
+            alert('Vui lòng tick chọn ít nhất 1 sản phẩm để xoá!');
+            return;
+        }
+
+        const confirmClear = confirm(`Bạn có chắc chắn muốn xoá ${selectedIds.size} sản phẩm đã chọn khỏi bảng?`);
+        if (!confirmClear) return;
+
+        this.products = this.products.filter(p => !selectedIds.has(p.id));
+        this.currentProductIndex = 0;
+
+        const fileNameLabel = document.getElementById('fileNameLabel');
+        if (fileNameLabel && this.products.length === 0) {
+            fileNameLabel.innerHTML = '📁 <em>Chưa có dữ liệu (Bảng trống)</em>';
+        }
+
+        this.renderTable();
+        this.updatePreview();
+    }
+
+    // Xoá 1 sản phẩm cụ thể
+    deleteSingleProduct(productId) {
+        const item = this.products.find(p => p.id === productId);
+        if (!item) return;
+
+        const confirmDel = confirm(`Xoá sản phẩm "${item.tenSP}" khỏi danh sách?`);
+        if (!confirmDel) return;
+
+        this.products = this.products.filter(p => p.id !== productId);
+        if (this.currentProductIndex >= this.products.length) {
+            this.currentProductIndex = Math.max(0, this.products.length - 1);
+        }
+
+        const fileNameLabel = document.getElementById('fileNameLabel');
+        if (fileNameLabel && this.products.length === 0) {
+            fileNameLabel.innerHTML = '📁 <em>Chưa có dữ liệu (Bảng trống)</em>';
+        }
+
+        this.renderTable();
+        this.updatePreview();
     }
 
     // Chuẩn bị toàn bộ các trang in - MỖI TEM LÀ 1 SẢN PHẨM KHÁC NHAU, KHÔNG TRÙNG LẶP
@@ -848,6 +951,11 @@ class App {
                 if (file) await this.handleExcelUpload(file);
             });
         }
+
+        // Các nút xoá dữ liệu
+        document.getElementById('btnClearAllData')?.addEventListener('click', () => this.clearAllData());
+        document.getElementById('btnResetDataCard')?.addEventListener('click', () => this.clearAllData());
+        document.getElementById('btnClearSelected')?.addEventListener('click', () => this.clearSelectedProducts());
 
         // Nút tải file Excel mẫu
         document.getElementById('btnDownloadSample')?.addEventListener('click', (e) => {

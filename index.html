@@ -6,8 +6,8 @@
     <title>In Tem POPUP Bảng Giá Siêu Thị - TV/Tủ Lạnh (A5) & Gia Dụng (A6)</title>
     
     <!-- CSS Styles -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/print.css">
+    <link rel="stylesheet" href="css/style.css?v=20261022_v2">
+    <link rel="stylesheet" href="css/print.css?v=20261022_v2">
 
     <!-- Vendor Libraries -->
     <script src="assets/xlsx.full.min.js"></script>
@@ -101,6 +101,13 @@
                     </div>
                     <button type="button" class="btn-header btn-header-primary" id="btnParsePastedText" style="width: 100%; justify-content: center; font-size: 12px;">
                         ⚡ Trích xuất bảng giá ngay
+                    </button>
+                </div>
+
+                <!-- Nút Xoá Dữ Liệu / Làm Mới Bảng -->
+                <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed #e2e8f0;">
+                    <button type="button" class="btn-header" id="btnResetDataCard" style="width: 100%; justify-content: center; font-size: 11px; background: #fff1f2; color: #be123c; border-color: #fecdd3; font-weight: 700;" title="Xoá sạch toàn bộ sản phẩm trong bảng để nạp mới từ đầu">
+                        🗑️ Xoá toàn bộ dữ liệu (Làm mới bảng)
                     </button>
                 </div>
             </div>
@@ -279,15 +286,21 @@
                         </div>
                         <input type="text" class="form-input" id="searchInput" style="width: 150px; padding: 4px 10px; font-size: 12px;" placeholder="🔍 Tìm Model / Mã..." />
                     </div>
-                    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                        <div style="font-size: 12px; font-weight: 600; color: #0284c7;" id="selectedCountLabel">
-                            Đang chọn: 27 sản phẩm
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                            <div style="font-size: 12px; font-weight: 600; color: #0284c7;" id="selectedCountLabel">
+                                Đang chọn: 28 sản phẩm
+                            </div>
+                            <!-- Nút ưu tiên chọn nhanh -->
+                            <button type="button" class="btn-quick-sel" id="btnSelectTvTlLoa" title="Chọn TV, Tủ Lạnh, Loa">📺 Chọn TV/TL</button>
+                            <button type="button" class="btn-quick-sel" id="btnSelectMayGiatTuDong" title="Chọn Máy Giặt, Tủ Đông">🧺 Chọn Giặt/Đông</button>
+                            <button type="button" class="btn-quick-sel" id="btnSelectGiaDung" title="Chọn Gia Dụng">🍳 Chọn Gia Dụng</button>
+                            <button type="button" class="btn-quick-sel" id="btnSelectMayLocNuoc" title="Chọn Máy Lọc Nước">💧 Chọn Lọc Nước</button>
                         </div>
-                        <!-- Nút ưu tiên chọn nhanh -->
-                        <button type="button" class="btn-quick-sel" id="btnSelectTvTlLoa" title="Chọn TV, Tủ Lạnh, Loa">📺 Chọn TV/TL</button>
-                        <button type="button" class="btn-quick-sel" id="btnSelectMayGiatTuDong" title="Chọn Máy Giặt, Tủ Đông">🧺 Chọn Giặt/Đông</button>
-                        <button type="button" class="btn-quick-sel" id="btnSelectGiaDung" title="Chọn Gia Dụng">🍳 Chọn Gia Dụng</button>
-                        <button type="button" class="btn-quick-sel" id="btnSelectMayLocNuoc" title="Chọn Máy Lọc Nước">💧 Chọn Lọc Nước</button>
+                        <div style="display: flex; align-items: center; gap: 6px;">
+                            <button type="button" class="btn-quick-sel" id="btnClearSelected" style="color: #dc2626; border-color: #fca5a5; background: #fff5f5; font-weight: 600;" title="Xoá các sản phẩm đang được tick chọn khỏi bảng">🗑️ Xoá mục đã chọn</button>
+                            <button type="button" class="btn-quick-sel" id="btnClearAllData" style="color: #b91c1c; border-color: #f87171; background: #fee2e2; font-weight: 700;" title="Xoá toàn bộ sản phẩm trong bảng để nạp mới">🗑️ Xoá tất cả</button>
+                        </div>
                     </div>
                 </div>
 
@@ -348,10 +361,10 @@
     </div>
 
     <!-- Script App Logic -->
-    <script src="js/dummy-data.js"></script>
-    <script src="js/excel-parser.js"></script>
-    <script src="js/ocr-parser.js"></script>
-    <script src="js/banner-generator.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/dummy-data.js?v=20261022_v2"></script>
+    <script src="js/excel-parser.js?v=20261022_v2"></script>
+    <script src="js/ocr-parser.js?v=20261022_v2"></script>
+    <script src="js/banner-generator.js?v=20261022_v2"></script>
+    <script src="js/app.js?v=20261022_v2"></script>
 </body>
 </html>
