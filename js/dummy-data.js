@@ -702,8 +702,368 @@ const PRODUCTS_GVGS_0210_0410 = [
     }
 ];
 
+// 3. ĐỢT MỚI NHẤT: 23-24-25/10 (Trích xuất 100% chuẩn xác từ ảnh S__106111141.jpg)
+const PRODUCTS_GVGS_2310_2510 = [
+    // --- TIVI (4 SP) ---
+    {
+        id: "gv-2310-1",
+        nhom: "TiVi",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "3041094001912",
+        tenSP: "TCL QD-Mini LED 4K TV 55C6KS",
+        giaNiemYet: 17490000,
+        giaEvent: 10990000,
+        khungGio: "5 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-2",
+        nhom: "TiVi",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "3041094002048",
+        tenSP: "Tivi LED Sony K-65S25 (BRAVIA 2 II)",
+        giaNiemYet: 25990000,
+        giaEvent: 15990000,
+        khungGio: "5 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-3",
+        nhom: "TiVi",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "3041094002212",
+        tenSP: "TIVI LED LG 65NU855BPSA",
+        giaNiemYet: 19400000,
+        giaEvent: 12990000,
+        khungGio: "5 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-4",
+        nhom: "TiVi",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "3041094002166",
+        tenSP: "Tivi Mini LED Samsung UA65M8XHA",
+        giaNiemYet: 21900000,
+        giaEvent: 14990000,
+        khungGio: "5 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+
+    // --- LOA KARAOKE (2 SP) ---
+    {
+        id: "gv-2310-5",
+        nhom: "Loa Karaoke",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "3040880000094",
+        tenSP: "Loa Karaoke Dalton TS-12G450X",
+        giaNiemYet: 9090000,
+        giaEvent: 6990000,
+        khungGio: "5 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-6",
+        nhom: "Loa Karaoke",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "3040880000234",
+        tenSP: "Loa Karaoke Dalton PartyPro 215",
+        giaNiemYet: 18700000,
+        giaEvent: 13990000,
+        khungGio: "5 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+
+    // --- MÁY GIẶT (5 SP) ---
+    {
+        id: "gv-2310-7",
+        nhom: "Máy giặt",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1751099000216",
+        tenSP: "Máy giặt Toshiba AW-DK1300KV(MK)",
+        giaNiemYet: 10190000,
+        giaEvent: 6990000,
+        khungGio: "5 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-8",
+        nhom: "Máy giặt",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1751099000211",
+        tenSP: "Máy giặt Samsung WA40F12E4LSV",
+        giaNiemYet: 9390000,
+        giaEvent: 6990000,
+        khungGio: "5 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-9",
+        nhom: "Máy giặt",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1751099000218",
+        tenSP: "Máy giặt Electrolux 11kg EWF1124D3EC",
+        giaNiemYet: 15490000,
+        giaEvent: 9990000,
+        khungGio: "5 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-10",
+        nhom: "Máy giặt",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1751099000141",
+        tenSP: "Máy giặt Haier HW110-BD14387GNU1",
+        giaNiemYet: 16790000,
+        giaEvent: 12190000,
+        khungGio: "5 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-11",
+        nhom: "Máy giặt",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1751099000178",
+        tenSP: "Máy giặt LG FX1411N5S",
+        giaNiemYet: 15490000,
+        giaEvent: 11190000,
+        khungGio: "5 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+
+    // --- TỦ LẠNH & TỦ MÁT (7 SP) ---
+    {
+        id: "gv-2310-12",
+        nhom: "Tủ Lạnh",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1751097000169",
+        tenSP: "Tủ lạnh Hitachi HRSN9563DDXVN",
+        giaNiemYet: 17900000,
+        giaEvent: 15190000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-13",
+        nhom: "Tủ Lạnh",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1751097000103",
+        tenSP: "Tủ lạnh Toshiba GR-RS910WI-PMV(06)-MG",
+        giaNiemYet: 23510000,
+        giaEvent: 16490000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-14",
+        nhom: "Tủ Lạnh",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1751097000009",
+        tenSP: "Tủ lạnh Toshiba Inverter 474 lít GR-RF611WI-PGV(22)-XK",
+        giaNiemYet: 17630000,
+        giaEvent: 14990000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-15",
+        nhom: "Tủ Lạnh",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1751097000042",
+        tenSP: "Tủ lạnh LG LTD37BLM",
+        giaNiemYet: 17290000,
+        giaEvent: 10690000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-16",
+        nhom: "Tủ Lạnh",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "3051097001790",
+        tenSP: "Tủ lạnh Samsung RT22M4032BY/SV",
+        giaNiemYet: 8030000,
+        giaEvent: 5990000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-17",
+        nhom: "Tủ Lạnh",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1751097000264",
+        tenSP: "Tủ lạnh Samsung RS70F65Q3TSV",
+        giaNiemYet: 22490000,
+        giaEvent: 14990000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-18",
+        nhom: "Tủ Mát",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "3050894000098",
+        tenSP: "Tủ mát hòa phát 280 lít HSR D6280",
+        giaNiemYet: 11000000,
+        giaEvent: 8190000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+
+    // --- TỦ ĐÔNG (2 SP) ---
+    {
+        id: "gv-2310-19",
+        nhom: "Tủ Đông",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "3050893000194",
+        tenSP: "Tủ đông Kangaroo KG498KX2",
+        giaNiemYet: 10190000,
+        giaEvent: 8190000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-20",
+        nhom: "Tủ Đông",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "3050893000066",
+        tenSP: "Tủ đông Sanaky VH-4099A1 (Imei)",
+        giaNiemYet: 9420000,
+        giaEvent: 7590000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+
+    // --- MÁY LỌC NƯỚC (4 SP) ---
+    {
+        id: "gv-2310-21",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000197",
+        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Hòa Phát HPN639 12 lõi (Imei)",
+        giaNiemYet: 11590000,
+        giaEvent: 6290000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-22",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000243",
+        tenSP: "Máy lọc nước RO nóng nguội lạnh tủ đứng Kangaroo KG12S2H4 12 lõi (IMEI)",
+        giaNiemYet: 10990000,
+        giaEvent: 7490000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-23",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000193",
+        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Sunhouse UltraX SHA76601S 11 lõi (Imei)",
+        giaNiemYet: 12590000,
+        giaEvent: 8990000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-24",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000128",
+        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Karofi KAD-X68 11 lõi (Imei)",
+        giaNiemYet: 14990000,
+        giaEvent: 10990000,
+        khungGio: "3 suất / siêu thị",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+
+    // --- GIA DỤNG: Bàn Ủi, Lò Vi Sóng, Nồi Cơm (4 SP) ---
+    {
+        id: "gv-2310-25",
+        nhom: "Bàn Ủi",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "4844140000001",
+        tenSP: "Bàn ủi hơi nước Bluestone SIB-3819",
+        giaNiemYet: 699000,
+        giaEvent: 490000,
+        khungGio: "Không Giới Hạn Số Lượng",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-26",
+        nhom: "Bàn Ủi",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "4840952000138",
+        tenSP: "Bàn ủi khô Bluestone DIB-3726",
+        giaNiemYet: 360000,
+        giaEvent: 190000,
+        khungGio: "Không Giới Hạn Số Lượng",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-27",
+        nhom: "Lò Vi Sóng",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "4840958000537",
+        tenSP: "Lò vi sóng Bluestone MOB-7708B 20 lít (IMEI)",
+        giaNiemYet: 1960000,
+        giaEvent: 1390000,
+        khungGio: "Không Giới Hạn Số Lượng",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    },
+    {
+        id: "gv-2310-28",
+        nhom: "Nồi Cơm Điện Tử",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "4844158000151",
+        tenSP: "Nồi cơm điện tử Bluestone RCB-5938-1.8L (imei)",
+        giaNiemYet: 2260000,
+        giaEvent: 1290000,
+        khungGio: "Không Giới Hạn Số Lượng",
+        ghiChu: "Giờ vàng giá sốc 23-24-25/10",
+        selected: true
+    }
+];
+
 // Danh mục các chiến dịch đã lưu
 const CAMPAIGN_PRESETS = {
+    '2310_2510': {
+        id: '2310_2510',
+        title: 'HCM - GIỜ VÀNG GIÁ SỐC 23-24-25/10',
+        dateText: 'ÁP DỤNG: 23/10 - 25/10',
+        imageName: 'S__106111141.jpg',
+        products: PRODUCTS_GVGS_2310_2510
+    },
     '1610_1810': {
         id: '1610_1810',
         title: 'HCM - GIỜ VÀNG GIÁ SỐC 16/10 - 18/10',
@@ -720,5 +1080,5 @@ const CAMPAIGN_PRESETS = {
     }
 };
 
-// Đặt mặc định là chiến dịch mới nhất 16/10 - 18/10 (S__84279519.jpg)
-const DEFAULT_PRODUCTS = [...PRODUCTS_GVGS_1610_1810];
+// Đặt mặc định là chiến dịch mới nhất 23-24-25/10 (S__106111141.jpg)
+const DEFAULT_PRODUCTS = [...PRODUCTS_GVGS_2310_2510];

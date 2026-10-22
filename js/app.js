@@ -25,7 +25,7 @@ class App {
         this.bannerTheme = 'bw_classic';
         this.customSubline = '+ TRẢ GÓP 0%';
         this.uploadedBannerUrl = null;
-        this.customDateText = 'ÁP DỤNG: 16/10 - 18/10';
+        this.customDateText = 'ÁP DỤNG: 23/10 - 25/10';
 
         // Tùy chỉnh riêng cho Form Máy Lọc Nước A4 Full
         this.customMlnCategory = '';
@@ -178,9 +178,13 @@ class App {
             return 'maylocnuoc';
         }
 
-        // 2. Gia Dụng: Lò vi sóng, Nồi cơm, Bếp, Chảo, Nồi, Bình đun, Quạt...
+        // 2. Gia Dụng: Bàn ủi, Lò vi sóng, Nồi cơm, Bếp, Chảo, Nồi, Bình đun, Quạt...
         if (nhomLower.includes('gia dụng') || nhomLower.includes('gd') ||
+            nhomLower.includes('bàn ủi') || nhomLower.includes('ban ui') ||
+            nhomLower.includes('lò vi sóng') || nhomLower.includes('nồi cơm') ||
+            tenLower.includes('bàn ủi') || tenLower.includes('ban ui') ||
             tenLower.includes('lò vi sóng') || tenLower.includes('nồi cơm') ||
+            tenLower.includes('bluestone') ||
             tenLower.includes('nồi') || tenLower.includes('chảo') ||
             tenLower.includes('bếp') || tenLower.includes('bình đun') ||
             tenLower.includes('quạt') || tenLower.includes('máy xay') ||
@@ -899,7 +903,21 @@ class App {
             });
         }
 
-        // Nút nạp nhanh bảng giá Giờ Vàng Mới (16/10 - 18/10) [28 SP]
+        // Nút nạp nhanh bảng giá Giờ Vàng MỚI NHẤT (23/10 - 25/10) [28 SP Chuẩn]
+        document.getElementById('btnLoadNewestImage')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.products = [...PRODUCTS_GVGS_2310_2510];
+            this.currentProductIndex = 0;
+            this.customDateText = 'ÁP DỤNG: 23/10 - 25/10';
+            const customDateInput = document.getElementById('customDateInput');
+            if (customDateInput) customDateInput.value = this.customDateText;
+            this.updateRegionList();
+            this.renderTable();
+            this.updatePreview();
+            alert('Đã nạp đầy đủ 28 sản phẩm chính xác từ ảnh "HCM - Giờ Vàng Giá Sốc 23-24-25/10"!');
+        });
+
+        // Nút nạp nhanh bảng giá Giờ Vàng đợt cũ (16/10 - 18/10) [28 SP]
         document.getElementById('btnLoadDefaultImage')?.addEventListener('click', (e) => {
             e.preventDefault();
             this.products = [...PRODUCTS_GVGS_1610_1810];
@@ -910,7 +928,7 @@ class App {
             this.updateRegionList();
             this.renderTable();
             this.updatePreview();
-            alert('Đã nạp đầy đủ 28 sản phẩm chính xác từ ảnh "HCM - Giờ Vàng Giá Sốc 16/10 - 18/10"!');
+            alert('Đã nạp đầy đủ 28 sản phẩm từ đợt cũ "HCM - Giờ Vàng Giá Sốc 16/10 - 18/10"!');
         });
 
         // Nút nạp nhanh bảng giá đợt cũ (02/10 - 04/10) [27 SP]
