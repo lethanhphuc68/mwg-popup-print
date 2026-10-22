@@ -40,7 +40,7 @@ class App {
         if (typeof window !== 'undefined' && window.location) {
             const urlParams = new URLSearchParams(window.location.search);
             const formParam = urlParams.get('form');
-            if (formParam && ['tvtl', 'maygiat', 'giadung', 'maylocnuoc', 'maylocnuoc_a4'].includes(formParam)) {
+            if (formParam && ['tvtl', 'maygiat', 'giadung', 'maylocnuoc', 'maylocnuoc_a4', 'qdh_a4'].includes(formParam)) {
                 this.currentForm = formParam;
                 this.selectedCategory = this.getFormConfig(formParam).category;
             }
@@ -81,6 +81,12 @@ class App {
         const mlnBadge = document.querySelector('[data-form="maylocnuoc"] .form-card-badge');
         if (mlnBadge) mlnBadge.textContent = `${counts.maylocnuoc} SP`;
 
+        const mlnA4Badge = document.querySelector('[data-form="maylocnuoc_a4"] .form-card-badge');
+        if (mlnA4Badge) mlnA4Badge.textContent = `${counts.maylocnuoc} SP`;
+
+        const qdhBadge = document.querySelector('[data-form="qdh_a4"] .form-card-badge');
+        if (qdhBadge) qdhBadge.textContent = `${counts.giadung} SP`;
+
         const catAll = document.querySelector('.btn-cat-filter[data-cat="all"]');
         if (catAll) catAll.textContent = `⭐ Tất cả (${this.products.length})`;
 
@@ -97,7 +103,7 @@ class App {
         if (catMln) catMln.textContent = `💧 Lọc Nước (${counts.maylocnuoc})`;
     }
 
-    // Cấu hình chuẩn 4 Form CE theo yêu cầu người dùng - TOÀN BỘ LÀ GIẤY ĐỨNG (PORTRAIT)
+    // Cấu hình chuẩn Form CE theo yêu cầu người dùng - TOÀN BỘ LÀ GIẤY ĐỨNG (PORTRAIT)
     getFormConfig(formKey = this.currentForm) {
         switch (formKey) {
             case 'maygiat':
@@ -154,7 +160,21 @@ class App {
                     renderType: 'mln_a4',
                     category: 'maylocnuoc',
                     desc: 'GIẤY A4 ĐỨNG | POPUP: A4 FULL (1 TEM) | ĐÓNG KHUNG IN ĐẬM',
-                    sourceUrl: ''
+                    sourceUrl: 'https://mientay2.pro/in-online/popup/mln/full2/'
+                };
+            case 'qdh_a4':
+                return {
+                    key: 'qdh_a4',
+                    name: 'A4 QĐH - QUẠT',
+                    paper: 'A4',
+                    orientation: 'portrait',
+                    pageSize: '210mm 297mm',
+                    itemsPerSheet: 1,
+                    sheetClass: 'size-a4 layout-qdh-a4',
+                    renderType: 'qdh_a4',
+                    category: 'giadung',
+                    desc: 'GIẤY A4 ĐỨNG | POPUP: QĐH - QUẠT (XOAY DỌC) | GIÁ KHỦNG 255px',
+                    sourceUrl: 'https://mientay2.pro/in-online/popup/qdh/'
                 };
             case 'tvtl':
             default:
@@ -382,67 +402,36 @@ class App {
         const subline = this.customSubline || '+ TRẢ GÓP 0%';
 
         if (renderType === 'mln_a4') {
-            // Chuẩn MÁY LỌC NƯỚC A4 FULL theo mẫu ảnh thật IMG_4689.JPG:
-            // 1. MÁY LỌC NƯỚC: Hộp nền đen chữ trắng
-            // 2. GIÁ SỐC: Dòng riêng, chữ to font UTM-Colossalis / mt2-mincap
-            // 3. -% GIẢM GIÁ (VD: -24%): Dòng riêng, chữ đen siêu to khổng lồ trên nền giấy
-            // 4. MODEL: Khung viền chữ nhật nét đen mỏng [ MÁY LỌC NƯỚC KANGAROO KG12A6 ]
-            // 5. GIÁ GỐC: 11.590.000đ có vạch gạch ngang dày thò ra 2 bên
-            // 6. GIÁ GIẢM: 8.740 (chữ siêu to) + .000đ (chữ nhỏ nằm ngang hàng ở chân phải)
-            // 7. ƯU ĐÃI: + TRẢ GÓP 0% LÃI SUẤT (chữ in đậm)
+            // Chuẩn MÁY LỌC NƯỚC A4 FULL theo đúng mã nguồn https://mientay2.pro/in-online/popup/mln/full2/
             const diff = (item.giaNiemYet || 0) - (item.giaEvent || 0);
             const percent = (item.giaNiemYet > 0 && diff > 0) ? Math.floor((diff / item.giaNiemYet) * 100) : 24;
-            const discountStr = this.customMlnDiscount || `-${percent}%`;
+            const discountStr = this.customMlnDiscount || `-${percent} %`;
             const catTitle = this.customMlnCategory || 'MÁY LỌC NƯỚC';
             const shockTitle = this.customMlnShock || 'GIÁ SỐC';
             const subline = (this.customSubline && this.customSubline !== '+ TRẢ GÓP 0%') ? this.customSubline : '+ TRẢ GÓP 0% LÃI SUẤT';
             const priceSplit = this.splitPriceParts(item.giaEvent);
             const priceSuffix = this.customPriceSuffix || priceSplit.suffix;
+            const giaNiemYetVal = giaNiemYetStr ? (giaNiemYetStr.endsWith('đ') ? giaNiemYetStr : `${giaNiemYetStr}đ`) : '00.000.000đ';
 
             return `
-                <div class="label-box format-mln-a4-full" data-item-id="${item.id}">
-                    <!-- 1. BANNER: MÁY LỌC NƯỚC (NỀN ĐEN CHỮ TRẮNG) -->
-                    <div class="mln-section mln-banner-top">
-                        <div class="mln-cat-title editable-field" contenteditable="true" data-field="customHeaderCategory" title="Nhấp để sửa">${catTitle}</div>
-                    </div>
-
-                    <!-- 2. GIÁ SỐC (DÒNG RIÊNG, CHỮ TO) -->
-                    <div class="mln-section mln-shock-box">
-                        <div class="mln-shock-title editable-field" contenteditable="true" data-field="customHeaderShock" title="Nhấp để sửa chữ">${shockTitle}</div>
-                    </div>
-
-                    <!-- 3. -% GIẢM GIÁ (DÒNG RIÊNG, SIÊU TO KHỔNG LỒ) -->
-                    <div class="mln-section mln-discount-box">
-                        <div class="mln-discount-badge editable-field" contenteditable="true" data-field="customDiscount" title="Nhấp để sửa % giảm">${discountStr}</div>
-                    </div>
-
-                    <!-- 4. KHUNG MODEL (ĐÓNG KHUNG CHỮ NHẬT VIỀN ĐEN) -->
-                    <div class="mln-section mln-model-box">
-                        <div class="mln-model-inner">
-                            <input type="text" class="mln-model-input editable-field" data-field="tenSP" value="${item.tenSP || 'TÊN SẢN PHẨM'}" title="Nhấp để sửa tên model" />
-                        </div>
-                    </div>
-
-                    <!-- 5. GIÁ GỐC (GẠCH GIÁ VỚI VẠCH ĐEN DÀY THÒ RA 2 BÊN) -->
-                    <div class="mln-section mln-strike-box">
-                        <div class="mln-strike-inner">
-                            <span class="strike-number editable-field" contenteditable="true" data-field="giaNiemYet" title="Nhấp để sửa giá niêm yết">${giaNiemYetStr}đ</span>
-                            <div class="strike-bar"></div>
-                        </div>
-                    </div>
-
-                    <!-- 6. GIÁ GIẢM (SỐ CHÍNH TO + .000đ NGANG HÀNG Ở CHÂN) -->
-                    <div class="mln-section mln-price-box">
-                        <div class="mln-price-wrap" title="Nhấp vào số để sửa giá khuyến mãi">
-                            <span class="mln-price-big editable-field" contenteditable="true" data-field="giaEventMain">${priceSplit.main}</span>
-                            <span class="mln-price-small editable-field" contenteditable="true" data-field="giaEventSuffix">${priceSuffix}</span>
-                        </div>
-                    </div>
-
-                    <!-- 7. ƯU ĐÃI (+ TRẢ GÓP 0% LÃI SUẤT) -->
-                    <div class="mln-section mln-subline-box">
-                        <div class="mln-subline-text editable-field" contenteditable="true" data-field="subline" title="Nhấp để sửa ưu đãi">${subline}</div>
-                    </div>
+                <div class="pp1 label-box format-mln-a4-full" data-item-id="${item.id}"> 
+                    <input type="text" class="txt_100 mln editable-field" data-field="customHeaderCategory" value="${catTitle}" title="Nhấp để sửa tiêu đề danh mục" />
+                    <input type="text" class="txt_100 gs editable-field" data-field="customHeaderShock" value="${shockTitle}" title="Nhấp để sửa chữ Giá Sốc" />  
+                    <input type="text" class="txt_100 pt editable-field" data-field="customDiscount" value="${discountStr}" title="Nhấp để sửa % giảm giá" />  
+                    <input type="text" class="txt_100 tsp editable-field" data-field="tenSP" value="${item.tenSP || 'TÊN SẢN PHẨM'}" title="Nhấp để sửa tên sản phẩm" />  
+                    <input type="text" class="txt_100 gg editable-field" data-field="giaNiemYet" value="${giaNiemYetVal}" title="Nhấp để sửa giá gốc niêm yết" />  
+                    <input type="text" class="txt_100 gc editable-field" data-field="giaEventMain" value="${priceSplit.main}" title="Nhấp để sửa số giá chính" />  
+                    <input type="text" class="txt_100 gc2 editable-field" data-field="giaEventSuffix" value="${priceSuffix}" title="Nhấp để sửa đuôi giá" />  
+                    <input type="text" class="txt_100 nt editable-field" data-field="subline" value="${subline}" title="Nhấp để sửa khuyến mãi hoặc ghi chú" />  
+                </div>
+            `;
+        } else if (renderType === 'qdh_a4') {
+            // Chuẩn A4 QĐH - QUẠT theo đúng mã nguồn https://mientay2.pro/in-online/popup/qdh/
+            return `
+                <div class="pp1 label-box format-qdh-a4" data-item-id="${item.id}">
+                    <input type="text" class="txt_100 tsp editable-field" data-field="tenSP" value="${item.tenSP || 'TÊN SẢN PHẨM'}" title="Nhấp để sửa tên sản phẩm" />
+                    <input type="text" class="txt_100 ggh editable-field" data-field="giaNiemYet" value="${giaNiemYetStr}" title="Nhấp để sửa giá niêm yết" />
+                    <input type="text" class="txt_100 ggg editable-field" data-field="giaEvent" value="${giaEventStr}" title="Nhấp để sửa giá khuyến mãi" />
                 </div>
             `;
         } else if (renderType === 'gd') {

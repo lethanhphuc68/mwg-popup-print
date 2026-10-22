@@ -654,13 +654,14 @@
     }
 
     /* ==============================================================
-       FORM 5: MÁY LỌC NƯỚC A4 FULL (1 TEM KHỔ A4 ĐỨNG, ĐÓNG KHUNG IN ĐẬM)
+       FORM 5: MÁY LỌC NƯỚC A4 FULL & FORM 6: A4 QĐH - QUẠT (PRINT)
        ============================================================== */
-    .print-sheet.layout-mln-a4-full {
+    .print-sheet.layout-mln-a4-full,
+    .print-sheet.layout-qdh-a4 {
         width: 210mm !important;
         height: 296mm !important;
         max-height: 296mm !important;
-        padding: 6mm 8mm !important;
+        padding: 0 !important;
         margin: 0 auto !important;
         page-break-after: always !important;
         break-after: page !important;
@@ -676,236 +677,181 @@
     }
 
     .print-sheet .label-box.format-mln-a4-full {
-        width: 198mm !important;
-        height: 286mm !important;
-        max-height: 286mm !important;
-        border: 3.5mm solid #000000 !important;
-        margin: 0 auto !important;
-        box-sizing: border-box !important;
+        display: inline-block !important;
+        width: 740px !important;
+        height: 1060px !important;
+        border: 5px solid #000000 !important;
+        margin: auto !important;
         overflow: hidden !important;
+        background: #ffffff !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
         page-break-inside: avoid !important;
         break-inside: avoid !important;
-        font-family: 'UTM-Colossalis', 'mt2-mincap', 'Arial Black', sans-serif !important;
-        font-weight: 900 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        background: #ffffff !important;
-        color: #000000 !important;
-        padding: 4.5mm 4mm 4mm 4mm !important;
     }
 
-    /* Các section phân bố đều nhau, KHÔNG CÓ ĐƯỜNG LINE NGĂN CÁCH NỘI BỘ */
-    .print-sheet .format-mln-a4-full .mln-section {
+    .print-sheet .label-box.format-mln-a4-full * {
+        font-family: 'mt2-font', sans-serif;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+    .print-sheet .label-box.format-mln-a4-full .txt_100 {
         width: 100% !important;
-        box-sizing: border-box !important;
-        text-align: center !important;
-        font-weight: 900 !important;
         border: none !important;
+        text-align: center !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block;
     }
 
-    /* 1. BANNER: MÁY LỌC NƯỚC (NỀN ĐEN CHỮ TRẮNG) */
-    .print-sheet .format-mln-a4-full .mln-banner-top {
+    .print-sheet .label-box.format-mln-a4-full .mln {
+        width: 94% !important;
+        margin-left: 3% !important;
         background: #000000 !important;
         color: #ffffff !important;
-        width: 100% !important;
-        padding: 3mm 2mm 2.8mm 2mm !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        border: none !important;
+        margin-top: 20px !important;
+        padding-bottom: 8px !important;
+        font-size: 45px !important;
+        line-height: 1.2 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 
-    .print-sheet .format-mln-a4-full .mln-cat-title {
-        font-family: 'Arial Black', 'Montserrat', 'Inter', sans-serif !important;
-        font-size: 13.8mm !important;
+    .print-sheet .label-box.format-mln-a4-full .gs {
+        margin-top: 30px !important;
+        padding: 0px !important;
+        font-size: 150px !important;
+        font-family: 'UTM-Colossalis', sans-serif !important;
+        font-weight: bold !important;
         line-height: 1 !important;
-        font-weight: 900 !important;
-        letter-spacing: 2px !important;
-        text-transform: uppercase !important;
-        color: #ffffff !important;
     }
 
-    /* 2. GIÁ SỐC (DÒNG RIÊNG, TO BẰNG -45%) */
-    .print-sheet .format-mln-a4-full .mln-shock-box {
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0 !important;
+    .print-sheet .label-box.format-mln-a4-full .pt {
+        margin-top: -5px !important;
+        font-size: 250px !important;
+        font-weight: bold !important;
+        height: 250px !important;
+        padding: 0px !important;
+        font-family: 'UTM-Colossalis', sans-serif !important;
+        line-height: 1 !important;
     }
 
-    .print-sheet .format-mln-a4-full .mln-shock-title {
-        font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-        font-size: 46mm !important;
-        line-height: 0.95 !important;
-        font-weight: 900 !important;
-        letter-spacing: 2px !important;
-        text-transform: uppercase !important;
-        color: #000000 !important;
+    .print-sheet .label-box.format-mln-a4-full .tsp {
+        margin-top: 45px !important;
+        font-size: 35px !important;
+        padding: 0px !important;
+        border: 2px solid #000000 !important;
+        width: 94% !important;
+        font-family: 'mt2-mincap', sans-serif !important;
+        margin-left: 3% !important;
+        line-height: 1.3 !important;
     }
 
-    /* 3. -% GIẢM GIÁ (DÒNG RIÊNG, SIÊU TO KHỔNG LỒ) */
-    .print-sheet .format-mln-a4-full .mln-discount-box {
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0 !important;
+    .print-sheet .label-box.format-mln-a4-full .gg {
+        background-repeat: no-repeat !important;
+        background-size: 70% 5px !important;
+        background-position: center 55% !important;
+        background-image: linear-gradient(to right, #000000, #000000) !important;
+        font-size: 100px !important;
+        margin-top: 15px !important;
+        font-family: 'mt2-mincap', sans-serif !important;
+        line-height: 1 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 
-    .print-sheet .format-mln-a4-full .mln-discount-badge {
-        font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-        font-size: 50mm !important;
-        line-height: 0.88 !important;
-        font-weight: 900 !important;
-        background: transparent !important;
-        color: #000000 !important;
-        letter-spacing: -2px !important;
-        text-transform: uppercase !important;
-        border: none !important;
+    .print-sheet .label-box.format-mln-a4-full .gc {
+        font-family: 'UTM-Colossalis', sans-serif !important;
+        font-size: 160px !important;
+        width: 76% !important;
+        font-weight: bold !important;
+        text-align: right !important;
+        float: left !important;
         display: inline-block !important;
+        line-height: 1 !important;
     }
 
-    /* 4. KHUNG MODEL (ĐỔI FONT CHỮ GỌN ĐẸP, CHỮ NHỎ LẠI ĐỂ VỪA TÊN DÀI) */
-    .print-sheet .format-mln-a4-full .mln-model-box {
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0 1.5mm !important;
+    .print-sheet .label-box.format-mln-a4-full .gc2 {
+        width: 23% !important;
+        font-size: 50px !important;
+        padding-left: 0px !important;
+        text-align: left !important;
+        font-family: 'UTM-Colossalis', sans-serif !important;
+        float: left !important;
+        display: inline-block !important;
+        line-height: 1 !important;
     }
 
-    .print-sheet .format-mln-a4-full .mln-model-inner {
-        width: 100% !important;
-        border: 1.5px solid #000000 !important;
-        padding: 1mm 2.5mm !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        background: transparent !important;
+    .print-sheet .label-box.format-mln-a4-full .nt {
+        margin-top: -20px !important;
+        font-size: 30px !important;
+        font-family: 'mt2-mincap', sans-serif !important;
+        clear: both !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Print styling cho A4 QĐH - QUẠT */
+    .print-sheet .label-box.format-qdh-a4 {
+        display: inline-block !important;
+        width: 740px !important;
+        height: 1060px !important;
+        border: 5px solid #000000 !important;
+        margin: auto !important;
+        overflow: hidden !important;
+        background: #ffffff !important;
         box-sizing: border-box !important;
-    }
-
-    .print-sheet .format-mln-a4-full .mln-model-input {
-        width: 100% !important;
-        height: 6mm !important;
-        font-size: 4.5mm !important;
-        line-height: 1 !important;
-        font-weight: 800 !important;
-        text-align: center !important;
-        border: none !important;
-        background: transparent !important;
-        color: #000000 !important;
-        text-transform: uppercase !important;
-        font-family: 'Plus Jakarta Sans', 'Arial', sans-serif !important;
-        letter-spacing: 0.2px !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-
-    /* 5. GIÁ GỐC (GẠCH GIÁ VỚI VẠCH ĐEN DÀY THÒ RA 2 BÊN) */
-    .print-sheet .format-mln-a4-full .mln-strike-box {
-        width: 100% !important;
-        height: 20mm !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        position: relative !important;
-        border: none !important;
-    }
-
-    .print-sheet .format-mln-a4-full .mln-strike-inner {
-        position: relative !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-
-    .print-sheet .format-mln-a4-full .strike-number {
-        font-family: 'Arial Black', 'Arial', sans-serif !important;
-        font-size: 17mm !important;
-        line-height: 1 !important;
-        font-weight: 900 !important;
-        text-align: center !important;
-        color: #000000 !important;
-        z-index: 1 !important;
-        letter-spacing: -0.5px !important;
-    }
-
-    .print-sheet .format-mln-a4-full .strike-bar {
-        position: absolute !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-        left: -12mm !important;
-        right: -12mm !important;
-        height: 2.8px !important;
-        background-color: #000000 !important;
-        border-top: 2.8px solid #000000 !important;
-        z-index: 2 !important;
-        pointer-events: none !important;
-    }
-
-    /* 6. GIÁ GIẢM (SỐ CHÍNH TO BẰNG -45% + .000đ NGANG HÀNG Ở CHÂN) */
-    .print-sheet .format-mln-a4-full .mln-price-box {
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        overflow: hidden !important;
-        border: none !important;
-    }
-
-    .print-sheet .format-mln-a4-full .mln-price-wrap {
-        display: inline-flex !important;
-        flex-direction: row !important;
-        align-items: baseline !important;
-        justify-content: center !important;
-        line-height: 1 !important;
-    }
-
-    .print-sheet .format-mln-a4-full .mln-price-big {
-        font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-        font-size: 50mm !important;
-        line-height: 0.82 !important;
-        font-weight: 900 !important;
-        color: #000000 !important;
-        letter-spacing: -2px !important;
-        display: inline-block !important;
-    }
-
-    .print-sheet .format-mln-a4-full .mln-price-small {
-        font-family: 'UTM-Colossalis', 'mt2-mincap', sans-serif !important;
-        font-size: 16mm !important;
-        line-height: 1 !important;
-        font-weight: 900 !important;
-        color: #000000 !important;
-        letter-spacing: -0.5px !important;
-        display: inline-block !important;
-        margin-left: 0.5mm !important;
-    }
-
-    /* 7. ƯU ĐÃI (+ TRẢ GÓP 0% LÃI SUẤT) */
-    .print-sheet .format-mln-a4-full .mln-subline-box {
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0 0 1mm 0 !important;
-        border: none !important;
-    }
-
-    .print-sheet .format-mln-a4-full .mln-subline-text {
-        font-family: 'Arial Black', 'Arial', sans-serif !important;
-        font-size: 6.8mm !important;
-        line-height: 1 !important;
-        font-weight: 900 !important;
-        border: none !important;
         padding: 0 !important;
-        color: #000000 !important;
-        letter-spacing: 0.5px !important;
-        text-transform: uppercase !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    .print-sheet .label-box.format-qdh-a4 * {
+        font-family: 'mt2-mincap', sans-serif;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+    .print-sheet .label-box.format-qdh-a4 .txt_100 {
+        width: 1060px !important;
+        border: none !important;
+        text-align: center !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        transform: rotate(-90deg) !important;
+    }
+
+    .print-sheet .label-box.format-qdh-a4 .tsp {
+        padding: 20px !important;
+        margin-left: -440px !important;
+        margin-top: 480px !important;
+        font-size: 40px !important;
+        font-family: 'mt2-mincap', sans-serif !important;
+    }
+
+    .print-sheet .label-box.format-qdh-a4 .ggh {
+        padding: 20px !important;
+        margin-left: -280px !important;
+        margin-top: -500px !important;
+        font-size: 145px !important;
+        background-repeat: no-repeat !important;
+        background-size: 60% 5px !important;
+        background-position: center 55% !important;
+        background-image: linear-gradient(to right, #000000, #000000) !important;
+        font-family: 'mt2-mincap', sans-serif !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .print-sheet .label-box.format-qdh-a4 .ggg {
+        padding: 20px !important;
+        margin-left: -30px !important;
+        margin-top: -1000px !important;
+        font-size: 255px !important;
+        padding-left: 80px !important;
+        font-weight: bold !important;
+        font-family: 'mt2-mincap', sans-serif !important;
     }
 }
