@@ -2057,7 +2057,7 @@ body {
     text-align: center !important;
     color: #000000 !important;
     text-transform: uppercase !important;
-    font-family: 'UTM-Colossalis', 'mt2-font', 'Arial Black', sans-serif !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
     font-weight: 900 !important;
     padding: 4px 0 2px 0 !important;
     margin: 0 !important;
@@ -2067,32 +2067,32 @@ body {
 }
 
 .label-box.format-qdh-a4 .qdh-line1 {
-    font-size: 70px !important;
-    line-height: 1.2 !important;
-    letter-spacing: 1px !important;
+    font-size: 82px !important;
+    line-height: 1.18 !important;
+    letter-spacing: 1.5px !important;
 }
 
 .label-box.format-qdh-a4 .qdh-line1.title-long {
-    font-size: 56px !important;
+    font-size: 68px !important;
 }
 
 .label-box.format-qdh-a4 .qdh-line1.title-xlong {
-    font-size: 44px !important;
+    font-size: 54px !important;
 }
 
 .label-box.format-qdh-a4 .qdh-line2 {
-    font-size: 60px !important;
-    line-height: 1.18 !important;
-    letter-spacing: 0.5px !important;
+    font-size: 70px !important;
+    line-height: 1.16 !important;
+    letter-spacing: 1px !important;
     margin-top: -4px !important;
 }
 
 .label-box.format-qdh-a4 .qdh-line2.model-long {
-    font-size: 48px !important;
+    font-size: 58px !important;
 }
 
 .label-box.format-qdh-a4 .qdh-line2.model-xlong {
-    font-size: 38px !important;
+    font-size: 46px !important;
 }
 
 .label-box.format-qdh-a4 .qdh-strike-row {
@@ -2100,8 +2100,8 @@ body {
     display: flex !important;
     justify-content: flex-start !important;
     align-items: center !important;
-    padding-left: 10px !important;
-    margin-top: 2px !important;
+    padding-left: 14px !important;
+    margin-top: 0px !important;
 }
 
 .label-box.format-qdh-a4 .qdh-strike-wrap {
@@ -2113,8 +2113,8 @@ body {
 }
 
 .label-box.format-qdh-a4 .qdh-strike-num {
-    font-family: 'UTM-Colossalis', 'mt2-mincap', 'Arial Black', sans-serif !important;
-    font-size: 82px !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+    font-size: 92px !important;
     line-height: 1 !important;
     font-weight: 900 !important;
     color: #000000 !important;
@@ -2141,32 +2141,32 @@ body {
     display: flex !important;
     align-items: baseline !important;
     justify-content: center !important;
-    gap: 4px !important;
-    margin-top: -4px !important;
+    gap: 6px !important;
+    margin-top: -6px !important;
     white-space: nowrap !important;
 }
 
 .label-box.format-qdh-a4 .qdh-price-main {
-    font-family: 'UTM-Colossalis', 'mt2-mincap', 'Arial Black', sans-serif !important;
-    font-size: 248px !important;
-    line-height: 0.84 !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+    font-size: 330px !important;
+    line-height: 0.85 !important;
     font-weight: 900 !important;
     color: #000000 !important;
-    letter-spacing: -2px !important;
+    letter-spacing: 1px !important;
     outline: none !important;
 }
 
 .label-box.format-qdh-a4 .qdh-promo-row.len-short .qdh-price-main {
-    font-size: 288px !important;
+    font-size: 345px !important;
 }
 
 .label-box.format-qdh-a4 .qdh-promo-row.len-long .qdh-price-main {
-    font-size: 202px !important;
+    font-size: 285px !important;
 }
 
 .label-box.format-qdh-a4 .qdh-price-suffix {
-    font-family: 'UTM-Colossalis', 'mt2-mincap', 'Arial Black', sans-serif !important;
-    font-size: 64px !important;
+    font-family: 'mt2-mincap', 'UTM-Colossalis', sans-serif !important;
+    font-size: 86px !important;
     line-height: 1 !important;
     font-weight: 900 !important;
     color: #000000 !important;
@@ -2174,11 +2174,11 @@ body {
 }
 
 .label-box.format-qdh-a4 .qdh-promo-row.len-short .qdh-price-suffix {
-    font-size: 72px !important;
+    font-size: 92px !important;
 }
 
 .label-box.format-qdh-a4 .qdh-promo-row.len-long .qdh-price-suffix {
-    font-size: 54px !important;
+    font-size: 76px !important;
 }
 
 .label-box.format-qdh-a4 .editable-field:hover {
