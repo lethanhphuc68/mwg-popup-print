@@ -208,6 +208,24 @@ class OCRParser {
     static parseSmartText(rawText) {
         if (!rawText) return [];
 
+        // Hỗ trợ dán trực tiếp dữ liệu CSV / TSV của "File in Popup Thường ngày" (Model: AS [44], Giá gốc: AH [33], Giá KM: AE [30])
+        if (typeof XLSX !== 'undefined' && typeof ExcelParser !== 'undefined' &&
+            (rawText.includes('Giá chỉ giao hàng') || rawText.includes('Giá giao + lắp đặt') || rawText.split('\n')[0]?.split('\t').length >= 45)) {
+            try {
+                const wb = XLSX.read(rawText, { type: 'string' });
+                const ws = wb.Sheets[wb.SheetNames[0]];
+                const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+                if (ExcelParser.isDailyPopupFormat(rows)) {
+                    const extracted = ExcelParser.extractDailyPopupRows(rows);
+                    if (extracted.products && extracted.products.length > 0) {
+                        return extracted.products;
+                    }
+                }
+            } catch (e) {
+                console.warn('Daily popup paste parse fallback:', e);
+            }
+        }
+
         const lines = rawText.split('\n').map(l => l.trim()).filter(Boolean);
         const products = [];
 
@@ -323,15 +341,16 @@ class OCRParser {
     static detectGroup(name) {
         if (!name) return 'Sản phẩm';
         const n = name.toLowerCase();
+        if (n.includes('lọc nước') || n.includes('hòa phát hpn') || n.includes('karofi') || n.includes('ultrax') || n.includes('hpn639') || n.includes('kg12s')) return 'Máy Lọc Nước';
         if (n.includes('tivi') || n.includes('tv') || n.includes('qled') || n.includes('qned') || n.includes('bravia') || n.includes('55c6ks') || n.includes('65t6d')) return 'TiVi';
         if (n.includes('loa') || n.includes('karaoke') || n.includes('dalton')) return 'Loa Karaoke';
-        if (n.includes('giặt') || n.includes('samsung wa') || n.includes('toshiba tw') || n.includes('electrolux') || n.includes('dk1300kv')) return 'Máy giặt';
+        if (n.includes('giặt') || n.includes('máy sấy') || n.includes('samsung wa') || n.includes('toshiba tw') || n.includes('electrolux') || n.includes('dk1300kv')) return 'Máy giặt';
         if (n.includes('tủ lạnh') || n.includes('hitachi') || n.includes('inverter 474') || n.includes('hrsn9563') || n.includes('rt535wea')) return 'Tủ Lạnh';
         if (n.includes('tủ mát') || n.includes('sanaky tm')) return 'Tủ Mát';
         if (n.includes('tủ đông') || n.includes('kangaroo kg') || n.includes('ad6352') || n.includes('hpf')) return 'Tủ Đông';
-        if (n.includes('lọc nước') || n.includes('hòa phát') || n.includes('sunhouse') || n.includes('karofi') || n.includes('hpn639') || n.includes('kg12s2h4')) return 'Máy Lọc Nước';
+        if (n.includes('quạt') || n.includes('làm mát') || n.includes('qđh')) return 'Quạt điều hòa';
         if (n.includes('lò vi sóng') || n.includes('vi sóng') || n.includes('sharp r-211')) return 'Gia Dụng';
-        if (n.includes('nồi cơm') || n.includes('sharp ks') || n.includes('chảo') || n.includes('bếp') || n.includes('kg15rih1') || n.includes('kgrc18m8') || n.includes('kg516m') || n.includes('kgic22s2')) return 'Gia Dụng';
+        if (n.includes('nồi cơm') || n.includes('bàn ủi') || n.includes('nồi chiên') || n.includes('bình đun') || n.includes('máy xay') || n.includes('sharp ks') || n.includes('chảo') || n.includes('bếp') || n.includes('kg15rih1') || n.includes('kgrc18m8') || n.includes('kg516m') || n.includes('kgic22s2')) return 'Gia Dụng';
         return 'Sản phẩm';
     }
 }

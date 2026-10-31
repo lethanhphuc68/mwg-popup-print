@@ -1055,8 +1055,344 @@ const PRODUCTS_GVGS_2310_2510 = [
     }
 ];
 
+// 4. BẢNG GIÁ MLN 2026 (File in Popup Thường ngày - Model: AS, Giá gốc: AH, Giá KM: AE)
+const PRODUCTS_MLN_2026 = [
+    {
+        id: "mln-2026-1",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000116",
+        tenSP: "Máy lọc nước RO tủ đứng Karofi KAQ-X18 11 lõi (Imei)",
+        giaNiemYet: 6990000,
+        giaEvent: 6860000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo nhôm chống dính",
+        selected: true
+    },
+    {
+        id: "mln-2026-2",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000117",
+        tenSP: "Máy lọc nước RO nóng nguội tủ đứng Karofi KAH-X29 11 lõi (Imei)",
+        giaNiemYet: 9390000,
+        giaEvent: 9160000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo inox 26cm",
+        selected: true
+    },
+    {
+        id: "mln-2026-3",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000128",
+        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Karofi KAD-X68 11 lõi (Imei)",
+        giaNiemYet: 14990000,
+        giaEvent: 14890000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Máy hút bụi Midea MVC-SC861B",
+        selected: true
+    },
+    {
+        id: "mln-2026-4",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000132",
+        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Karofi KAD-X58 11 lõi (Imei)",
+        giaNiemYet: 12990000,
+        giaEvent: 11690000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo inox 26cm",
+        selected: true
+    },
+    {
+        id: "mln-2026-5",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000162",
+        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Kangaroo KG12A8 12 lõi (IMEI)",
+        giaNiemYet: 14490000,
+        giaEvent: 13290000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Máy hút bụi Midea MVC-SC861B",
+        selected: true
+    },
+    {
+        id: "mln-2026-6",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000181",
+        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Sunhouse SHA76623KL 11 lõi (Imei)",
+        giaNiemYet: 13190000,
+        giaEvent: 10490000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Máy hút bụi Midea MVC-SC861B",
+        selected: true
+    },
+    {
+        id: "mln-2026-7",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000182",
+        tenSP: "Máy lọc nước RO tủ đứng Sunhouse SHA8800KL 11 lõi (Imei)",
+        giaNiemYet: 7090000,
+        giaEvent: 4850000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo nhôm chống dính",
+        selected: true
+    },
+    {
+        id: "mln-2026-8",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000189",
+        tenSP: "Máy lọc nước RO tủ đứng nóng lạnh ion kiềm Kangaroo KGHC12A3 12 lõi (IMEI)",
+        giaNiemYet: 19990000,
+        giaEvent: 19390000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Máy hút bụi Midea MVC-SC861B",
+        selected: true
+    },
+    {
+        id: "mln-2026-9",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000190",
+        tenSP: "Máy lọc nước RO tủ đứng Kangaroo KG11A1 11 lõi (IMEI)",
+        giaNiemYet: 7990000,
+        giaEvent: 6290000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo nhôm chống dính",
+        selected: true
+    },
+    {
+        id: "mln-2026-10",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000192",
+        tenSP: "Máy lọc nước RO tủ đứng nóng lạnh Kangaroo KG11A3 11 lõi (IMEI)",
+        giaNiemYet: 12990000,
+        giaEvent: 11490000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo inox 26cm",
+        selected: true
+    },
+    {
+        id: "mln-2026-11",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000195",
+        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Sunhouse UltraX SHA76668SH 11 lõi (Imei)",
+        giaNiemYet: 19190000,
+        giaEvent: 17690000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Tủ lạnh Aqua AQR-D100FA(BS)",
+        selected: true
+    },
+    {
+        id: "mln-2026-12",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000196",
+        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Sunhouse UltraX SHA76688SH 11 lõi (Imei)",
+        giaNiemYet: 20190000,
+        giaEvent: 18790000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Tủ lạnh Aqua AQR-D100FA(BS)",
+        selected: true
+    },
+    {
+        id: "mln-2026-13",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000200",
+        tenSP: "Máy lọc nước RO nóng nguội lạnh tủ đứng Hydro-ion kiềm Karofi KAE-S688 12 lõi (Imei)",
+        giaNiemYet: 21990000,
+        giaEvent: 21290000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Máy hút bụi Midea MVC-SC861B",
+        selected: true
+    },
+    {
+        id: "mln-2026-14",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000205",
+        tenSP: "Máy lọc nước RO nóng nguội lạnh tủ đứng Karofi KAD-X59 12 lõi (Imei)",
+        giaNiemYet: 14990000,
+        giaEvent: 14390000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo inox 26cm",
+        selected: true
+    },
+    {
+        id: "mln-2026-15",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000206",
+        tenSP: "Máy lọc nước RO nóng nguội lạnh tủ đứng Karofi KAD-X69 12 lõi (Imei)",
+        giaNiemYet: 17990000,
+        giaEvent: 17390000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Máy hút bụi Midea MVC-SC861B",
+        selected: true
+    },
+    {
+        id: "mln-2026-16",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000207",
+        tenSP: "Máy lọc nước RO tủ đứng Karofi KAQ-X26S 12 lõi (Imei)",
+        giaNiemYet: 10990000,
+        giaEvent: 10690000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo inox 26cm",
+        selected: true
+    },
+    {
+        id: "mln-2026-17",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000208",
+        tenSP: "Máy lọc nước RO tủ đứng Hydro-ion kiềm Karofi KAE-S66 12 lõi (Imei)",
+        giaNiemYet: 16490000,
+        giaEvent: 16090000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Máy hút bụi Midea MVC-SC861B",
+        selected: true
+    },
+    {
+        id: "mln-2026-18",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000209",
+        tenSP: "Máy lọc nước RO nóng nguội lạnh tủ đứng Hydro-ion kiềm Karofi KAE-S695 13 lõi (Imei)",
+        giaNiemYet: 31890000,
+        giaEvent: 31890000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Tủ lạnh Aqua AQR-D100FA(BS)",
+        selected: true
+    },
+    {
+        id: "mln-2026-19",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000216",
+        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Sunhouse UltraX SHA76656LA 12 lõi (Imei)",
+        giaNiemYet: 14190000,
+        giaEvent: 12190000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo inox 26cm",
+        selected: true
+    },
+    {
+        id: "mln-2026-20",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000217",
+        tenSP: "Máy lọc nước RO nóng lạnh tủ đứng Sunhouse UltraX SHA76258LA 12 lõi (Imei)",
+        giaNiemYet: 12690000,
+        giaEvent: 8040000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo inox 26cm",
+        selected: true
+    },
+    {
+        id: "mln-2026-21",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000223",
+        tenSP: "Máy lọc nước RO nóng nguội lạnh tủ đứng Kangaroo KGHC11A4 11 lõi (IMEI)",
+        giaNiemYet: 15990000,
+        giaEvent: 15360000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo inox 26cm",
+        selected: true
+    },
+    {
+        id: "mln-2026-22",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000226",
+        tenSP: "Máy lọc nước RO nóng nguội lạnh tủ đứng Kangaroo KG12S3H3 12 lõi (IMEI)",
+        giaNiemYet: 13990000,
+        giaEvent: 12690000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Máy hút bụi Midea MVC-SC861B",
+        selected: true
+    },
+    {
+        id: "mln-2026-23",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000237",
+        tenSP: "Máy lọc nước RO nóng nguội lạnh tủ đứng Karofi PLATINUM S6 12 lõi (Imei)",
+        giaNiemYet: 21990000,
+        giaEvent: 21370000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Máy hút bụi Midea MVC-SC861B",
+        selected: true
+    },
+    {
+        id: "mln-2026-24",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000238",
+        tenSP: "Máy lọc nước RO tủ đứng Karofi PLATINUM S2 12 lõi (Imei)",
+        giaNiemYet: 14690000,
+        giaEvent: 13680000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Máy hút bụi Midea MVC-SC861B",
+        selected: true
+    },
+    {
+        id: "mln-2026-25",
+        nhom: "Máy Lọc Nước",
+        vung: "Vùng Hồ Chí Minh",
+        maSP: "1114171000242",
+        tenSP: "Máy lọc nước RO tủ đứng Kangaroo KG12S1H1 12 lõi (IMEI)",
+        giaNiemYet: 8490000,
+        giaEvent: 6790000,
+        khungGio: "Áp dụng: 01/11/2026",
+        ghiChu: "BẢNG GIÁ MLN 2026",
+        quaTang: "Tặng Chảo nhôm chống dính",
+        selected: true
+    }
+];
+
 // Danh mục các chiến dịch đã lưu
 const CAMPAIGN_PRESETS = {
+    'mln_2026': {
+        id: 'mln_2026',
+        title: 'BẢNG GIÁ MLN 2026 (Popup Thường ngày)',
+        dateText: 'ÁP DỤNG: 01/11/2026',
+        note: 'BẢNG GIÁ MLN 2026',
+        products: PRODUCTS_MLN_2026
+    },
     '2310_2510': {
         id: '2310_2510',
         title: 'HCM - GIỜ VÀNG GIÁ SỐC 23-24-25/10',
@@ -1080,5 +1416,8 @@ const CAMPAIGN_PRESETS = {
     }
 };
 
-// Đặt mặc định là chiến dịch mới nhất 23-24-25/10 (S__106111141.jpg)
-const DEFAULT_PRODUCTS = [...PRODUCTS_GVGS_2310_2510];
+// Mặc định giữ mẫu các ngành hàng khác và cập nhật toàn bộ nhóm Máy Lọc Nước sang BẢNG GIÁ MLN 2026 (25 SP)
+const DEFAULT_PRODUCTS = [
+    ...PRODUCTS_GVGS_2310_2510.filter(p => p.nhom !== 'Máy Lọc Nước'),
+    ...PRODUCTS_MLN_2026.map(p => ({ ...p }))
+];

@@ -25,7 +25,7 @@ class App {
         this.bannerTheme = 'bw_classic';
         this.customSubline = '+ TRẢ GÓP 0%';
         this.uploadedBannerUrl = null;
-        this.customDateText = 'ÁP DỤNG: 23/10 - 25/10';
+        this.customDateText = 'ÁP DỤNG: 01/11/2026';
 
         // Tùy chỉnh riêng cho Form Máy Lọc Nước A4 Full
         this.customMlnCategory = '';
@@ -368,7 +368,8 @@ class App {
                 const matchName = (item.tenSP || '').toLowerCase().includes(kw);
                 const matchCode = (item.maSP || '').toLowerCase().includes(kw);
                 const matchNhom = (item.nhom || '').toLowerCase().includes(kw);
-                if (!matchName && !matchCode && !matchNhom) return false;
+                const matchNote = (item.ghiChu || '').toLowerCase().includes(kw);
+                if (!matchName && !matchCode && !matchNhom && !matchNote) return false;
             }
 
             return true;
@@ -465,8 +466,11 @@ class App {
         if (renderType === 'mln_a4') {
             // Chuẩn MÁY LỌC NƯỚC A4 FULL: Giá giảm siêu to nổi bật + .000đ nằm ở dưới giá giảm
             const diff = (item.giaNiemYet || 0) - (item.giaEvent || 0);
-            const percent = (item.giaNiemYet > 0 && diff > 0) ? Math.floor((diff / item.giaNiemYet) * 100) : 24;
-            const discountStr = this.customMlnDiscount || `-${percent} %`;
+            const percent = (item.giaNiemYet > 0 && diff > 0) ? Math.max(1, Math.round((diff / item.giaNiemYet) * 100)) : 0;
+            const defaultDiscount = percent > 0 ? `-${percent} %` : 'ƯU ĐÃI';
+            const discountStr = item.customDiscount || this.customMlnDiscount || defaultDiscount;
+            const ptSizeClass = (!discountStr.includes('%') && discountStr.length >= 5) ? 'pt-text' : '';
+            const ggClass = diff <= 0 ? 'gg-no-strike' : '';
             const catTitle = this.customMlnCategory || 'MÁY LỌC NƯỚC';
             const shockTitle = this.customMlnShock || 'GIÁ SỐC';
             const subline = (this.customSubline && this.customSubline !== '+ TRẢ GÓP 0%') ? this.customSubline : '+ TRẢ GÓP 0% LÃI SUẤT';
@@ -476,15 +480,15 @@ class App {
             const mainLen = (priceSplit.main || '').length;
             const gcSizeClass = mainLen >= 7 ? 'gc-xlong' : (mainLen >= 6 ? 'gc-long' : (mainLen <= 3 ? 'gc-short' : ''));
             const tspText = item.tenSP || 'TÊN SẢN PHẨM';
-            const tspSizeClass = tspText.length > 65 ? 'tsp-xlong' : (tspText.length > 52 ? 'tsp-long' : '');
+            const tspSizeClass = tspText.length > 75 ? 'tsp-xxlong' : (tspText.length > 65 ? 'tsp-xlong' : (tspText.length > 52 ? 'tsp-long' : ''));
 
             return `
                 <div class="pp1 label-box format-mln-a4-full" data-item-id="${item.id}"> 
                     <input type="text" class="txt_100 mln editable-field" data-field="customHeaderCategory" value="${catTitle}" title="Nhấp để sửa tiêu đề danh mục" />
                     <input type="text" class="txt_100 gs editable-field" data-field="customHeaderShock" value="${shockTitle}" title="Nhấp để sửa chữ Giá Sốc" />  
-                    <input type="text" class="txt_100 pt editable-field" data-field="customDiscount" value="${discountStr}" title="Nhấp để sửa % giảm giá" />  
+                    <input type="text" class="txt_100 pt ${ptSizeClass} editable-field" data-field="customDiscount" value="${discountStr}" title="Nhấp để sửa % giảm giá" />  
                     <input type="text" class="txt_100 tsp ${tspSizeClass} editable-field" data-field="tenSP" value="${tspText}" title="Nhấp để sửa tên sản phẩm" />  
-                    <input type="text" class="txt_100 gg editable-field" data-field="giaNiemYet" value="${giaNiemYetVal}" title="Nhấp để sửa giá gốc niêm yết" />  
+                    <input type="text" class="txt_100 gg ${ggClass} editable-field" data-field="giaNiemYet" value="${giaNiemYetVal}" title="Nhấp để sửa giá gốc niêm yết" />  
                     <input type="text" class="txt_100 gc ${gcSizeClass} editable-field" data-field="giaEventMain" value="${priceSplit.main}" title="Nhấp để sửa số giá chính" />  
                     <input type="text" class="txt_100 gc2 editable-field" data-field="giaEventSuffix" value="${priceSuffix}" title="Nhấp để sửa đuôi giá" />  
                     <input type="text" class="txt_100 nt editable-field" data-field="subline" value="${subline}" title="Nhấp để sửa khuyến mãi hoặc ghi chú" />  
@@ -522,11 +526,12 @@ class App {
             `;
         } else if (renderType === 'gd') {
             // Chuẩn GIA DỤNG (A7 x 4): https://mientay2.pro/in-online/popup/gd/gach/
+            const hideStrike = (item.giaNiemYet || 0) <= (item.giaEvent || 0) ? 'style="visibility:hidden;"' : '';
             return `
                 <div class="label-box format-gd-a7" data-item-id="${item.id}">
                     <div class="label-banner">${bannerContent}</div>
                     <input type="text" class="gd-tsp editable-field" data-field="tenSP" value="${item.tenSP || 'TÊN SẢN PHẨM'}" title="Nhấp để sửa tên sản phẩm" />
-                    <div class="gd-gg">
+                    <div class="gd-gg" ${hideStrike}>
                         <span class="strike-number editable-field" contenteditable="true" data-field="giaNiemYet" title="Nhấp để sửa giá">${giaNiemYetStr}</span>
                         <div class="strike-bar"></div>
                     </div>
@@ -537,10 +542,11 @@ class App {
             `;
         } else if (renderType === 'mg') {
             // Chuẩn MÁY GIẶT - TỦ ĐÔNG & MÁY LỌC NƯỚC (A6 x 2): https://mientay2.pro/in-online/popup/mg/gach/
+            const hideStrike = (item.giaNiemYet || 0) <= (item.giaEvent || 0) ? 'style="visibility:hidden;"' : '';
             return `
                 <div class="label-box format-mg-a6" data-item-id="${item.id}">
                     <div class="label-banner">${bannerContent}</div>
-                    <div class="txt-price-strike">
+                    <div class="txt-price-strike" ${hideStrike}>
                         <span class="strike-number editable-field" contenteditable="true" data-field="giaNiemYet" title="Nhấp để sửa giá niêm yết">${giaNiemYetStr}</span>
                         <div class="strike-bar"></div>
                     </div>
@@ -554,10 +560,11 @@ class App {
             `;
         } else {
             // Chuẩn TIVI - TỦ LẠNH (A5 x 2): https://mientay2.pro/in-online/popup/tvtl/gach/
+            const hideStrike = (item.giaNiemYet || 0) <= (item.giaEvent || 0) ? 'style="visibility:hidden;"' : '';
             return `
                 <div class="label-box format-tvtl-a5" data-item-id="${item.id}">
                     <div class="label-banner">${bannerContent}</div>
-                    <div class="txt-price-strike">
+                    <div class="txt-price-strike" ${hideStrike}>
                         <span class="strike-number editable-field" contenteditable="true" data-field="giaNiemYet" title="Nhấp để sửa giá niêm yết">${giaNiemYetStr}</span>
                         <div class="strike-bar"></div>
                     </div>
@@ -627,7 +634,7 @@ class App {
                 } else if (field === 'customHeaderShock') {
                     this.customMlnShock = val;
                 } else if (field === 'customDiscount') {
-                    this.customMlnDiscount = val;
+                    targetItem.customDiscount = val;
                 } else if (field === 'dateText') {
                     this.customDateText = val;
                 }
@@ -678,9 +685,12 @@ class App {
                     </td>
                     <td><span class="badge-group badge-group-${groupKey}">${item.nhom || '-'}</span></td>
                     <td style="font-family: monospace; font-size: 11px; color: #475569;">${item.maSP || '-'}</td>
-                    <td style="font-weight: 600; max-width: 260px;">
+                    <td style="font-weight: 600; max-width: 280px;">
                         ${item.tenSP || '-'}
-                        <div style="font-size: 11px; color: #64748b; font-weight: normal;">${item.khungGio || ''}</div>
+                        <div style="font-size: 11px; color: #64748b; font-weight: normal; margin-top: 2px;">
+                            ${item.ghiChu ? `<span style="display:inline-block; background:#e0f2fe; color:#0369a1; font-weight:700; padding:1px 6px; border-radius:4px; margin-right:4px;">📌 ${item.ghiChu}</span>` : ''}
+                            ${item.khungGio || ''}
+                        </div>
                     </td>
                     <td>
                         <span class="price-strike-val">${ExcelParser.formatPrice(item.giaNiemYet)}</span>
@@ -1050,6 +1060,31 @@ class App {
                 if (file) await this.handleImageUpload(file);
             });
         }
+
+        // Nút nạp nhanh BẢNG GIÁ MLN 2026 (25 SP Thường ngày - Model: AS, Giá gốc: AH, Giá KM: AE)
+        document.querySelectorAll('.btn-load-mln-2026').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.products = PRODUCTS_MLN_2026.map(p => ({ ...p }));
+                this.currentProductIndex = 0;
+                this.selectedCategory = 'maylocnuoc';
+                if (this.currentForm !== 'maylocnuoc' && this.currentForm !== 'maylocnuoc_a4') {
+                    this.currentForm = 'maylocnuoc_a4';
+                }
+                this.customDateText = 'ÁP DỤNG: 01/11/2026';
+                const customDateInput = document.getElementById('customDateInput');
+                if (customDateInput) customDateInput.value = this.customDateText;
+                const fileNameLabel = document.getElementById('fileNameLabel');
+                if (fileNameLabel) {
+                    fileNameLabel.innerHTML = '📁 <strong>BẢNG GIÁ MLN 2026</strong> (25 SP Thường ngày)';
+                }
+                this.syncActiveFormAndCategory();
+                this.updateRegionList();
+                this.renderTable();
+                this.updatePreview();
+                alert('Đã nạp thành công "BẢNG GIÁ MLN 2026" (25 sản phẩm Máy Lọc Nước thường ngày)!');
+            });
+        });
 
         // Nút nạp nhanh bảng giá Giờ Vàng MỚI NHẤT (23/10 - 25/10) [28 SP Chuẩn]
         document.getElementById('btnLoadNewestImage')?.addEventListener('click', (e) => {

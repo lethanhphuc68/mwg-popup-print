@@ -30,10 +30,17 @@ class ExcelParser {
     static async parseFile(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
+            const isCsv = (file.name || '').toLowerCase().endsWith('.csv');
             reader.onload = (e) => {
                 try {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
+                    let workbook;
+                    if (isCsv) {
+                        const csvText = new TextDecoder('utf-8').decode(e.target.result);
+                        workbook = XLSX.read(csvText, { type: 'string' });
+                    } else {
+                        const data = new Uint8Array(e.target.result);
+                        workbook = XLSX.read(data, { type: 'array' });
+                    }
                     
                     // Lấy sheet đầu tiên hoặc sheet chứa từ 'gia' / 'list' / 'danh sach'
                     let targetSheetName = workbook.SheetNames[0];
@@ -63,7 +70,95 @@ class ExcelParser {
         });
     }
 
+    // Nhận diện định dạng "File in Popup Thường ngày" MWG (Model: Cột AS [44], Giá gốc: Cột AH [33], Giá KM: Cột AE [30])
+    static isDailyPopupFormat(rows) {
+        if (!Array.isArray(rows) || rows.length === 0) return false;
+        for (let i = 0; i < Math.min(5, rows.length); i++) {
+            const row = rows[i];
+            if (!Array.isArray(row) || row.length < 45) continue;
+            const colA = String(row[0] || '').toLowerCase();
+            const colAG = String(row[32] || '').toLowerCase();
+            const colAS = String(row[44] || '').trim();
+            const priceAH = this.parsePrice(row[33]);
+            const priceAE = this.parsePrice(row[30]);
+            if ((colA.includes('giá giao') || colAG.includes('giá chỉ giao hàng') || colAS.length >= 6) &&
+                colAS && !colAS.toLowerCase().includes('model') && priceAH > 0 && priceAE > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static extractDailyPopupRows(rows) {
+        const products = [];
+        const seen = new Set();
+        const groupsSet = new Set();
+
+        for (let r = 0; r < rows.length; r++) {
+            const row = rows[r];
+            if (!Array.isArray(row) || row.length < 45) continue;
+
+            // Chuẩn file in Popup Thường ngày: MODE = AS (44), GIÁ GỐC = AH (33), GIÁ KM = AE (30)
+            const tenSP = String(row[44] || '').trim();
+            let giaNiemYet = this.parsePrice(row[33]);
+            let giaEvent = this.parsePrice(row[30]);
+
+            if (!tenSP || (giaNiemYet === 0 && giaEvent === 0)) continue;
+            if (tenSP.toLowerCase() === 'model' || tenSP.toLowerCase().includes('tên sản phẩm')) continue;
+
+            if (giaNiemYet > 0 && giaEvent > 0 && giaNiemYet < giaEvent) {
+                const tmp = giaNiemYet;
+                giaNiemYet = giaEvent;
+                giaEvent = tmp;
+            } else if (giaNiemYet === 0 && giaEvent > 0) {
+                giaNiemYet = giaEvent;
+            } else if (giaEvent === 0 && giaNiemYet > 0) {
+                giaEvent = giaNiemYet;
+            }
+
+            const rawSkuCell = String(row[55] || '').trim();
+            const maSP = rawSkuCell ? rawSkuCell.split('-')[0].trim() : '';
+            const rawApplyDate = String(row[57] || '').replace(/^Ngày áp dụng:\s*/i, '').trim();
+            const khungGio = rawApplyDate ? `Áp dụng: ${rawApplyDate}` : 'Popup Thường ngày';
+            const nhom = (typeof OCRParser !== 'undefined' && OCRParser.detectGroup)
+                ? OCRParser.detectGroup(tenSP)
+                : (tenSP.toLowerCase().includes('lọc nước') ? 'Máy Lọc Nước' : 'Sản phẩm');
+            const ghiChu = nhom === 'Máy Lọc Nước' ? 'BẢNG GIÁ MLN 2026' : 'Popup Thường ngày';
+
+            const dedupeKey = maSP ? `sku_${maSP}` : `name_${tenSP.toLowerCase()}`;
+            if (seen.has(dedupeKey)) continue;
+            seen.add(dedupeKey);
+            groupsSet.add(nhom);
+
+            products.push({
+                id: `sp-daily-${r}-${Date.now().toString(36)}`,
+                nhom,
+                vung: 'Vùng Hồ Chí Minh',
+                maSP,
+                tenSP,
+                giaNiemYet,
+                giaEvent,
+                khungGio,
+                ghiChu,
+                selected: true
+            });
+        }
+
+        return {
+            products,
+            regions: ['Vùng Hồ Chí Minh'],
+            groups: Array.from(groupsSet),
+            headerRowIndex: -1,
+            columnMapping: { tenSP: 44, giaNiemYet: 33, giaEvent: 30, maSP: 55 }
+        };
+    }
+
     static extractDataFromRows(rows) {
+        // Ưu tiên kiểm tra định dạng "File in Popup Thường ngày" (Cột AS: Model, AH: Giá gốc, AE: Giá KM)
+        if (this.isDailyPopupFormat(rows)) {
+            return this.extractDailyPopupRows(rows);
+        }
+
         // Tìm dòng tiêu đề cột thích hợp nhất (trong 10 dòng đầu)
         let headerRowIndex = -1;
         let bestScore = 0;

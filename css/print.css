@@ -738,6 +738,12 @@
         line-height: 1 !important;
     }
 
+    .print-sheet .label-box.format-mln-a4-full .pt.pt-text {
+        font-size: 165px !important;
+        height: 210px !important;
+        margin-top: 12px !important;
+    }
+
     .print-sheet .label-box.format-mln-a4-full .tsp {
         margin-top: 22px !important;
         font-size: 34px !important;
@@ -757,6 +763,10 @@
         font-size: 25px !important;
     }
 
+    .print-sheet .label-box.format-mln-a4-full .tsp.tsp-xxlong {
+        font-size: 20.5px !important;
+    }
+
     .print-sheet .label-box.format-mln-a4-full .gg {
         background-repeat: no-repeat !important;
         background-size: 70% 5px !important;
@@ -769,6 +779,11 @@
         line-height: 1 !important;
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
+    }
+
+    .print-sheet .label-box.format-mln-a4-full .gg.gg-no-strike {
+        background-image: none !important;
+        color: transparent !important;
     }
 
     .print-sheet .label-box.format-mln-a4-full .gc {

@@ -1958,6 +1958,12 @@ body {
     line-height: 1 !important;
 }
 
+.label-box.format-mln-a4-full .pt.pt-text {
+    font-size: 165px !important;
+    height: 210px !important;
+    margin-top: 12px !important;
+}
+
 .label-box.format-mln-a4-full .tsp {
     margin-top: 22px !important;
     font-size: 34px !important;
@@ -1977,6 +1983,10 @@ body {
     font-size: 25px !important;
 }
 
+.label-box.format-mln-a4-full .tsp.tsp-xxlong {
+    font-size: 20.5px !important;
+}
+
 .label-box.format-mln-a4-full .gg {
     background-repeat: no-repeat !important;
     background-size: 70% 5px !important;
@@ -1987,6 +1997,11 @@ body {
     margin-top: 10px !important;
     font-family: 'mt2-mincap', sans-serif !important;
     line-height: 1 !important;
+}
+
+.label-box.format-mln-a4-full .gg.gg-no-strike {
+    background-image: none !important;
+    color: transparent !important;
 }
 
 .label-box.format-mln-a4-full .gc {
