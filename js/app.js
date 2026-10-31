@@ -463,7 +463,7 @@ class App {
         const subline = this.customSubline || '+ TRẢ GÓP 0%';
 
         if (renderType === 'mln_a4') {
-            // Chuẩn MÁY LỌC NƯỚC A4 FULL theo đúng mã nguồn https://mientay2.pro/in-online/popup/mln/full2/
+            // Chuẩn MÁY LỌC NƯỚC A4 FULL: Giá giảm siêu to nổi bật + .000đ nằm ở dưới giá giảm
             const diff = (item.giaNiemYet || 0) - (item.giaEvent || 0);
             const percent = (item.giaNiemYet > 0 && diff > 0) ? Math.floor((diff / item.giaNiemYet) * 100) : 24;
             const discountStr = this.customMlnDiscount || `-${percent} %`;
@@ -473,15 +473,19 @@ class App {
             const priceSplit = this.splitPriceParts(item.giaEvent);
             const priceSuffix = this.customPriceSuffix || priceSplit.suffix;
             const giaNiemYetVal = giaNiemYetStr ? (giaNiemYetStr.endsWith('đ') ? giaNiemYetStr : `${giaNiemYetStr}đ`) : '00.000.000đ';
+            const mainLen = (priceSplit.main || '').length;
+            const gcSizeClass = mainLen >= 7 ? 'gc-xlong' : (mainLen >= 6 ? 'gc-long' : (mainLen <= 3 ? 'gc-short' : ''));
+            const tspText = item.tenSP || 'TÊN SẢN PHẨM';
+            const tspSizeClass = tspText.length > 65 ? 'tsp-xlong' : (tspText.length > 52 ? 'tsp-long' : '');
 
             return `
                 <div class="pp1 label-box format-mln-a4-full" data-item-id="${item.id}"> 
                     <input type="text" class="txt_100 mln editable-field" data-field="customHeaderCategory" value="${catTitle}" title="Nhấp để sửa tiêu đề danh mục" />
                     <input type="text" class="txt_100 gs editable-field" data-field="customHeaderShock" value="${shockTitle}" title="Nhấp để sửa chữ Giá Sốc" />  
                     <input type="text" class="txt_100 pt editable-field" data-field="customDiscount" value="${discountStr}" title="Nhấp để sửa % giảm giá" />  
-                    <input type="text" class="txt_100 tsp editable-field" data-field="tenSP" value="${item.tenSP || 'TÊN SẢN PHẨM'}" title="Nhấp để sửa tên sản phẩm" />  
+                    <input type="text" class="txt_100 tsp ${tspSizeClass} editable-field" data-field="tenSP" value="${tspText}" title="Nhấp để sửa tên sản phẩm" />  
                     <input type="text" class="txt_100 gg editable-field" data-field="giaNiemYet" value="${giaNiemYetVal}" title="Nhấp để sửa giá gốc niêm yết" />  
-                    <input type="text" class="txt_100 gc editable-field" data-field="giaEventMain" value="${priceSplit.main}" title="Nhấp để sửa số giá chính" />  
+                    <input type="text" class="txt_100 gc ${gcSizeClass} editable-field" data-field="giaEventMain" value="${priceSplit.main}" title="Nhấp để sửa số giá chính" />  
                     <input type="text" class="txt_100 gc2 editable-field" data-field="giaEventSuffix" value="${priceSuffix}" title="Nhấp để sửa đuôi giá" />  
                     <input type="text" class="txt_100 nt editable-field" data-field="subline" value="${subline}" title="Nhấp để sửa khuyến mãi hoặc ghi chú" />  
                 </div>
