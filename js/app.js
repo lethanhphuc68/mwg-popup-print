@@ -167,13 +167,13 @@ class App {
                     key: 'qdh_a4',
                     name: 'A4 QĐH - QUẠT',
                     paper: 'A4',
-                    orientation: 'portrait',
-                    pageSize: '210mm 297mm',
+                    orientation: 'landscape',
+                    pageSize: 'A4 landscape',
                     itemsPerSheet: 1,
-                    sheetClass: 'size-a4 layout-qdh-a4',
+                    sheetClass: 'size-a4-landscape layout-qdh-a4',
                     renderType: 'qdh_a4',
                     category: 'giadung',
-                    desc: 'GIẤY A4 ĐỨNG | POPUP: QĐH - QUẠT (XOAY DỌC) | GIÁ KHỦNG 255px',
+                    desc: 'GIẤY A4 NGANG | POPUP: 1 TEM A4 FULL | GIÁ TO RÕ - .000đ NHỎ',
                     sourceUrl: 'https://mientay2.pro/in-online/popup/qdh/'
                 };
             case 'tvtl':
@@ -217,6 +217,64 @@ class App {
         };
     }
 
+    // Tách tên sản phẩm thành 2 dòng in hoa chuẩn mẫu A4 QĐH (Dòng 1: Loại SP, Dòng 2: Hãng + Model)
+    splitQdhTitle(item) {
+        if (item.qdhLine1 !== undefined || item.qdhLine2 !== undefined) {
+            return {
+                line1: item.qdhLine1 !== undefined ? item.qdhLine1 : 'QUẠT ĐIỀU HÒA',
+                line2: item.qdhLine2 !== undefined ? item.qdhLine2 : (item.tenSP || 'MODEL SẢN PHẨM')
+            };
+        }
+
+        const rawName = String(item.tenSP || '')
+            .replace(/\(\s*imei\s*\)/gi, '')
+            .replace(/\bimei\b/gi, '')
+            .replace(/\s+/g, ' ')
+            .trim();
+
+        const prefixes = [
+            'Quạt điều hòa', 'Quạt điều hoà', 'Quạt hơi nước', 'Máy làm mát không khí', 'Máy làm mát',
+            'Quạt đứng', 'Quạt lửng', 'Quạt treo tường', 'Quạt treo', 'Quạt bàn', 'Quạt hộp',
+            'Quạt sạc', 'Quạt trần', 'Quạt không cánh', 'Quạt công nghiệp', 'Quạt',
+            'Máy lọc nước RO nóng nguội lạnh tủ đứng', 'Máy lọc nước RO nóng lạnh tủ đứng', 'Máy lọc nước',
+            'Nồi cơm điện tử', 'Nồi cơm cao tần', 'Nồi cơm nắp gài', 'Nồi cơm nắp rời', 'Nồi cơm điện', 'Nồi cơm',
+            'Nồi chiên không dầu', 'Lò vi sóng',
+            'Bếp điện từ đôi', 'Bếp điện từ đơn', 'Bếp điện từ', 'Bếp hồng ngoại', 'Bếp từ', 'Bếp ga đôi', 'Bếp ga',
+            'Bàn ủi hơi nước đứng', 'Bàn ủi hơi nước', 'Bàn ủi khô', 'Bàn ủi',
+            'Máy xay sinh tố', 'Máy ép chậm', 'Máy lọc không khí',
+            'Tủ lạnh', 'Tủ đông', 'Tủ mát', 'Máy giặt', 'Máy sấy', 'Loa Karaoke',
+            'Tivi QD-Mini LED', 'Tivi Mini LED', 'Tivi QLED', 'Tivi QNED', 'Tivi OLED', 'Tivi LED', 'Tivi'
+        ];
+
+        const rawLower = rawName.toLowerCase();
+        for (const prefix of prefixes) {
+            const pLower = prefix.toLowerCase();
+            if (rawLower.startsWith(pLower + ' ')) {
+                const rest = rawName.slice(prefix.length).trim();
+                if (rest) {
+                    return {
+                        line1: prefix.toUpperCase(),
+                        line2: rest.toUpperCase()
+                    };
+                }
+            }
+        }
+
+        const nhomClean = String(item.nhom || '').trim();
+        const genericGroups = ['', 'gia dụng', 'gd', 'sản phẩm', 'khác', '-'];
+        if (nhomClean && !genericGroups.includes(nhomClean.toLowerCase())) {
+            return {
+                line1: nhomClean.toUpperCase(),
+                line2: (rawName || 'MODEL SẢN PHẨM').toUpperCase()
+            };
+        }
+
+        return {
+            line1: 'QUẠT ĐIỀU HÒA',
+            line2: (rawName || 'TÊN SẢN PHẨM').toUpperCase()
+        };
+    }
+
     // PHÂN LOẠI 27 SẢN PHẨM THEO ĐÚNG 4 NHÓM NGÀNH HÀNG:
     // 1. Tivi, Tủ Lạnh, Loa (+ Tủ Mát): 13 SP
     // 2. Máy Giặt, Tủ Đông: 6 SP
@@ -235,8 +293,10 @@ class App {
             return 'maylocnuoc';
         }
 
-        // 2. Gia Dụng: Bàn ủi, Lò vi sóng, Nồi cơm, Bếp, Chảo, Nồi, Bình đun, Quạt...
+        // 2. Gia Dụng: Bàn ủi, Lò vi sóng, Nồi cơm, Bếp, Chảo, Nồi, Bình đun, Quạt, QĐH...
         if (nhomLower.includes('gia dụng') || nhomLower.includes('gd') ||
+            nhomLower.includes('quạt') || nhomLower.includes('qđh') || nhomLower.includes('qdh') ||
+            nhomLower.includes('làm mát') ||
             nhomLower.includes('bàn ủi') || nhomLower.includes('ban ui') ||
             nhomLower.includes('lò vi sóng') || nhomLower.includes('nồi cơm') ||
             tenLower.includes('bàn ủi') || tenLower.includes('ban ui') ||
@@ -244,7 +304,8 @@ class App {
             tenLower.includes('bluestone') ||
             tenLower.includes('nồi') || tenLower.includes('chảo') ||
             tenLower.includes('bếp') || tenLower.includes('bình đun') ||
-            tenLower.includes('quạt') || tenLower.includes('máy xay') ||
+            tenLower.includes('quạt') || tenLower.includes('qđh') ||
+            tenLower.includes('làm mát') || tenLower.includes('máy xay') ||
             tenLower.includes('chiên')) {
             return 'giadung';
         }
@@ -426,12 +487,33 @@ class App {
                 </div>
             `;
         } else if (renderType === 'qdh_a4') {
-            // Chuẩn A4 QĐH - QUẠT theo đúng mã nguồn https://mientay2.pro/in-online/popup/qdh/
+            // Chuẩn A4 QĐH - QUẠT (A4 Ngang: 2 dòng tên to rõ + Giá gạch trái + Giá chính siêu to & .000đ nhỏ)
+            const qdhTitle = this.splitQdhTitle(item);
+            const priceSplit = this.splitPriceParts(item.giaEvent);
+            const qdhSuffix = item.qdhPriceSuffix !== undefined ? item.qdhPriceSuffix : (this.customPriceSuffix || priceSplit.suffix);
+            const mainLen = (priceSplit.main || '').length;
+            const mainSizeClass = mainLen >= 6 ? 'len-long' : (mainLen <= 3 ? 'len-short' : 'len-medium');
+            const line1Len = (qdhTitle.line1 || '').length;
+            const line1SizeClass = line1Len > 22 ? 'title-xlong' : (line1Len > 16 ? 'title-long' : '');
+            const line2Len = (qdhTitle.line2 || '').length;
+            const line2SizeClass = line2Len > 26 ? 'model-xlong' : (line2Len > 19 ? 'model-long' : '');
+
             return `
-                <div class="pp1 label-box format-qdh-a4" data-item-id="${item.id}">
-                    <input type="text" class="txt_100 tsp editable-field" data-field="tenSP" value="${item.tenSP || 'TÊN SẢN PHẨM'}" title="Nhấp để sửa tên sản phẩm" />
-                    <input type="text" class="txt_100 ggh editable-field" data-field="giaNiemYet" value="${giaNiemYetStr}" title="Nhấp để sửa giá niêm yết" />
-                    <input type="text" class="txt_100 ggg editable-field" data-field="giaEvent" value="${giaEventStr}" title="Nhấp để sửa giá khuyến mãi" />
+                <div class="label-box format-qdh-a4" data-item-id="${item.id}">
+                    <div class="qdh-header">
+                        <input type="text" class="qdh-line1 ${line1SizeClass} editable-field" data-field="qdhLine1" value="${qdhTitle.line1}" title="Nhấp để sửa dòng tiêu đề loại sản phẩm" />
+                        <input type="text" class="qdh-line2 ${line2SizeClass} editable-field" data-field="qdhLine2" value="${qdhTitle.line2}" title="Nhấp để sửa hãng & model sản phẩm" />
+                    </div>
+                    <div class="qdh-strike-row">
+                        <div class="qdh-strike-wrap">
+                            <span class="qdh-strike-num editable-field" contenteditable="true" data-field="giaNiemYet" title="Nhấp để sửa giá niêm yết">${giaNiemYetStr}</span>
+                            <div class="qdh-strike-bar"></div>
+                        </div>
+                    </div>
+                    <div class="qdh-promo-row ${mainSizeClass}">
+                        <span class="qdh-price-main editable-field" contenteditable="true" data-field="giaEventMain" title="Nhấp để sửa số giá chính">${priceSplit.main}</span>
+                        <span class="qdh-price-suffix editable-field" contenteditable="true" data-field="qdhPriceSuffix" title="Nhấp để sửa đuôi .000đ">${qdhSuffix}</span>
+                    </div>
                 </div>
             `;
         } else if (renderType === 'gd') {
@@ -519,8 +601,21 @@ class App {
                     }
                 } else if (field === 'giaEventSuffix') {
                     this.customPriceSuffix = val;
+                } else if (field === 'qdhPriceSuffix') {
+                    targetItem.qdhPriceSuffix = val;
+                } else if (field === 'qdhLine1') {
+                    const currentSplit = this.splitQdhTitle(targetItem);
+                    targetItem.qdhLine1 = val;
+                    if (targetItem.qdhLine2 === undefined) targetItem.qdhLine2 = currentSplit.line2;
+                } else if (field === 'qdhLine2') {
+                    const currentSplit = this.splitQdhTitle(targetItem);
+                    if (targetItem.qdhLine1 === undefined) targetItem.qdhLine1 = currentSplit.line1;
+                    targetItem.qdhLine2 = val;
+                    targetItem.tenSP = `${targetItem.qdhLine1} ${val}`.trim();
                 } else if (field === 'tenSP') {
                     targetItem.tenSP = val;
+                    delete targetItem.qdhLine1;
+                    delete targetItem.qdhLine2;
                 } else if (field === 'subline') {
                     this.customSubline = val;
                 } else if (field === 'customHeaderCategory') {
@@ -861,7 +956,11 @@ class App {
                 // Đồng bộ form tương ứng nếu bấm chọn nhóm ngành hàng cụ thể
                 if (cat === 'tv_tl_loa') this.currentForm = 'tvtl';
                 else if (cat === 'maygiat_tudong') this.currentForm = 'maygiat';
-                else if (cat === 'giadung') this.currentForm = 'giadung';
+                else if (cat === 'giadung') {
+                    if (this.currentForm !== 'giadung' && this.currentForm !== 'qdh_a4') {
+                        this.currentForm = 'giadung';
+                    }
+                }
                 else if (cat === 'maylocnuoc') {
                     if (this.currentForm !== 'maylocnuoc' && this.currentForm !== 'maylocnuoc_a4') {
                         this.currentForm = 'maylocnuoc_a4';
@@ -914,7 +1013,9 @@ class App {
         });
 
         document.getElementById('btnSelectGiaDung')?.addEventListener('click', () => {
-            this.currentForm = 'giadung';
+            if (this.currentForm !== 'giadung' && this.currentForm !== 'qdh_a4') {
+                this.currentForm = 'giadung';
+            }
             this.selectedCategory = 'giadung';
             this.syncActiveFormAndCategory();
             this.products.forEach(p => {
