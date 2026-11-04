@@ -1,5 +1,357 @@
 // Dữ liệu bảng giá Giờ Vàng Giá Sốc chính thức MWG Vùng Hồ Chí Minh
 
+// 0. ĐỢT MỚI NHẤT HIỆN TẠI: 06/11 - 08/11 (Trích xuất 100% chuẩn xác từ ảnh HCM - GIỜ VÀNG GIÁ SỐC 06-07-08/11)
+const PRODUCTS_GVGS_0611_0811 = [
+    {
+        "id": "gv-0611-1",
+        "nhom": "TiVi",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "3041094002166",
+        "tenSP": "Tivi Mini LED Samsung UA65M8XHA",
+        "giaNiemYet": 21900000,
+        "giaEvent": 14990000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-2",
+        "nhom": "TiVi",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "3041094002213",
+        "tenSP": "TIVI LED LG 55NU855BPSA",
+        "giaNiemYet": 15500000,
+        "giaEvent": 11890000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-3",
+        "nhom": "TiVi",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "3041094002066",
+        "tenSP": "Tivi LED 4K Toshiba 55C350RP",
+        "giaNiemYet": 11990000,
+        "giaEvent": 8990000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-4",
+        "nhom": "TiVi",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "3041094002067",
+        "tenSP": "Tivi LED 4K Toshiba 65C350RP",
+        "giaNiemYet": 14990000,
+        "giaEvent": 10990000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-5",
+        "nhom": "Loa Karaoke",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "3040880000152",
+        "tenSP": "Loa Karaoke Nanomax X-2000",
+        "giaNiemYet": 12930000,
+        "giaEvent": 9990000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-6",
+        "nhom": "Loa Karaoke",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "3040880000074",
+        "tenSP": "Loa Karaoke Dalton TS-18G850X",
+        "giaNiemYet": 16100000,
+        "giaEvent": 12990000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-7",
+        "nhom": "Máy giặt",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1751099000210",
+        "tenSP": "Máy giặt Samsung WA40F12E4CSV",
+        "giaNiemYet": 9690000,
+        "giaEvent": 7390000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-8",
+        "nhom": "Máy giặt",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1751099000224",
+        "tenSP": "Máy giặt Toshiba TW-T33B130UWV(MK)",
+        "giaNiemYet": 13890000,
+        "giaEvent": 9690000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-9",
+        "nhom": "Máy giặt",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1751099000203",
+        "tenSP": "Máy giặt Electrolux EWF1143P5SC",
+        "giaNiemYet": 16990000,
+        "giaEvent": 11790000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-10",
+        "nhom": "Máy giặt",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1751099000142",
+        "tenSP": "Máy giặt Haier HW120-BD14387GNU1",
+        "giaNiemYet": 17790000,
+        "giaEvent": 12990000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-11",
+        "nhom": "Máy giặt",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1751099000200",
+        "tenSP": "Máy giặt LG FX1413S5G",
+        "giaNiemYet": 17990000,
+        "giaEvent": 13590000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-12",
+        "nhom": "Máy Rửa Chén",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1753859000049",
+        "tenSP": "Máy rửa bát Junger DWJ-143-PRO",
+        "giaNiemYet": 21990000,
+        "giaEvent": 14490000,
+        "khungGio": "5 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-13",
+        "nhom": "Tủ Lạnh",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1751097000169",
+        "tenSP": "Tủ lạnh Hitachi HRSN9563DDXVN",
+        "giaNiemYet": 17900000,
+        "giaEvent": 13990000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-14",
+        "nhom": "Tủ Lạnh",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1751097000121",
+        "tenSP": "Tủ lạnh Toshiba GR-RF606WI-PMV(60)-AG",
+        "giaNiemYet": 17490000,
+        "giaEvent": 14990000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-15",
+        "nhom": "Tủ Lạnh",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1751097000103",
+        "tenSP": "Tủ lạnh Toshiba GR-RS910WI-PMV(06)-MG",
+        "giaNiemYet": 23510000,
+        "giaEvent": 16490000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-16",
+        "nhom": "Tủ Lạnh",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1751097000152",
+        "tenSP": "Tủ lạnh AQUA AQR-S682XA(WGB)",
+        "giaNiemYet": 18690000,
+        "giaEvent": 15690000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-17",
+        "nhom": "Tủ Lạnh",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "3051097001790",
+        "tenSP": "Tủ lạnh Samsung RT22M4032BY/SV",
+        "giaNiemYet": 8030000,
+        "giaEvent": 5990000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-18",
+        "nhom": "Tủ Lạnh",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1751097000214",
+        "tenSP": "Tủ lạnh Haier HM610AGBVNUI",
+        "giaNiemYet": 23190000,
+        "giaEvent": 19490000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-19",
+        "nhom": "Tủ Lạnh",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1751097000045",
+        "tenSP": "Tủ lạnh LG LTB31BLM",
+        "giaNiemYet": 12690000,
+        "giaEvent": 9190000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-20",
+        "nhom": "Tủ Đông",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "3050893000296",
+        "tenSP": "Tủ đông Kangaroo 430 lít KG FZ490IG1",
+        "giaNiemYet": 13890000,
+        "giaEvent": 10990000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-21",
+        "nhom": "Tủ Mát",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "3050894000045",
+        "tenSP": "Tủ Mát Sanaky TM.VH 358K3L",
+        "giaNiemYet": 13150000,
+        "giaEvent": 9990000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-22",
+        "nhom": "Máy Lọc Nước",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1114171000197",
+        "tenSP": "Máy lọc nước RO nóng lạnh tủ đứng Hòa Phát HPN639 12 lõi (Imei)",
+        "giaNiemYet": 11590000,
+        "giaEvent": 6490000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-23",
+        "nhom": "Máy Lọc Nước",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1114171000243",
+        "tenSP": "Máy lọc nước RO nóng nguội lạnh tủ đứng Kangaroo KG12S2H4 12 lõi (IMEI)",
+        "giaNiemYet": 11990000,
+        "giaEvent": 7990000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-24",
+        "nhom": "Máy Lọc Nước",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1114171000193",
+        "tenSP": "Máy lọc nước RO nóng lạnh tủ đứng Sunhouse UltraX SHA76601S 11 lõi (Imei)",
+        "giaNiemYet": 12790000,
+        "giaEvent": 9490000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-25",
+        "nhom": "Máy Lọc Nước",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "1114171000128",
+        "tenSP": "Máy lọc nước RO nóng lạnh tủ đứng Karofi KAD-X68 11 lõi (Imei)",
+        "giaNiemYet": 14990000,
+        "giaEvent": 11490000,
+        "khungGio": "3 suất / siêu thị",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-26",
+        "nhom": "Nồi Cơm Điện Tử",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "4844158000193",
+        "tenSP": "Nồi cơm điện tử Toshiba RC-18DR2PV(K) 1.8L (imei)",
+        "giaNiemYet": 2990000,
+        "giaEvent": 1890000,
+        "khungGio": "Không Giới Hạn Số Lượng",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-27",
+        "nhom": "Lò Vi Sóng",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "4840958000510",
+        "tenSP": "Lò vi sóng Toshiba MW3-MM25PE(BK) (IMEI)",
+        "giaNiemYet": 2690000,
+        "giaEvent": 1590000,
+        "khungGio": "Không Giới Hạn Số Lượng",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-28",
+        "nhom": "Nồi Cơm Cao Tần",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "4844157000055",
+        "tenSP": "Nồi cơm cao tần Toshiba RC-10IP1PV IL (imei)",
+        "giaNiemYet": 4190000,
+        "giaEvent": 2790000,
+        "khungGio": "Không Giới Hạn Số Lượng",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    },
+    {
+        "id": "gv-0611-29",
+        "nhom": "Bếp Điện Từ",
+        "vung": "Vùng Hồ Chí Minh",
+        "maSP": "4844147000169",
+        "tenSP": "Bếp điện từ Toshiba IC-20S4PV (IMEI)",
+        "giaNiemYet": 2290000,
+        "giaEvent": 1390000,
+        "khungGio": "Không Giới Hạn Số Lượng",
+        "ghiChu": "Giờ vàng giá sốc 06/11 - 08/11",
+        "selected": true
+    }
+];
+
 // 1. ĐỢT MỚI NHẤT: 16/10 - 18/10 (Trích xuất 100% chuẩn xác từ ảnh S__84279519.jpg)
 const PRODUCTS_GVGS_1610_1810 = [
     // --- TIVI (4 SP) ---
@@ -1386,6 +1738,13 @@ const PRODUCTS_MLN_2026 = [
 
 // Danh mục các chiến dịch đã lưu
 const CAMPAIGN_PRESETS = {
+    '0611_0811': {
+        id: '0611_0811',
+        title: 'HCM - GIỜ VÀNG GIÁ SỐC 06-07-08/11',
+        dateText: 'ÁP DỤNG: 06/11 - 08/11',
+        imageName: 'media_1793781380604_e9962408.jpg',
+        products: PRODUCTS_GVGS_0611_0811
+    },
     'mln_2026': {
         id: 'mln_2026',
         title: 'BẢNG GIÁ MLN 2026 (Popup Thường ngày)',
@@ -1417,7 +1776,5 @@ const CAMPAIGN_PRESETS = {
 };
 
 // Mặc định giữ mẫu các ngành hàng khác và cập nhật toàn bộ nhóm Máy Lọc Nước sang BẢNG GIÁ MLN 2026 (25 SP)
-const DEFAULT_PRODUCTS = [
-    ...PRODUCTS_GVGS_2310_2510.filter(p => p.nhom !== 'Máy Lọc Nước'),
-    ...PRODUCTS_MLN_2026.map(p => ({ ...p }))
-];
+// Đặt mặc định là chiến dịch mới nhất 06-07-08/11 (29 sản phẩm chuẩn)
+const DEFAULT_PRODUCTS = [...PRODUCTS_GVGS_0611_0811];

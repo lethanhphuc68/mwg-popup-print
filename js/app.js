@@ -25,7 +25,7 @@ class App {
         this.bannerTheme = 'bw_classic';
         this.customSubline = '+ TRẢ GÓP 0%';
         this.uploadedBannerUrl = null;
-        this.customDateText = 'ÁP DỤNG: 01/11/2026';
+        this.customDateText = 'ÁP DỤNG: 06/11 - 08/11';
 
         // Tùy chỉnh riêng cho Form Máy Lọc Nước A4 Full
         this.customMlnCategory = '';
@@ -310,11 +310,13 @@ class App {
             return 'giadung';
         }
 
-        // 3. Máy Giặt, Tủ Đông
+        // 3. Máy Giặt, Tủ Đông & Máy Rửa Chén
         if (nhomLower.includes('máy giặt') || nhomLower.includes('giặt') ||
             nhomLower.includes('tủ đông') || nhomLower.includes('máy sấy') ||
+            nhomLower.includes('rửa chén') || nhomLower.includes('rửa bát') ||
             tenLower.includes('máy giặt') || tenLower.includes('máy sấy') ||
-            tenLower.includes('tủ đông')) {
+            tenLower.includes('tủ đông') || tenLower.includes('rửa chén') ||
+            tenLower.includes('rửa bát') || tenLower.includes('junger')) {
             return 'maygiat_tudong';
         }
 
@@ -1086,18 +1088,44 @@ class App {
             });
         });
 
-        // Nút nạp nhanh bảng giá Giờ Vàng MỚI NHẤT (23/10 - 25/10) [28 SP Chuẩn]
-        document.getElementById('btnLoadNewestImage')?.addEventListener('click', (e) => {
+        // Nút nạp nhanh bảng giá Giờ Vàng MỚI NHẤT (06/11 - 08/11) [29 SP Chuẩn]
+        const load0611Handler = (e) => {
+            if (e) e.preventDefault();
+            this.products = PRODUCTS_GVGS_0611_0811.map(p => ({ ...p }));
+            this.currentProductIndex = 0;
+            this.customDateText = 'ÁP DỤNG: 06/11 - 08/11';
+            const customDateInput = document.getElementById('customDateInput');
+            if (customDateInput) customDateInput.value = this.customDateText;
+            const fileNameLabel = document.getElementById('fileNameLabel');
+            if (fileNameLabel) {
+                fileNameLabel.innerHTML = '📁 <strong>Giờ Vàng 06/11 - 08/11</strong> (29 SP Mới Nhất)';
+            }
+            this.syncActiveFormAndCategory();
+            this.updateRegionList();
+            this.renderTable();
+            this.updatePreview();
+            alert('Đã nạp đầy đủ 29 sản phẩm chính xác từ ảnh "HCM - Giờ Vàng Giá Sốc 06-07-08/11"!');
+        };
+        document.getElementById('btnLoadNewestImage')?.addEventListener('click', load0611Handler);
+        document.getElementById('btnQuickLoad0611')?.addEventListener('click', load0611Handler);
+
+        // Nút nạp nhanh bảng giá Giờ Vàng đợt cũ (23/10 - 25/10) [28 SP]
+        document.getElementById('btnLoad2310Image')?.addEventListener('click', (e) => {
             e.preventDefault();
-            this.products = [...PRODUCTS_GVGS_2310_2510];
+            this.products = PRODUCTS_GVGS_2310_2510.map(p => ({ ...p }));
             this.currentProductIndex = 0;
             this.customDateText = 'ÁP DỤNG: 23/10 - 25/10';
             const customDateInput = document.getElementById('customDateInput');
             if (customDateInput) customDateInput.value = this.customDateText;
+            const fileNameLabel = document.getElementById('fileNameLabel');
+            if (fileNameLabel) {
+                fileNameLabel.innerHTML = '📁 <strong>Giờ Vàng 23/10 - 25/10</strong> (28 SP)';
+            }
+            this.syncActiveFormAndCategory();
             this.updateRegionList();
             this.renderTable();
             this.updatePreview();
-            alert('Đã nạp đầy đủ 28 sản phẩm chính xác từ ảnh "HCM - Giờ Vàng Giá Sốc 23-24-25/10"!');
+            alert('Đã nạp 28 sản phẩm đợt "HCM - Giờ Vàng Giá Sốc 23-24-25/10"!');
         });
 
         // Nút nạp nhanh bảng giá Giờ Vàng đợt cũ (16/10 - 18/10) [28 SP]
