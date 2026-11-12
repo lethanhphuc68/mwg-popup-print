@@ -32,6 +32,7 @@ class App {
         this.customMlnShock = '';
         this.customMlnDiscount = '';
         this.customPriceSuffix = '';
+        this.lastUploadedImageFile = null;
 
         this.init();
     }
@@ -776,6 +777,11 @@ class App {
 
         const imageInput = document.getElementById('imageFileInput');
         if (imageInput) imageInput.value = '';
+        this.lastUploadedImageFile = null;
+        const ocrEnhanceActions = document.getElementById('ocrEnhanceActions');
+        if (ocrEnhanceActions) ocrEnhanceActions.style.display = 'none';
+        const enhancedPreviewContainer = document.getElementById('enhancedPreviewContainer');
+        if (enhancedPreviewContainer) enhancedPreviewContainer.style.display = 'none';
 
         this.updateRegionList();
         this.renderTable();
@@ -1054,14 +1060,68 @@ class App {
             this.updatePreview();
         });
 
-        // Nạp ảnh bảng giá OCR
+        // Nạp ảnh bảng giá OCR (Chọn file, kéo thả, dán Ctrl+V và công cụ nâng cấp ảnh)
         const imageFileInput = document.getElementById('imageFileInput');
         if (imageFileInput) {
             imageFileInput.addEventListener('change', async (e) => {
                 const file = e.target.files?.[0];
                 if (file) await this.handleImageUpload(file);
+                imageFileInput.value = '';
             });
         }
+
+        const imageDropzone = document.getElementById('imageDropzone');
+        if (imageDropzone) {
+            imageDropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                imageDropzone.classList.add('dragover');
+            });
+            imageDropzone.addEventListener('dragleave', () => imageDropzone.classList.remove('dragover'));
+            imageDropzone.addEventListener('drop', async (e) => {
+                e.preventDefault();
+                imageDropzone.classList.remove('dragover');
+                const file = e.dataTransfer.files?.[0];
+                if (file) await this.handleImageUpload(file);
+            });
+        }
+
+        window.addEventListener('paste', async (e) => {
+            const imageTab = document.getElementById('imageTabContent');
+            if (!imageTab || imageTab.style.display === 'none') return;
+            const items = e.clipboardData?.items || [];
+            for (const item of items) {
+                if (item.type && item.type.startsWith('image/')) {
+                    const file = item.getAsFile();
+                    if (file) {
+                        e.preventDefault();
+                        await this.handleImageUpload(file);
+                        break;
+                    }
+                }
+            }
+        });
+
+        document.getElementById('btnReprocessImage')?.addEventListener('click', async () => {
+            if (!this.lastUploadedImageFile) {
+                alert('Vui lòng tải ảnh lên trước khi quét lại.');
+                return;
+            }
+            await this.handleImageUpload(this.lastUploadedImageFile);
+        });
+
+        document.getElementById('btnToggleEnhancedPreview')?.addEventListener('click', async () => {
+            const container = document.getElementById('enhancedPreviewContainer');
+            const imgEl = document.getElementById('enhancedPreviewImg');
+            if (!container || !imgEl || !this.lastUploadedImageFile) return;
+
+            if (container.style.display === 'none') {
+                const mode = document.getElementById('ocrEnhanceMode')?.value || 'auto';
+                imgEl.src = await OCRParser.preprocessImage(this.lastUploadedImageFile, mode);
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+            }
+        });
 
         // Nút nạp nhanh BẢNG GIÁ MLN 2026 (25 SP Thường ngày - Model: AS, Giá gốc: AH, Giá KM: AE)
         document.querySelectorAll('.btn-load-mln-2026').forEach(btn => {
@@ -1350,22 +1410,36 @@ class App {
         }
     }
 
-    // Xử lý nạp hình ảnh qua OCR
+    // Xử lý nạp hình ảnh qua OCR (có công cụ nâng cấp chất lượng ảnh)
     async handleImageUpload(file) {
         const ocrStatusEl = document.getElementById('ocrStatusLabel');
+        const enhanceMode = document.getElementById('ocrEnhanceMode')?.value || 'auto';
+        this.lastUploadedImageFile = file;
+
+        const enhanceActions = document.getElementById('ocrEnhanceActions');
+        if (enhanceActions) enhanceActions.style.display = 'flex';
+
+        const previewContainer = document.getElementById('enhancedPreviewContainer');
+        const previewImg = document.getElementById('enhancedPreviewImg');
+        if (previewContainer && previewContainer.style.display !== 'none' && previewImg) {
+            OCRParser.preprocessImage(file, enhanceMode).then(url => {
+                if (url) previewImg.src = url;
+            });
+        }
+
         try {
-            if (ocrStatusEl) ocrStatusEl.textContent = 'Đang phân tích hình ảnh...';
+            if (ocrStatusEl) ocrStatusEl.textContent = 'Đang nâng cấp & phân tích hình ảnh...';
 
             const res = await OCRParser.recognizeImage(file, (pct, statusText) => {
                 if (ocrStatusEl) ocrStatusEl.textContent = `${statusText}`;
-            });
+            }, { enhanceMode });
 
             const products = Array.isArray(res) ? res : (res?.products || []);
             const campaign = res?.campaign;
 
             if (!products || products.length === 0) {
-                alert('Không trích xuất được bảng giá từ ảnh này. Bạn có thể dùng tab [📋 Dán Bảng] để dán chữ từ Google Lens / Zalo.');
-                if (ocrStatusEl) ocrStatusEl.textContent = 'Không tìm thấy bảng giá trong ảnh';
+                alert('Không trích xuất được bảng giá từ ảnh này. Hãy thử đổi chế độ "Tăng nét mạnh" trong Công cụ nâng cấp hình ảnh rồi bấm [🔄 Quét lại ảnh], hoặc dùng tab [📋 Dán Bảng].');
+                if (ocrStatusEl) ocrStatusEl.textContent = 'Không tìm thấy bảng giá trong ảnh — thử chế độ Tăng nét mạnh';
                 return;
             }
 
@@ -1376,6 +1450,12 @@ class App {
                 this.customDateText = campaign.dateText;
                 const customDateInput = document.getElementById('customDateInput');
                 if (customDateInput) customDateInput.value = campaign.dateText;
+            }
+
+            const fileNameLabel = document.getElementById('fileNameLabel');
+            if (fileNameLabel) {
+                const labelTitle = campaign ? campaign.title : (file.name || 'Ảnh bảng giá');
+                fileNameLabel.innerHTML = `📷 <strong>${labelTitle}</strong> (${products.length} SP từ ảnh)`;
             }
 
             this.updateRegionList();
